@@ -1,0 +1,298 @@
+---
+import { site } from "../config/site";
+---
+
+<form
+  id="modulo-contatto"
+  method="post"
+  action="/api/contatto"
+  class="space-y-5"
+  novalidate
+>
+  <!-- Honeypot: invisibile e ignorato da chi naviga con tastiera o lettore di schermo. -->
+  <div
+    class="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden"
+    aria-hidden="true"
+  >
+    <label for="sito_web_personale">Non compilare questo campo</label>
+    <input
+      type="text"
+      id="sito_web_personale"
+      name="sito_web_personale"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+  <input type="hidden" id="carica_ts" name="carica_ts" value="" />
+
+  <p
+    id="stato-invio"
+    role="status"
+    aria-live="polite"
+    class="hidden rounded-[var(--radius-md)] p-4 text-sm"
+  >
+  </p>
+
+  <div>
+    <label
+      for="nome"
+      class="block text-sm font-semibold text-[var(--color-text)]"
+    >
+      Nome o come preferisci essere chiamata/o <span aria-hidden="true">*</span>
+    </label>
+    <input
+      type="text"
+      id="nome"
+      name="nome"
+      required
+      maxlength="120"
+      class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+      aria-describedby="errore-nome"
+    />
+    <p
+      id="errore-nome"
+      class="mt-1 text-sm text-[var(--color-error-text)]"
+      hidden
+    >
+    </p>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label
+        for="email"
+        class="block text-sm font-semibold text-[var(--color-text)]"
+      >
+        Email
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+        aria-describedby="errore-email errore-recapito"
+      />
+      <p
+        id="errore-email"
+        class="mt-1 text-sm text-[var(--color-error-text)]"
+        hidden
+      >
+      </p>
+    </div>
+    <div>
+      <label
+        for="telefono"
+        class="block text-sm font-semibold text-[var(--color-text)]"
+      >
+        Telefono
+      </label>
+      <input
+        type="tel"
+        id="telefono"
+        name="telefono"
+        class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+        aria-describedby="errore-telefono errore-recapito"
+      />
+      <p
+        id="errore-telefono"
+        class="mt-1 text-sm text-[var(--color-error-text)]"
+        hidden
+      >
+      </p>
+    </div>
+  </div>
+  <p id="errore-recapito" class="text-sm text-[var(--color-error-text)]" hidden>
+  </p>
+  <p class="text-sm text-[var(--color-text-muted)]">
+    Inserisci almeno un recapito tra email e telefono.
+  </p>
+
+  <fieldset>
+    <legend class="text-sm font-semibold text-[var(--color-text)]">
+      Come preferisci essere ricontattata/o? <span aria-hidden="true">*</span>
+    </legend>
+    <div class="mt-2 flex flex-wrap gap-4">
+      <label class="flex items-center gap-2 text-sm text-[var(--color-text)]">
+        <input type="radio" name="preferenza_contatto" value="email" required /> Email
+      </label>
+      <label class="flex items-center gap-2 text-sm text-[var(--color-text)]">
+        <input type="radio" name="preferenza_contatto" value="telefono" /> Telefono
+      </label>
+      <label class="flex items-center gap-2 text-sm text-[var(--color-text)]">
+        <input type="radio" name="preferenza_contatto" value="whatsapp" /> WhatsApp
+      </label>
+    </div>
+    <p
+      id="errore-preferenza_contatto"
+      class="mt-1 text-sm text-[var(--color-error-text)]"
+      hidden
+    >
+    </p>
+  </fieldset>
+
+  <div>
+    <label
+      for="disponibilita"
+      class="block text-sm font-semibold text-[var(--color-text)]"
+    >
+      Disponibilità di massima (facoltativo)
+    </label>
+    <input
+      type="text"
+      id="disponibilita"
+      name="disponibilita"
+      maxlength="300"
+      placeholder="Es. preferibilmente nel tardo pomeriggio, dal lunedì al mercoledì"
+      class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+    />
+  </div>
+
+  <div>
+    <p
+      class="mb-1 rounded-[var(--radius-md)] bg-[var(--color-bg-alt)] p-3 text-sm text-[var(--color-text)]"
+    >
+      Per tutelare la tua riservatezza, non inserire informazioni sul tuo stato
+      di salute. Le approfondiremo insieme nel primo colloquio.
+    </p>
+    <label
+      for="messaggio"
+      class="block text-sm font-semibold text-[var(--color-text)]"
+    >
+      Messaggio <span aria-hidden="true">*</span>
+    </label>
+    <textarea
+      id="messaggio"
+      name="messaggio"
+      required
+      maxlength="2000"
+      rows="5"
+      class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+      aria-describedby="errore-messaggio"></textarea>
+    <p
+      id="errore-messaggio"
+      class="mt-1 text-sm text-[var(--color-error-text)]"
+      hidden
+    >
+    </p>
+  </div>
+
+  <div>
+    <label class="flex items-start gap-2 text-sm text-[var(--color-text)]">
+      <input
+        type="checkbox"
+        id="consenso_privacy"
+        name="consenso_privacy"
+        required
+        class="mt-1"
+      />
+      <span>
+        Ho preso visione dell'<a
+          class="underline"
+          href="/privacy"
+          target="_blank"
+          rel="noopener"
+        >
+          informativa privacy
+        </a> (versione {site.informativaPrivacy.versione}) e acconsento al
+        trattamento dei dati inseriti in questo modulo, ai soli fini della
+        richiesta di contatto.
+        <span aria-hidden="true">*</span>
+      </span>
+    </label>
+    <p
+      id="errore-consenso_privacy"
+      class="mt-1 text-sm text-[var(--color-error-text)]"
+      hidden
+    >
+    </p>
+  </div>
+
+  <button
+    type="submit"
+    class="inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] transition-colors duration-[var(--motion-duration)] hover:bg-[var(--color-primary-hover)] disabled:opacity-60"
+  >
+    Invia il messaggio
+  </button>
+</form>
+
+<script>
+  const modulo = document.getElementById(
+    "modulo-contatto",
+  ) as HTMLFormElement | null;
+  const caricaTs = document.getElementById(
+    "carica_ts",
+  ) as HTMLInputElement | null;
+  const stato = document.getElementById("stato-invio");
+
+  if (caricaTs) caricaTs.value = String(Date.now());
+
+  function nascondiErrori() {
+    modulo?.querySelectorAll('[id^="errore-"]').forEach((el) => {
+      el.textContent = "";
+      el.setAttribute("hidden", "");
+    });
+  }
+
+  function mostraErrori(errori: Record<string, string>) {
+    nascondiErrori();
+    let primoCampo: HTMLElement | null = null;
+    for (const [campo, messaggio] of Object.entries(errori)) {
+      const el = document.getElementById(`errore-${campo}`);
+      if (el) {
+        el.textContent = messaggio;
+        el.removeAttribute("hidden");
+      }
+      const input = document.getElementById(campo);
+      if (input && !primoCampo) primoCampo = input;
+    }
+    primoCampo?.focus();
+  }
+
+  modulo?.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    if (!modulo || !stato) return;
+
+    const bottone = modulo.querySelector(
+      'button[type="submit"]',
+    ) as HTMLButtonElement | null;
+    bottone?.setAttribute("disabled", "true");
+
+    stato.className =
+      "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-bg-alt)] text-[var(--color-text)]";
+    stato.textContent = "Invio in corso…";
+    stato.hidden = false;
+
+    try {
+      const risposta = await fetch(modulo.action, {
+        method: "POST",
+        headers: { accept: "application/json" },
+        body: new FormData(modulo),
+      });
+      const corpo = await risposta.json();
+
+      if (corpo.ok) {
+        nascondiErrori();
+        stato.className =
+          "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-success-bg)] text-[var(--color-success-text)]";
+        stato.textContent =
+          "Messaggio inviato. Grazie: verrà riscontrato secondo i tempi indicati nella pagina Emergenze/Contatti.";
+        modulo.reset();
+        if (caricaTs) caricaTs.value = String(Date.now());
+      } else {
+        mostraErrori(
+          corpo.errori ?? { generale: "Si è verificato un errore. Riprova." },
+        );
+        stato.className =
+          "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-error-bg)] text-[var(--color-error-text)]";
+        stato.textContent =
+          corpo.errori?.generale ?? "Controlla i campi evidenziati e riprova.";
+      }
+    } catch {
+      stato.className =
+        "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-error-bg)] text-[var(--color-error-text)]";
+      stato.textContent = "Errore di connessione. Riprova o scrivi via email.";
+    } finally {
+      bottone?.removeAttribute("disabled");
+    }
+  });
+</script>

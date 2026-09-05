@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Messaggio inviato"
+  description="Il tuo messaggio è stato inviato correttamente."
+  noindex
+>
+  <section
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-16 sm:px-6 sm:py-24"
+  >
+    <div class="mx-auto max-w-[var(--prose-max-width)] text-center">
+      <h1
+        class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+      >
+        Messaggio inviato
+      </h1>
+      <p class="mt-4 text-[var(--color-text-muted)]">
+        Grazie per aver scritto. Il messaggio è stato inviato correttamente e
+        verrà riscontrato al più presto. Per situazioni urgenti, consulta la
+        pagina
+        <a class="underline" href="/emergenze">emergenze</a>.
+      </p>
+      <a
+        class="mt-8 inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]"
+        href="/"
+      >
+        Torna alla home
+      </a>
+    </div>
+  </section>
+</Layout>

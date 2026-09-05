@@ -124,4 +124,46 @@ Nessun'altra dipendenza runtime aggiunta. Niente librerie di componenti UI pesan
 
 ---
 
+## 9. Form di contatto: risposta duale JSON/HTML in base all'header `Accept`
+
+**Deciso:** la Function `/api/contatto` risponde con JSON quando la richiesta include
+`Accept: application/json` (invio potenziato da JavaScript, con validazione inline e
+`aria-live`) e con un redirect 303 verso `/contatti/grazie` (successo) o una piccola
+pagina HTML di errore (fallimento) quando non lo include — cioè per un invio nativo del
+form senza JavaScript. Così il requisito "senza JavaScript la pagina contatti resta
+pienamente utilizzabile" è soddisfatto dallo stesso endpoint, senza duplicare la logica.
+
+**Alternative scartate:** due endpoint separati (uno JSON, uno HTML) — scartata perché
+duplica validazione/antispam/rate-limit senza benefici.
+
+**Costo per cambiare idea:** basso, la selezione è isolata in `functions/_lib/risposte.ts`.
+
+---
+
+## 10. Honeypot: risposta di "falso successo"
+
+**Deciso:** se il campo honeypot risulta compilato, la Function restituisce comunque un
+esito di successo (senza inviare né registrare nulla), invece di un errore esplicito.
+È una pratica standard anti-bot: non rivela ai bot automatici che sono stati
+riconosciuti, così non imparano a evitare il campo.
+
+**Costo per cambiare idea:** nullo, è un `if` isolato in `functions/api/contatto.ts`.
+
+---
+
+## 11. Time-trap saltato quando manca il timestamp (navigazione senza JavaScript)
+
+**Deciso:** il controllo "invio troppo rapido" si basa su un campo nascosto valorizzato
+via JavaScript al caricamento della pagina. Senza JavaScript quel campo resta vuoto: in
+quel caso il controllo viene saltato invece di bloccare l'invio, perché non c'è modo di
+valutarlo. Restano comunque attivi honeypot e rate limit per IP.
+
+**Perché è accettabile:** i bot di massa quasi sempre eseguono JavaScript per aumentare
+l'efficacia (molti moduli di contatto sono protetti lato client), quindi il caso "niente
+JS, invio malevolo" è un sottoinsieme piccolo rispetto al traffico atteso; il
+compromesso privilegia l'accessibilità/usabilità (requisito esplicito del prompt) sulla
+protezione antispam marginale aggiuntiva.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

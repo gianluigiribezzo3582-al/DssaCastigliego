@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import RitrattoElisa from "../components/RitrattoElisa.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { site } from "../config/site";
+
+const waTesto = encodeURIComponent(
+  "Ciao, ho visto il sito e vorrei informazioni su un appuntamento.",
+);
+const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
+---
+
+<Layout
+  title="Contatti"
+  description="Scrivi tramite il modulo di contatto, email, telefono o WhatsApp. Studio a Bologna, colloqui anche online."
+>
+  <section
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      Contatti
+    </h1>
+    <p
+      class="mt-3 max-w-[var(--prose-max-width)] text-[var(--color-text-muted)]"
+    >
+      Scrivi tramite il modulo qui sotto, oppure direttamente via email,
+      telefono o WhatsApp. Il modulo funziona anche senza JavaScript attivo.
+    </p>
+
+    <div class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <div
+        class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-card)] sm:p-8"
+      >
+        <ContactForm />
+      </div>
+
+      <aside class="space-y-6">
+        <div class="mx-auto w-32">
+          <RitrattoElisa
+            variant="piccola"
+            class="w-full rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]"
+          />
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold text-[var(--color-text)]">
+            Contatti diretti
+          </h2>
+          <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
+            <li>
+              Email:{" "}
+              <a
+                class="underline hover:text-[var(--color-primary)]"
+                href={`mailto:${site.contatti.email}`}
+              >
+                {site.contatti.email}
+              </a>
+            </li>
+            <li>
+              Telefono:{" "}
+              <a
+                class="underline hover:text-[var(--color-primary)]"
+                href={`tel:${site.contatti.telefono}`}
+              >
+                {site.contatti.telefono}
+              </a>
+            </li>
+            <li>
+              <a
+                class="underline hover:text-[var(--color-primary)]"
+                href={waHref}
+                rel="noopener"
+              >
+                Scrivi su WhatsApp
+              </a>
+              <p class="mt-1 text-xs">
+                Solo per appuntamenti e questioni pratiche, non per contenuti
+                clinici.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold text-[var(--color-text)]">Studio</h2>
+          <p class="mt-2 text-sm text-[var(--color-text-muted)]">
+            {site.indirizzoStudio.via}<br />
+            {site.indirizzoStudio.cap}
+            {site.indirizzoStudio.citta} ({site.indirizzoStudio.provincia})
+          </p>
+          <!-- Mappa statica segnaposto: nessun iframe di Google Maps, per privacy.
+               Sostituire con un'immagine statica reale o un link esterno prima della pubblicazione.
+               Vedi /docs/ASSETS.md. -->
+          <a
+            class="mt-2 flex aspect-[4/3] items-center justify-center rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] bg-[var(--color-bg-alt)] text-center text-sm text-[var(--color-text-muted)]"
+            href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(site.indirizzoStudio.via + " " + site.indirizzoStudio.citta)}`}
+            rel="noopener"
+            target="_blank"
+          >
+            Mappa non caricata per privacy —<br />apri l'indirizzo in una mappa
+            esterna
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
