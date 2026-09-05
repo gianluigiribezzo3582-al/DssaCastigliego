@@ -1,0 +1,25 @@
+# Copia questo file in .dev.vars per lo sviluppo locale con `wrangler pages dev`.
+# .dev.vars NON va mai committato (è già in .gitignore).
+
+# mock = non invia nessuna email reale, stampa un riepilogo oscurato in console (default)
+# brevo = invia davvero tramite l'API Brevo (richiede BREVO_API_KEY)
+MAIL_DRIVER=mock
+
+# Necessaria solo se MAIL_DRIVER=brevo. Non inserire mai la chiave reale in questo
+# file di esempio o in un file committato: vedi /docs/DEPLOY.md.
+BREVO_API_KEY=
+
+# Indirizzo mittente verificato su Brevo (necessario solo con MAIL_DRIVER=brevo)
+BREVO_MITTENTE_EMAIL={{EMAIL_CONTATTO}}
+BREVO_MITTENTE_NOME=Sito Elisa Castigliego
+
+# Indirizzo che riceve le richieste dal form (necessario solo con MAIL_DRIVER=brevo)
+DESTINATARIO_EMAIL={{EMAIL_CONTATTO}}
+
+# Chiave segreta usata per hashare l'IP nel rate limiting (mai il messaggio, solo l'IP).
+# In locale un valore qualsiasi va bene; in produzione va generata a parte.
+RATE_LIMIT_SALT=cambia-questo-valore-in-locale
+
+# Punto di innesto per Cloudflare Turnstile, predisposto ma NON attivo.
+# Lasciare vuoto per mantenere Turnstile disattivato.
+TURNSTILE_SECRET_KEY=
