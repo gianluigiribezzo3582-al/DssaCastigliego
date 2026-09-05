@@ -6,7 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node scripts/copy-cms.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/copy-cms.mjs",
     "dev:functions": "npm run build && wrangler pages dev ./dist --compatibility-date=2024-09-01",
     "build": "astro build",
     "preview": "astro preview",
@@ -23,6 +25,7 @@
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource/work-sans": "^5.3.0",
     "@lucide/astro": "^1.41.0",
+    "@sveltia/cms": "^0.205.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.1",
     "tailwindcss": "^4.3.3"

@@ -61,7 +61,11 @@ const jsonLdCompleto = senzaSchemaOrganizzazione
 
     {
       jsonLdCompleto.map((blocco) => (
-        <script type="application/ld+json" set:html={JSON.stringify(blocco)} />
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(blocco)}
+        />
       ))
     }
   </head>

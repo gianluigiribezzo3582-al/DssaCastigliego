@@ -1,0 +1,41 @@
+{
+  "contatti": {
+    "email": "{{EMAIL_CONTATTO}}",
+    "telefono": "{{TELEFONO_CONTATTO}}",
+    "whatsappNumero": "{{WHATSAPP_NUMERO}}"
+  },
+  "social": {
+    "linkedin": "{{URL_LINKEDIN}}",
+    "instagram": "{{URL_INSTAGRAM}}"
+  },
+  "indirizzoStudio": {
+    "via": "{{INDIRIZZO_STUDIO_VIA}}",
+    "cap": "{{INDIRIZZO_STUDIO_CAP}}"
+  },
+  "orari": {
+    "giorni": "Lunedì – Venerdì",
+    "orario": "{{ORARIO_APERTURA}} - {{ORARIO_CHIUSURA}}"
+  },
+  "albo": {
+    "regione": "{{ALBO_REGIONE}}",
+    "numero": "{{ALBO_NUMERO}}"
+  },
+  "partitaIva": "{{PARTITA_IVA}}",
+  "codiceFiscale": "{{CODICE_FISCALE}}",
+  "informativaPrivacy": {
+    "versione": "0.1-bozza",
+    "dataAggiornamento": "{{DATA_AGGIORNAMENTO_PRIVACY}}"
+  },
+  "emergenze": {
+    "numeriSupporto": [
+      {
+        "nome": "{{NOME_SERVIZIO_SUPPORTO_1}}",
+        "numero": "{{NUMERO_SUPPORTO_1}}"
+      },
+      {
+        "nome": "{{NOME_SERVIZIO_SUPPORTO_2}}",
+        "numero": "{{NUMERO_SUPPORTO_2}}"
+      }
+    ]
+  }
+}

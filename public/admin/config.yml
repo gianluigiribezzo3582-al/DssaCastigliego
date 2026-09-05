@@ -1,0 +1,160 @@
+# Configurazione di Sveltia CMS (compatibile con Decap CMS: stesso formato config.yml).
+#
+# In sviluppo locale (npm run dev) NON servono le righe sul backend GitHub qui sotto:
+# su /admin comparirà il pulsante "Lavora con la repository locale" grazie a
+# `local_backend: true`, che apre una cartella del progetto direttamente dal browser
+# (File System Access API) e legge/scrive i file senza bisogno di credenziali.
+#
+# In produzione, perché il pulsante "Login con GitHub" funzioni, vanno completate le
+# righe "repo:" qui sotto e pubblicato il Worker OAuth in /worker-oauth — procedura
+# passo-passo in /docs/CMS.md. Finché non viene fatto, resta solo il backend locale.
+
+backend:
+  name: github
+  repo: "{{GITHUB_OWNER}}/{{GITHUB_REPO}}" # SEGNAPOSTO — vedi /docs/CMS.md
+  branch: main
+  base_url: "{{URL_WORKER_OAUTH}}" # SEGNAPOSTO — origine del Worker in /worker-oauth
+
+local_backend: true
+
+site_url: "{{DOMINIO_SITO}}"
+logo_url: "/favicon.svg"
+
+media_folder: "public/immagini-cms"
+public_folder: "/immagini-cms"
+
+i18n:
+  structure: single_file
+  locales: [it]
+  default_locale: it
+
+collections:
+  - name: "pagine"
+    label: "Pagine del sito"
+    description: "I testi delle pagine principali: Home, Chi sono, Come lavoro."
+    files:
+      - name: "home"
+        label: "Home"
+        file: "src/content/pagine/home.md"
+        fields:
+          - { label: "Titolo per la scheda del browser e per Google", name: "seoTitle", widget: "string" }
+          - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
+          - { label: "Titolo grande in home", name: "titolo", widget: "string" }
+          - { label: "Sottotitolo in home", name: "sottotitolo", widget: "string" }
+          - { label: "Nota di bozza (solo per uso interno, non è mai visibile online)", name: "draftNote", widget: "string", required: false }
+          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
+
+      - name: "chi-sono"
+        label: "Chi sono"
+        file: "src/content/pagine/chi-sono.md"
+        fields:
+          - { label: "Titolo per la scheda del browser e per Google", name: "seoTitle", widget: "string" }
+          - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
+          - { label: "Titolo della pagina", name: "titolo", widget: "string" }
+          - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
+          - { label: "Testo della pagina", name: "body", widget: "markdown" }
+
+      - name: "come-lavoro"
+        label: "Come lavoro"
+        file: "src/content/pagine/come-lavoro.md"
+        fields:
+          - { label: "Titolo per la scheda del browser e per Google", name: "seoTitle", widget: "string" }
+          - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
+          - { label: "Titolo della pagina", name: "titolo", widget: "string" }
+          - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
+          - { label: "Testo della pagina", name: "body", widget: "markdown" }
+
+  - name: "aree"
+    label: "Aree di intervento"
+    description: "Una scheda per ogni area di cui ti occupi (ansia, relazioni, ecc.)."
+    folder: "src/content/aree"
+    create: true
+    slug: "{{fields.titolo}}"
+    fields:
+      - { label: "Titolo dell'area", name: "titolo", widget: "string" }
+      - { label: "Riassunto breve (mostrato nelle anteprime, massimo 220 caratteri)", name: "riassunto", widget: "text" }
+      - { label: "Ordine di visualizzazione (numero: più basso = più in alto nella lista)", name: "ordine", widget: "number", value_type: "int" }
+      - { label: "Titolo per Google (facoltativo)", name: "seoTitle", widget: "string", required: false }
+      - { label: "Descrizione per Google (facoltativo, massimo 160 caratteri)", name: "seoDescription", widget: "text", required: false }
+      - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
+      - { label: "Testo della scheda", name: "body", widget: "markdown" }
+
+  - name: "faq"
+    label: "Domande frequenti"
+    description: "Una scheda per ogni domanda della pagina FAQ."
+    folder: "src/content/faq"
+    create: true
+    slug: "{{fields.domanda}}"
+    fields:
+      - { label: "Domanda", name: "domanda", widget: "string" }
+      - { label: "Ordine di visualizzazione (numero: più basso = più in alto)", name: "ordine", widget: "number", value_type: "int" }
+      - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
+      - { label: "Risposta", name: "body", widget: "markdown" }
+
+  - name: "dati_sito"
+    label: "Contatti e dati dello studio"
+    description: "Email, telefono, WhatsApp, indirizzo, orari, Albo e numeri utili — usati in tutto il sito."
+    files:
+      - name: "dati-sito"
+        label: "Contatti e dati dello studio"
+        file: "src/content/dati-sito.json"
+        fields:
+          - label: "Contatti"
+            name: "contatti"
+            widget: "object"
+            fields:
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Telefono", name: "telefono", widget: "string" }
+              - label: "Numero WhatsApp (solo cifre, formato internazionale, es. 393331234567)"
+                name: "whatsappNumero"
+                widget: "string"
+                pattern: ["^[0-9]{8,15}$", "Solo cifre, senza + e senza spazi"]
+
+          - label: "Social"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Link LinkedIn", name: "linkedin", widget: "string" }
+              - { label: "Link Instagram", name: "instagram", widget: "string" }
+
+          - label: "Indirizzo dello studio"
+            name: "indirizzoStudio"
+            widget: "object"
+            fields:
+              - { label: "Via e numero civico", name: "via", widget: "string" }
+              - { label: "CAP", name: "cap", widget: "string" }
+
+          - label: "Orari"
+            name: "orari"
+            widget: "object"
+            fields:
+              - { label: "Giorni di apertura (es. Lunedì – Venerdì)", name: "giorni", widget: "string" }
+              - { label: "Fascia oraria (es. 9:00 - 18:00)", name: "orario", widget: "string" }
+
+          - label: "Iscrizione all'Albo"
+            name: "albo"
+            widget: "object"
+            fields:
+              - { label: "Regione dell'Albo", name: "regione", widget: "string" }
+              - { label: "Numero di iscrizione", name: "numero", widget: "string" }
+
+          - { label: "Partita IVA", name: "partitaIva", widget: "string" }
+          - { label: "Codice fiscale", name: "codiceFiscale", widget: "string" }
+
+          - label: "Informativa privacy"
+            name: "informativaPrivacy"
+            widget: "object"
+            fields:
+              - { label: "Numero di versione (es. 1.0)", name: "versione", widget: "string" }
+              - { label: "Data ultimo aggiornamento", name: "dataAggiornamento", widget: "string" }
+
+          - label: "Numeri utili in caso di emergenza"
+            name: "emergenze"
+            widget: "object"
+            fields:
+              - label: "Elenco numeri di supporto"
+                name: "numeriSupporto"
+                widget: "list"
+                fields:
+                  - { label: "Nome del servizio", name: "nome", widget: "string" }
+                  - { label: "Numero di telefono", name: "numero", widget: "string" }

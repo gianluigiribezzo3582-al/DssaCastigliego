@@ -21,6 +21,9 @@ pnpm-debug.log*
 # Cloudflare Wrangler
 .wrangler/
 
+# Bundle di Sveltia CMS, copiato automaticamente da node_modules (vedi scripts/copy-cms.mjs)
+public/admin/sveltia-cms.js
+
 # editor
 .vscode/*
 !.vscode/extensions.json

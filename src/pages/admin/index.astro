@@ -1,0 +1,23 @@
+---
+// Pagina "guscio" per Sveltia CMS: passa dalla routing di Astro (invece di stare
+// come semplice file statico in public/) così `/admin` funziona in modo identico
+// in `astro dev`, `astro preview` e nella build di produzione — Astro risolve
+// correttamente /admin e /admin/ verso questa pagina, cosa che un file statico
+// public/admin/index.html non garantisce in ogni modalità. `config.yml` e il
+// bundle di Sveltia CMS restano invece file statici in public/admin/, perché
+// non hanno bisogno della pipeline di Astro.
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Redazione contenuti — Elisa Castigliego</title>
+    <script is:inline src="/admin/sveltia-cms.js" type="module"></script>
+  </head>
+  <body>
+    <!-- Sveltia CMS crea qui la propria interfaccia. -->
+  </body>
+</html>

@@ -1,0 +1,17 @@
+# Copia questo file in wrangler.toml (nella stessa cartella worker-oauth/) e
+# compila i segnaposto prima di eseguire `wrangler deploy` da questa cartella.
+# Procedura completa, passo-passo, in /docs/CMS.md.
+
+name = "elisa-castigliego-cms-auth" # nome libero, diventa parte dell'URL *.workers.dev
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+
+# Le variabili GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET NON vanno scritte qui:
+# vanno impostate come secret con:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+
+[vars]
+# Dominio del sito pubblico (quello dove gira /admin), usato per limitare a chi
+# viene inviato il token via postMessage. Più origini separate da virgola.
+ALLOWED_ORIGINS = "https://{{DOMINIO_SITO}}"
