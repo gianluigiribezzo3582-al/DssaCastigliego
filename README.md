@@ -39,16 +39,16 @@ in fase di sviluppo puro Astro. Per testare il flusso completo usare `npm run de
 
 ## Script disponibili
 
-| Comando | Cosa fa |
-|---|---|
-| `npm run dev` | Avvia Astro in sviluppo |
-| `npm run dev:functions` | Avvia Astro + Pages Function via Wrangler (richiede build) |
-| `npm run build` | Build statica di produzione in `dist/` |
-| `npm run preview` | Anteprima della build |
-| `npm run lint` | Controllo formattazione con Prettier |
-| `npm run format` | Applica la formattazione con Prettier |
-| `npm test` | Esegue i test (Vitest): content collections, form, antispam |
-| `npm run check` | Type-check di Astro |
+| Comando                 | Cosa fa                                                     |
+| ----------------------- | ----------------------------------------------------------- |
+| `npm run dev`           | Avvia Astro in sviluppo                                     |
+| `npm run dev:functions` | Avvia Astro + Pages Function via Wrangler (richiede build)  |
+| `npm run build`         | Build statica di produzione in `dist/`                      |
+| `npm run preview`       | Anteprima della build                                       |
+| `npm run lint`          | Controllo formattazione con Prettier                        |
+| `npm run format`        | Applica la formattazione con Prettier                       |
+| `npm test`              | Esegue i test (Vitest): content collections, form, antispam |
+| `npm run check`         | Type-check di Astro                                         |
 
 ## Struttura del progetto
 

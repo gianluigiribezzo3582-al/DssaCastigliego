@@ -1,1 +1,146 @@
 @import "tailwindcss";
+
+/* Font self-hosted (nessuna richiesta a CDN esterni in runtime) */
+@import "@fontsource-variable/fraunces/wght.css";
+@import "@fontsource/work-sans/400.css";
+@import "@fontsource/work-sans/500.css";
+@import "@fontsource/work-sans/600.css";
+@import "@fontsource/work-sans/700.css";
+
+@import "./tokens.css";
+
+/* Espone i design token come tema Tailwind, senza duplicarli:
+   tokens.css resta l'unica fonte da modificare per cambiare direzione visiva. */
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-bg-alt: var(--color-bg-alt);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-contrast: var(--color-primary-contrast);
+  --color-accent: var(--color-accent);
+  --color-accent-bg: var(--color-accent-bg);
+  --color-focus: var(--color-focus);
+  --color-success-bg: var(--color-success-bg);
+  --color-success-text: var(--color-success-text);
+  --color-error-bg: var(--color-error-bg);
+  --color-error-text: var(--color-error-text);
+
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    line-height: var(--line-height-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    line-height: var(--line-height-heading);
+    font-weight: 600;
+  }
+
+  /* Focus visibile e coerente su tutti gli elementi interattivi, come richiesto
+     dal requisito di accessibilità: mai affidarsi solo al colore. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--color-accent-bg);
+    color: var(--color-primary-contrast);
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 100;
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
+    transition: top var(--motion-duration) var(--motion-easing);
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  .prose-content {
+    max-width: var(--prose-max-width);
+  }
+
+  .prose-content :where(h2) {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+
+  .prose-content :where(h3) {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-2);
+  }
+
+  .prose-content :where(p, ul, ol) {
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+  }
+
+  .prose-content :where(ul, ol) {
+    padding-left: var(--space-5);
+  }
+
+  .prose-content :where(ul) {
+    list-style: disc;
+  }
+
+  .prose-content :where(ol) {
+    list-style: decimal;
+  }
+
+  .prose-content :where(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

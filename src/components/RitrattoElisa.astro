@@ -1,0 +1,44 @@
+---
+// Punto unico di importazione del ritratto di Elisa: quando arriverà la fotografia
+// definitiva basterà sostituire src/assets/placeholder.jpeg (stesso nome file) oppure
+// aggiornare l'unica riga di import qui sotto. Nessun altro file del sito importa
+// direttamente l'immagine. Vedi /docs/ASSETS.md per le proporzioni richieste.
+import { Image } from "astro:assets";
+import placeholder from "../assets/placeholder.jpeg";
+
+interface Props {
+  /** Inquadratura richiesta dal layout che la usa. */
+  variant: "verticale" | "quadrata" | "piccola";
+  /** Testo alternativo: provvisorio, va riscritto con Elisa prima della pubblicazione. */
+  alt?: string;
+  class?: string;
+  /** Se true, l'immagine è puramente decorativa in quel contesto (alt vuoto). */
+  decorative?: boolean;
+  loading?: "lazy" | "eager";
+}
+
+const {
+  variant,
+  alt = "Ritratto provvisorio — foto segnaposto, in attesa della fotografia definitiva di Elisa Castigliego",
+  class: className = "",
+  decorative = false,
+  loading = "lazy",
+} = Astro.props;
+
+const dimensioni = {
+  verticale: { width: 720, height: 960 }, // 3:4 — home
+  quadrata: { width: 640, height: 640 }, // 1:1 — chi sono
+  piccola: { width: 240, height: 240 }, // 1:1 — contatti
+} as const;
+
+const { width, height } = dimensioni[variant];
+---
+
+<Image
+  src={placeholder}
+  alt={decorative ? "" : alt}
+  width={width}
+  height={height}
+  loading={loading}
+  class={`object-cover ${className}`}
+/>

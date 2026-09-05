@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { getCollection } from "astro:content";
+
+const aree = (await getCollection("aree")).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+---
+
+<Layout
+  title="Aree di intervento"
+  description="Le aree su cui si concentra più spesso il lavoro psicologico con adulti: ansia, umore, relazioni, crescita personale, cambiamento, supporto ai familiari."
+>
+  <section
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      Aree di intervento
+    </h1>
+    <p
+      class="mt-3 max-w-[var(--prose-max-width)] text-[var(--color-text-muted)]"
+    >
+      Un elenco informativo, non esaustivo: ogni percorso parte dalla richiesta
+      specifica della persona, non da una categoria predefinita.
+    </p>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        aree.map((area) => (
+          <li>
+            <Card href={`/aree-di-intervento/${area.id}`}>
+              <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]">
+                {area.data.titolo}
+              </h2>
+              <p class="mt-2 text-sm text-[var(--color-text-muted)]">
+                {area.data.riassunto}
+              </p>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

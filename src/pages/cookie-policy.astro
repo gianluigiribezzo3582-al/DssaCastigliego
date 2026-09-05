@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../config/site";
+---
+
+<Layout
+  title="Cookie policy"
+  description="Questo sito non installa cookie di profilazione, analytics o marketing. Nessun cookie tecnico non essenziale è presente."
+>
+  <article
+    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      Cookie policy
+    </h1>
+    <p class="text-sm text-[var(--color-text-muted)]">
+      Versione informativa {site.informativaPrivacy.versione} — ultimo aggiornamento:
+      {site.informativaPrivacy.dataAggiornamento}.
+    </p>
+
+    <h2>Nessun cookie installato</h2>
+    <p>
+      Questo sito, per scelta di progetto, non installa cookie di profilazione,
+      statistica/analytics o marketing, né cookie tecnici non essenziali. Non è
+      presente alcun banner di consenso perché non ce n'è motivo: non viene
+      impostato alcun cookie durante la normale navigazione del sito.
+    </p>
+
+    <h2>Local storage del CMS e della demo di prenotazione</h2>
+    <p>
+      Le pagine <code>/admin</code> (area di redazione dei contenuti) e
+      <code>/demo-prenotazione</code> (prototipo dimostrativo, non collegato al sito
+      pubblico) possono utilizzare la memoria locale del browser (
+      <em>localStorage</em>) per far funzionare l'interfaccia. Non si tratta di
+      cookie e questi dati restano esclusivamente sul dispositivo di chi naviga,
+      senza essere inviati a nessun server.
+    </p>
+
+    <h2>Servizi di terze parti</h2>
+    <p>
+      Il sito non incorpora font, script, iframe o altre risorse caricate in
+      tempo reale da domini di terze parti (niente Google Fonts via CDN, niente
+      Google Maps, niente widget di chat). L'unico collegamento verso terze
+      parti è un link diretto a WhatsApp (wa.me), che si apre solo se l'utente
+      clicca volontariamente il pulsante corrispondente.
+    </p>
+
+    <h2>Verifica</h2>
+    <p>
+      Questa dichiarazione è stata verificata ispezionando la build di
+      produzione: dettagli in <code>/docs/PRIVACY.md</code>.
+    </p>
+  </article>
+</Layout>

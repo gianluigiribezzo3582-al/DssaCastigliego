@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../config/site";
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Informativa sul trattamento dei dati personali raccolti tramite il modulo di contatto di questo sito."
+>
+  <article
+    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      Privacy Policy
+    </h1>
+    <p class="text-sm text-[var(--color-text-muted)]">
+      Versione {site.informativaPrivacy.versione} — ultimo aggiornamento:
+      {site.informativaPrivacy.dataAggiornamento}. [BOZZA — struttura con
+      segnaposto espliciti; il testo giuridico definitivo va redatto o validato
+      da una persona competente, non generato automaticamente.]
+    </p>
+
+    <h2>Titolare del trattamento</h2>
+    <ul>
+      <li>{site.titolareTrattamento}, {site.titoloProfessionale}</li>
+      <li>
+        Indirizzo: {site.indirizzoStudio.via}, {site.indirizzoStudio.citta}
+      </li>
+      <li>Email: {site.contatti.email}</li>
+      <li>
+        [SEGNAPOSTO] Eventuale responsabile della protezione dei dati (se
+        nominato): {"{{DPO_NOME}}"}
+      </li>
+    </ul>
+
+    <h2>Quali dati raccoglie questo sito</h2>
+    <p>
+      Il sito non raccoglie dati di navigazione tramite cookie o strumenti di
+      analytics. Gli unici dati personali trattati sono quelli che l'utente
+      sceglie volontariamente di inserire nel <a href="/contatti"
+        >modulo di contatto</a
+      >: nome o identificativo a scelta, un recapito (email o telefono), la
+      preferenza di contatto, la disponibilità indicativa e un messaggio libero.
+    </p>
+    <p>
+      <strong
+        >Il modulo chiede esplicitamente di non inserire informazioni sullo
+        stato di salute</strong
+      >: quei dati vengono discussi solo durante il primo colloquio, non tramite
+      il sito.
+    </p>
+
+    <h2>Come vengono trattati questi dati</h2>
+    <p>
+      Il messaggio inviato dal modulo viene elaborato da una funzione automatica
+      (Cloudflare Pages Function) che lo inoltra via email al titolare, senza
+      salvarlo in nessun database, file di log applicativo o sistema di
+      archiviazione del sito. L'unico luogo in cui il messaggio resta è la
+      casella di posta del titolare.
+    </p>
+    <p>
+      L'indirizzo IP di chi invia il modulo viene usato esclusivamente per un
+      controllo antispam (limite al numero di invii in un breve periodo), in
+      forma hashata (non riconducibile in chiaro) e con conservazione breve; non
+      viene mai associato al contenuto del messaggio né conservato insieme ad
+      esso.
+    </p>
+
+    <h2>Chi tratta i dati per conto del titolare (fornitori)</h2>
+    <ul>
+      <li>
+        <strong>Cloudflare</strong> — hosting del sito ed esecuzione della funzione
+        che inoltra il modulo di contatto; instradamento dell'email in ricezione (Cloudflare
+        Email Routing).
+      </li>
+      <li>
+        <strong>Brevo</strong> — invio dell'email generata dal modulo di contatto
+        verso la casella del titolare (quando attivo; in fase di sviluppo il sito
+        gira in modalità simulata, senza alcun invio reale).
+      </li>
+    </ul>
+    <p>
+      Dettaglio completo dei trattamenti, utile per il registro del titolare, in
+      <code> /docs/PRIVACY.md</code>.
+    </p>
+
+    <h2>WhatsApp</h2>
+    <p>
+      Il pulsante WhatsApp presente nel sito è un semplice collegamento (wa.me):
+      non carica alcuno script di Meta e non trasmette dati finché non viene
+      cliccato volontariamente. Una volta aperta la conversazione su WhatsApp,
+      il trattamento dei dati è regolato dall'informativa privacy di WhatsApp
+      stessa. Questo canale è pensato solo per appuntamenti e questioni
+      pratiche, non per contenuti clinici.
+    </p>
+
+    <h2>Per quanto tempo vengono conservati i dati</h2>
+    <p>
+      Il contenuto del modulo di contatto non viene conservato dal sito:
+      transita e arriva direttamente nella casella email del titolare, dove
+      resta secondo le normali politiche di conservazione della posta
+      elettronica del titolare stesso. Le chiavi hashate usate per l'antispam
+      hanno una durata (TTL) breve, dell'ordine di pochi minuti.
+    </p>
+
+    <h2>Diritti dell'interessato</h2>
+    <p>
+      [SEGNAPOSTO] In qualità di interessato puoi esercitare i diritti previsti
+      dagli articoli 15-22 del Regolamento (UE) 2016/679 (accesso, rettifica,
+      cancellazione, limitazione, portabilità, opposizione) scrivendo a {
+        site.contatti.email
+      }.
+    </p>
+
+    <h2>Reclamo all'Autorità di controllo</h2>
+    <p>
+      Hai diritto di proporre reclamo al Garante per la protezione dei dati
+      personali qualora ritenga che il trattamento dei tuoi dati violi la
+      normativa vigente.
+    </p>
+  </article>
+</Layout>

@@ -111,14 +111,14 @@ dal CMS.
 
 ## 8. Dipendenze aggiunte e motivazione
 
-| Pacchetto | Perché |
-|---|---|
-| `@astrojs/mdx` | contenuti MDX per le pagine più ricche (FAQ, aree) mantenendo compatibilità con le content collections |
-| `@astrojs/sitemap` | generazione automatica di `sitemap.xml` in build, richiesta esplicitamente |
-| `@lucide/astro` | icone da libreria open source, non generate, come richiesto |
-| `@tailwindcss/vite`, `tailwindcss` | CSS utility-first richiesto dal prompt |
-| `vitest` (dev) | test automatici richiesti (content collections, form, antispam) |
-| `prettier`, `prettier-plugin-astro` (dev) | formattazione standard richiesta |
+| Pacchetto                                 | Perché                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `@astrojs/mdx`                            | contenuti MDX per le pagine più ricche (FAQ, aree) mantenendo compatibilità con le content collections |
+| `@astrojs/sitemap`                        | generazione automatica di `sitemap.xml` in build, richiesta esplicitamente                             |
+| `@lucide/astro`                           | icone da libreria open source, non generate, come richiesto                                            |
+| `@tailwindcss/vite`, `tailwindcss`        | CSS utility-first richiesto dal prompt                                                                 |
+| `vitest` (dev)                            | test automatici richiesti (content collections, form, antispam)                                        |
+| `prettier`, `prettier-plugin-astro` (dev) | formattazione standard richiesta                                                                       |
 
 Nessun'altra dipendenza runtime aggiunta. Niente librerie di componenti UI pesanti.
 

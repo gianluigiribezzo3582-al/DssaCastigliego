@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../config/site";
+---
+
+<Layout
+  title="In caso di emergenza"
+  description="Questo sito non gestisce emergenze o urgenze psicologiche. In caso di pericolo immediato, contattare il 112."
+>
+  <article
+    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      In caso di emergenza
+    </h1>
+
+    <div
+      class="mt-6 rounded-[var(--radius-lg)] border-2 border-[var(--color-error-text)] bg-[var(--color-error-bg)] p-5"
+    >
+      <p class="font-semibold text-[var(--color-error-text)]">
+        Questo sito e lo studio della dott.ssa {site.nome} non gestiscono emergenze
+        né urgenze. Se sei in pericolo immediato, o se stai vivendo un'emergenza per
+        te o per un'altra persona, non usare il modulo di contatto: chiama subito
+        il{" "}
+        <a
+          class="underline"
+          href={`tel:${site.emergenze.numeroUnicoEmergenze}`}
+        >
+          {site.emergenze.numeroUnicoEmergenze}
+        </a>.
+      </p>
+    </div>
+
+    <h2>Numeri di supporto</h2>
+    <p>
+      Alcuni servizi nazionali di supporto e ascolto (numeri da verificare —
+      vedi nota in fondo alla pagina):
+    </p>
+    <ul>
+      {
+        site.emergenze.numeriSupporto.map((servizio) => (
+          <li>
+            {servizio.nome}:{" "}
+            <a href={`tel:${servizio.numero}`}>{servizio.numero}</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2>Tempi di risposta alle richieste dal sito</h2>
+    <p>
+      Le richieste ricevute tramite il modulo di contatto, email o WhatsApp
+      vengono lette e riscontrate entro {"{{TEMPI_RISPOSTA_GIORNI}}"} giorni lavorativi.
+      Non è un canale adatto a situazioni urgenti.
+    </p>
+
+    <p class="text-sm text-[var(--color-text-muted)]">
+      Nota: i numeri di supporto indicati sopra sono segnaposto. Non sono stati
+      né inventati né ricercati in autonomia, per evitare di pubblicare un
+      numero errato in un contesto delicato: vanno verificati e inseriti da una
+      persona prima della pubblicazione del sito. Vedi <code
+        >/docs/DA-COMPILARE.md</code
+      >.
+    </p>
+  </article>
+</Layout>

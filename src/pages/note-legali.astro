@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../config/site";
+---
+
+<Layout
+  title="Note legali"
+  description="Titolarità del sito, dati identificativi della professionista e note legali."
+>
+  <article
+    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <h1
+      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+    >
+      Note legali
+    </h1>
+    <p class="text-sm text-[var(--color-text-muted)]">
+      [BOZZA — struttura con segnaposto espliciti. Il testo definitivo va
+      scritto o verificato da una persona, non generato automaticamente: vedi
+      <code>/docs/DA-COMPILARE.md</code>.]
+    </p>
+
+    <h2>Titolare del sito</h2>
+    <ul>
+      <li>Nome e cognome: {site.titolareTrattamento}</li>
+      <li>Titolo professionale: {site.titoloProfessionale}</li>
+      <li>Iscrizione all'Albo: {site.albo.regione}, n. {site.albo.numero}</li>
+      <li>Partita IVA: {site.partitaIva}</li>
+      <li>Codice fiscale: {site.codiceFiscale}</li>
+      <li>
+        Indirizzo dello studio: {site.indirizzoStudio.via}, {
+          site.indirizzoStudio.cap
+        }{" "}
+        {site.indirizzoStudio.citta} ({site.indirizzoStudio.provincia})
+      </li>
+      <li>Email: {site.contatti.email}</li>
+      <li>Telefono: {site.contatti.telefono}</li>
+    </ul>
+
+    <h2>Natura del sito</h2>
+    <p>
+      Il sito ha finalità informativa e di presentazione professionale. Non
+      costituisce erogazione di prestazioni sanitarie a distanza né consulto
+      medico/psicologico online: ogni prestazione viene erogata solo nell'ambito
+      del rapporto professionale diretto tra la dott.ssa {site.nome} e la persona
+      che si rivolge a lei.
+    </p>
+
+    <h2>Hosting e fornitori tecnici</h2>
+    <p>
+      Il sito è ospitato su Cloudflare Pages. Il modulo di contatto utilizza,
+      quando attivo, il servizio di invio email Brevo. Dettagli completi sul
+      trattamento dei dati in <a href="/privacy">Privacy Policy</a>.
+    </p>
+
+    <h2>Proprietà dei contenuti</h2>
+    <p>
+      [SEGNAPOSTO] Testi, fotografie ed elementi grafici presenti sul sito sono
+      di proprietà di {site.titolareTrattamento} o utilizzati con relativa licenza.
+      È vietata la riproduzione non autorizzata.
+    </p>
+
+    <h2>Comunicazione sanitaria</h2>
+    <p>
+      I contenuti del sito rispettano i principi di correttezza, trasparenza e
+      prudenza previsti per la comunicazione in ambito sanitario: non contengono
+      promesse di risultato, claim comparativi né testimonianze di pazienti.
+    </p>
+  </article>
+</Layout>

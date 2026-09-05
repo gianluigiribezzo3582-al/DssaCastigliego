@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+import SkipLink from "../components/SkipLink.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { schemaPsychologist } from "../lib/jsonld";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Impedisce l'indicizzazione (admin, demo prenotazione). */
+  noindex?: boolean;
+  /** Blocchi JSON-LD aggiuntivi (FAQPage, BreadcrumbList...). Lo schema Psychologist è già incluso di default. */
+  jsonLd?: Record<string, unknown>[];
+  /** Disattiva lo schema Psychologist automatico (solo per pagine noindex come demo/admin). */
+  senzaSchemaOrganizzazione?: boolean;
+}
+
+const {
+  title,
+  description,
+  noindex = false,
+  jsonLd = [],
+  senzaSchemaOrganizzazione = false,
+} = Astro.props;
+
+const titoloCompleto = title.includes("Elisa Castigliego")
+  ? title
+  : `${title} — Elisa Castigliego, Psicologa a Bologna`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const jsonLdCompleto = senzaSchemaOrganizzazione
+  ? jsonLd
+  : [schemaPsychologist(Astro.site?.origin ?? ""), ...jsonLd];
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{titoloCompleto}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={titoloCompleto} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={titoloCompleto} />
+    <meta name="twitter:description" content={description} />
+
+    <meta name="generator" content={Astro.generator} />
+
+    {
+      jsonLdCompleto.map((blocco) => (
+        <script type="application/ld+json" set:html={JSON.stringify(blocco)} />
+      ))
+    }
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-[var(--color-bg)] text-[var(--color-text)]"
+  >
+    <SkipLink />
+    <Header />
+    <main id="contenuto" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

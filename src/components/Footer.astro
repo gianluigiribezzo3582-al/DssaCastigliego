@@ -1,0 +1,106 @@
+---
+import { site } from "../config/site";
+
+const waTesto = encodeURIComponent(
+  "Ciao, ho visto il sito e vorrei informazioni su un appuntamento.",
+);
+const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
+---
+
+<footer
+  class="mt-[var(--space-12)] border-t border-[var(--color-border)] bg-[var(--color-bg-alt)]"
+>
+  <div class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6">
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div>
+        <p
+          class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]"
+        >
+          {site.nome}
+        </p>
+        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+          {site.titoloProfessionale} · {site.citta}
+        </p>
+        <p class="mt-3 text-sm text-[var(--color-text-muted)]">
+          Albo {site.albo.regione} n. {site.albo.numero} · P.IVA {
+            site.partitaIva
+          }
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-[var(--color-text)]">Contatti</h2>
+        <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href={`mailto:${site.contatti.email}`}
+            >
+              {site.contatti.email}
+            </a>
+          </li>
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href={`tel:${site.contatti.telefono}`}
+            >
+              {site.contatti.telefono}
+            </a>
+          </li>
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href={waHref}
+              rel="noopener"
+            >
+              WhatsApp (solo appuntamenti e questioni pratiche)
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-[var(--color-text)]">
+          Informazioni
+        </h2>
+        <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href="/emergenze">In caso di emergenza</a>
+          </li>
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href="/privacy">Privacy policy</a>
+          </li>
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href="/cookie-policy">Cookie policy</a>
+          </li>
+          <li>
+            <a
+              class="underline hover:text-[var(--color-primary)]"
+              href="/note-legali">Note legali</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p
+      class="mt-8 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)]"
+    >
+      Questo sito non gestisce emergenze o urgenze psicologiche. In caso di
+      pericolo immediato chiamare il 112. Vedi la pagina <a
+        class="underline"
+        href="/emergenze">emergenze</a
+      >.
+    </p>
+
+    <p class="mt-4 text-xs text-[var(--color-text-muted)]">
+      © {new Date().getFullYear()}
+      {site.nome} — {site.titolareTrattamento}
+    </p>
+  </div>
+</footer>

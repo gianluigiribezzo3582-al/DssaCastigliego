@@ -1,0 +1,116 @@
+/*
+ * Design token — Direzione A "Terracotta calda" (implementata).
+ * Le Direzioni B e C sono documentate in /docs/DESIGN.md: per provarle,
+ * commentare il blocco "Direzione A" qui sotto e scommentare quello desiderato.
+ * È l'UNICO file da modificare per cambiare direzione visiva a sito già costruito.
+ */
+
+:root {
+  /* ---- Direzione A: "Terracotta calda" ---- */
+  --color-bg: #fbf6f0;
+  --color-bg-alt: #f3e9de;
+  --color-surface: #ffffff;
+  --color-border: #e4d5c6;
+
+  --color-text: #2e2622;
+  --color-text-muted: #5c5049;
+
+  --color-primary: #b5502d;
+  --color-primary-hover: #93401f;
+  --color-primary-contrast: #ffffff;
+
+  --color-accent: #8a5a1e; /* testo/dettagli su sfondo chiaro */
+  --color-accent-bg: #c98a3b; /* superfici/badge, non per testo piccolo */
+
+  --color-focus: #1b4f72;
+
+  --color-success-bg: #eaf3ea;
+  --color-success-text: #2c5e33;
+  --color-error-bg: #fbeceb;
+  --color-error-text: #8a2e22;
+
+  /* ---- Direzione B: "Blu crepuscolo" (alternativa, non attiva) ----
+  --color-bg: #f5f7f7;
+  --color-bg-alt: #e9eeee;
+  --color-surface: #ffffff;
+  --color-border: #d7e0e0;
+  --color-text: #1f2a2e;
+  --color-text-muted: #4d5a5e;
+  --color-primary: #3b6e71;
+  --color-primary-hover: #2c5457;
+  --color-primary-contrast: #ffffff;
+  --color-accent: #8a3f24;
+  --color-accent-bg: #b5502d;
+  --color-focus: #8a3f24;
+  */
+
+  /* ---- Direzione C: "Ocra e prugna" (alternativa, non attiva) ----
+  --color-bg: #faf3e8;
+  --color-bg-alt: #f1e2cd;
+  --color-surface: #ffffff;
+  --color-border: #e8d3b0;
+  --color-text: #2b2320;
+  --color-text-muted: #5a4d43;
+  --color-primary: #8c5383;
+  --color-primary-hover: #6f4067;
+  --color-primary-contrast: #ffffff;
+  --color-accent: #96631a;
+  --color-accent-bg: #d98e2b;
+  --color-focus: #6f4067;
+  */
+
+  /* Tipografia — Direzione A: Fraunces (titoli) + Work Sans (testo) */
+  --font-heading:
+    "Fraunces Variable", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Direzione B: --font-heading: "Literata", Georgia, serif;  --font-body: "Karla", system-ui, sans-serif; */
+  /* Direzione C: --font-heading: "Sora", system-ui, sans-serif; --font-body: "Sora", system-ui, sans-serif; */
+
+  --font-size-base: 1rem;
+  --line-height-body: 1.6;
+  --line-height-heading: 1.15;
+
+  /* Scala tipografica (rem) */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 2.875rem;
+
+  /* Spaziature (rem), scala 4px */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-full: 999px;
+
+  --shadow-card:
+    0 1px 2px rgba(46, 38, 34, 0.06), 0 4px 16px rgba(46, 38, 34, 0.07);
+
+  --content-max-width: 72rem;
+  --prose-max-width: 42rem;
+
+  --touch-target-min: 2.75rem; /* 44px, superiore al minimo 24px richiesto */
+
+  --motion-duration: 180ms;
+  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration: 0ms;
+  }
+}
