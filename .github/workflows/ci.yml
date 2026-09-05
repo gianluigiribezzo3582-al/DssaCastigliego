@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installa le dipendenze
+        run: npm ci
+
+      - name: Controlla la formattazione (Prettier)
+        run: npm run lint
+
+      - name: Type-check del progetto Astro
+        run: npm run check
+
+      - name: Type-check delle Cloudflare Pages Functions
+        run: npx tsc --noEmit -p functions/tsconfig.json
+
+      - name: Build
+        run: npm run build
+
+      - name: Test (Vitest — content collections, form, antispam, link checker, headers)
+        run: npm test
