@@ -1,0 +1,514 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Demo prenotazione (dimostrazione)"
+  description="Prototipo dimostrativo del flusso di prenotazione online. Nessuna prenotazione viene realmente registrata."
+  noindex
+  senzaSchemaOrganizzazione
+>
+  <div
+    class="sticky top-0 z-30 border-b border-[var(--color-error-text)] bg-[var(--color-error-bg)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-error-text)]"
+  >
+    Dimostrazione — nessuna prenotazione viene realmente registrata. Nessun dato
+    inserito qui viene inviato o salvato.
+  </div>
+
+  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-12">
+    <h1
+      class="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text)] sm:text-3xl"
+    >
+      Demo — prenotazione di un primo colloquio
+    </h1>
+    <p class="mt-3 text-[var(--color-text-muted)]">
+      Questo è un prototipo puramente dimostrativo, pensato per mostrare come
+      potrebbe funzionare una prenotazione online. Gli orari mostrati sono di
+      esempio: non riflettono la disponibilità reale. Non viene effettuata
+      alcuna chiamata di rete: tutto avviene nel browser.
+    </p>
+
+    <ol
+      id="stepper"
+      class="mt-6 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4"
+      aria-label="Fasi della prenotazione"
+    >
+      <li
+        data-step-indicator="giorno"
+        class="rounded-[var(--radius-md)] border border-[var(--color-border)] p-2 text-center"
+      >
+        1. Giorno
+      </li>
+      <li
+        data-step-indicator="orario"
+        class="rounded-[var(--radius-md)] border border-[var(--color-border)] p-2 text-center"
+      >
+        2. Orario
+      </li>
+      <li
+        data-step-indicator="dati"
+        class="rounded-[var(--radius-md)] border border-[var(--color-border)] p-2 text-center"
+      >
+        3. Dati
+      </li>
+      <li
+        data-step-indicator="conferma"
+        class="rounded-[var(--radius-md)] border border-[var(--color-border)] p-2 text-center"
+      >
+        4. Conferma
+      </li>
+    </ol>
+
+    <p id="annuncio-passo" role="status" aria-live="polite" class="sr-only"></p>
+
+    <noscript>
+      <p
+        class="mt-8 rounded-[var(--radius-md)] border border-[var(--color-error-text)] bg-[var(--color-error-bg)] p-4 text-[var(--color-error-text)]"
+      >
+        Questa demo richiede JavaScript attivo per mostrare il calendario
+        interattivo. Il resto del sito, incluso il modulo di contatto reale,
+        funziona anche senza JavaScript.
+      </p>
+    </noscript>
+
+    <!-- Passo 1: giorno -->
+    <div id="passo-giorno" class="mt-8">
+      <h2 tabindex="-1" class="text-xl font-semibold text-[var(--color-text)]">
+        1. Scegli un giorno
+      </h2>
+      <p id="titolo-mese" class="mt-1 text-sm text-[var(--color-text-muted)]">
+      </p>
+      <div
+        id="griglia-calendario"
+        class="mt-4 grid grid-cols-7 gap-1 sm:gap-2"
+        aria-label="Calendario del mese, giorni con disponibilità"
+      >
+      </div>
+    </div>
+
+    <!-- Passo 2: orario -->
+    <div id="passo-orario" class="mt-8" hidden>
+      <button
+        type="button"
+        data-indietro="giorno"
+        class="text-sm font-semibold text-[var(--color-primary)] underline"
+      >
+        ← Cambia giorno
+      </button>
+      <h2
+        tabindex="-1"
+        class="mt-2 text-xl font-semibold text-[var(--color-text)]"
+      >
+        2. Scegli un orario
+      </h2>
+      <p id="giorno-scelto" class="mt-1 text-sm text-[var(--color-text-muted)]">
+      </p>
+      <div id="griglia-orari" class="mt-4 flex flex-wrap gap-2"></div>
+    </div>
+
+    <!-- Passo 3: dati -->
+    <div id="passo-dati" class="mt-8" hidden>
+      <button
+        type="button"
+        data-indietro="orario"
+        class="text-sm font-semibold text-[var(--color-primary)] underline"
+      >
+        ← Cambia orario
+      </button>
+      <h2
+        tabindex="-1"
+        class="mt-2 text-xl font-semibold text-[var(--color-text)]"
+      >
+        3. I tuoi dati (demo)
+      </h2>
+      <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+        Nessun dato inserito qui viene inviato o salvato: serve solo a mostrare
+        come funzionerebbe il riepilogo.
+      </p>
+      <form id="modulo-demo" class="mt-4 space-y-4" novalidate>
+        <div>
+          <label
+            for="demo-nome"
+            class="block text-sm font-semibold text-[var(--color-text)]"
+            >Nome (demo)</label
+          >
+          <input
+            type="text"
+            id="demo-nome"
+            name="demo-nome"
+            required
+            class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+          />
+        </div>
+        <div>
+          <label
+            for="demo-email"
+            class="block text-sm font-semibold text-[var(--color-text)]"
+            >Email (demo)</label
+          >
+          <input
+            type="email"
+            id="demo-email"
+            name="demo-email"
+            required
+            class="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)]"
+          />
+        </div>
+        <p
+          id="errore-dati-demo"
+          class="text-sm text-[var(--color-error-text)]"
+          hidden
+        >
+        </p>
+        <button
+          type="submit"
+          class="inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]"
+        >
+          Vai al riepilogo
+        </button>
+      </form>
+    </div>
+
+    <!-- Passo 4: riepilogo -->
+    <div id="passo-riepilogo" class="mt-8" hidden>
+      <button
+        type="button"
+        data-indietro="dati"
+        class="text-sm font-semibold text-[var(--color-primary)] underline"
+      >
+        ← Correggi i dati
+      </button>
+      <h2
+        tabindex="-1"
+        class="mt-2 text-xl font-semibold text-[var(--color-text)]"
+      >
+        4. Riepilogo (demo)
+      </h2>
+      <dl
+        class="mt-4 space-y-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-sm"
+      >
+        <div class="flex justify-between gap-4">
+          <dt class="font-semibold">Giorno</dt><dd id="riepilogo-giorno"></dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt class="font-semibold">Orario</dt><dd id="riepilogo-orario"></dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt class="font-semibold">Nome</dt><dd id="riepilogo-nome"></dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt class="font-semibold">Email</dt><dd id="riepilogo-email"></dd>
+        </div>
+      </dl>
+      <button
+        type="button"
+        id="conferma-demo"
+        class="mt-4 inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]"
+      >
+        Conferma (demo, nessun invio reale)
+      </button>
+    </div>
+
+    <!-- Passo 5: conferma -->
+    <div id="passo-conferma" class="mt-8" hidden>
+      <h2 tabindex="-1" class="text-xl font-semibold text-[var(--color-text)]">
+        Prenotazione dimostrativa completata
+      </h2>
+      <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+        In una versione reale, a questo punto partirebbero due email. Ecco
+        un'anteprima di come potrebbero apparire (testo di esempio, nessuna
+        email è stata inviata davvero).
+      </p>
+
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div
+          class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+        >
+          <p
+            class="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+          >
+            Anteprima email per la persona che prenota
+          </p>
+          <pre
+            id="anteprima-email-cliente"
+            class="mt-2 whitespace-pre-wrap font-sans text-sm text-[var(--color-text)]">
+          </pre>
+        </div>
+        <div
+          class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+        >
+          <p
+            class="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+          >
+            Anteprima email per Elisa
+          </p>
+          <pre
+            id="anteprima-email-elisa"
+            class="mt-2 whitespace-pre-wrap font-sans text-sm text-[var(--color-text)]">
+          </pre>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="ricomincia-demo"
+          class="inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)]"
+        >
+          Ricomincia la demo
+        </button>
+        <a
+          class="inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]"
+          href="/"
+        >
+          Torna al sito
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  import {
+    generaCalendarioMese,
+    NOMI_GIORNI_BREVI,
+    NOMI_MESI,
+    type GiornoCalendario,
+  } from "../../lib/demo-prenotazione/config";
+
+  const oggi = new Date();
+  const calendario = generaCalendarioMese(oggi.getFullYear(), oggi.getMonth());
+
+  const stato: {
+    giorno: GiornoCalendario | null;
+    orario: string | null;
+    nome: string;
+    email: string;
+  } = { giorno: null, orario: null, nome: "", email: "" };
+
+  const passi = ["giorno", "orario", "dati", "riepilogo", "conferma"] as const;
+  type Passo = (typeof passi)[number];
+
+  const contenitori: Record<Passo, HTMLElement> = {
+    giorno: document.getElementById("passo-giorno")!,
+    orario: document.getElementById("passo-orario")!,
+    dati: document.getElementById("passo-dati")!,
+    riepilogo: document.getElementById("passo-riepilogo")!,
+    conferma: document.getElementById("passo-conferma")!,
+  };
+
+  const etichettePasso: Record<Passo, string> = {
+    giorno: "Passo 1 di 4: scegli un giorno",
+    orario: "Passo 2 di 4: scegli un orario",
+    dati: "Passo 3 di 4: inserisci i tuoi dati",
+    riepilogo: "Passo 4 di 4: rivedi il riepilogo",
+    conferma: "Prenotazione dimostrativa completata",
+  };
+
+  const annuncio = document.getElementById("annuncio-passo")!;
+  const stepper = document.getElementById("stepper")!;
+
+  function vaiAlPasso(passo: Passo) {
+    for (const p of passi) {
+      contenitori[p].hidden = p !== passo;
+    }
+    stepper.querySelectorAll("[data-step-indicator]").forEach((el) => {
+      const nome = el.getAttribute("data-step-indicator");
+      const attivo =
+        nome === passo || (passo === "conferma" && nome === "conferma");
+      el.classList.toggle("bg-[var(--color-bg-alt)]", attivo);
+      el.classList.toggle("font-semibold", attivo);
+      if (attivo) el.setAttribute("aria-current", "step");
+      else el.removeAttribute("aria-current");
+    });
+    annuncio.textContent = etichettePasso[passo];
+    const titolo = contenitori[passo].querySelector("h2");
+    titolo?.focus();
+  }
+
+  function formattaData(data: Date): string {
+    return data.toLocaleDateString("it-IT", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+    });
+  }
+
+  function disegnaCalendario() {
+    const titoloMese = document.getElementById("titolo-mese")!;
+    titoloMese.textContent = `${NOMI_MESI[oggi.getMonth()]} ${oggi.getFullYear()}`;
+
+    const griglia = document.getElementById("griglia-calendario")!;
+    griglia.innerHTML = "";
+
+    for (const nomeGiorno of NOMI_GIORNI_BREVI) {
+      const intestazione = document.createElement("div");
+      intestazione.className =
+        "text-center text-xs font-semibold text-[var(--color-text-muted)]";
+      intestazione.textContent = nomeGiorno;
+      intestazione.setAttribute("aria-hidden", "true");
+      griglia.appendChild(intestazione);
+    }
+
+    // Riempie le celle vuote prima del primo giorno del mese (lunedì = inizio settimana).
+    const primoGiornoSettimana = (calendario[0].data.getDay() + 6) % 7;
+    for (let i = 0; i < primoGiornoSettimana; i++) {
+      griglia.appendChild(document.createElement("div"));
+    }
+
+    for (const giorno of calendario) {
+      const haSlot = giorno.slotDisponibili.length > 0;
+      const bottone = document.createElement("button");
+      bottone.type = "button";
+      bottone.textContent = String(giorno.data.getDate());
+      bottone.disabled = !haSlot;
+      bottone.className = [
+        "aspect-square rounded-[var(--radius-md)] text-sm",
+        haSlot
+          ? "border border-[var(--color-primary)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)]"
+          : "border border-[var(--color-border)] text-[var(--color-text-muted)] opacity-50",
+      ].join(" ");
+      bottone.setAttribute(
+        "aria-label",
+        haSlot
+          ? `${formattaData(giorno.data)}, ${giorno.slotDisponibili.length} orari disponibili`
+          : `${formattaData(giorno.data)}, nessun orario disponibile`,
+      );
+      if (haSlot) {
+        bottone.addEventListener("click", () => {
+          stato.giorno = giorno;
+          stato.orario = null;
+          disegnaOrari();
+          vaiAlPasso("orario");
+        });
+      }
+      griglia.appendChild(bottone);
+    }
+  }
+
+  function disegnaOrari() {
+    if (!stato.giorno) return;
+    document.getElementById("giorno-scelto")!.textContent =
+      `Giorno scelto: ${formattaData(stato.giorno.data)}`;
+
+    const griglia = document.getElementById("griglia-orari")!;
+    griglia.innerHTML = "";
+
+    for (const orario of stato.giorno.slotDisponibili) {
+      const bottone = document.createElement("button");
+      bottone.type = "button";
+      bottone.textContent = orario;
+      bottone.className =
+        "min-h-[var(--touch-target-min)] rounded-[var(--radius-md)] border border-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)]";
+      bottone.addEventListener("click", () => {
+        stato.orario = orario;
+        vaiAlPasso("dati");
+      });
+      griglia.appendChild(bottone);
+    }
+  }
+
+  function disegnaRiepilogo() {
+    document.getElementById("riepilogo-giorno")!.textContent = stato.giorno
+      ? formattaData(stato.giorno.data)
+      : "";
+    document.getElementById("riepilogo-orario")!.textContent =
+      stato.orario ?? "";
+    document.getElementById("riepilogo-nome")!.textContent = stato.nome;
+    document.getElementById("riepilogo-email")!.textContent = stato.email;
+  }
+
+  function disegnaAnteprimeEmail() {
+    const dataFormattata = stato.giorno ? formattaData(stato.giorno.data) : "";
+
+    const emailCliente = [
+      `Oggetto: Conferma appuntamento (DEMO — nessuna email reale inviata)`,
+      ``,
+      `Ciao ${stato.nome || "[nome]"},`,
+      `il tuo primo colloquio è fissato per ${dataFormattata} alle ${stato.orario}.`,
+      `Riceverai indicazioni su come raggiungere lo studio o sul link per il colloquio online.`,
+      ``,
+      `— Questa è solo un'anteprima dimostrativa —`,
+    ].join("\n");
+
+    const emailElisa = [
+      `Oggetto: Nuova prenotazione (DEMO — nessuna email reale inviata)`,
+      ``,
+      `Nuova prenotazione dimostrativa:`,
+      `Nome: ${stato.nome || "[nome]"}`,
+      `Email: ${stato.email || "[email]"}`,
+      `Giorno: ${dataFormattata}`,
+      `Orario: ${stato.orario}`,
+      ``,
+      `— Questa è solo un'anteprima dimostrativa —`,
+    ].join("\n");
+
+    document.getElementById("anteprima-email-cliente")!.textContent =
+      emailCliente;
+    document.getElementById("anteprima-email-elisa")!.textContent = emailElisa;
+  }
+
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-indietro]")
+    .forEach((bottone) => {
+      bottone.addEventListener("click", () => {
+        const passo = bottone.getAttribute("data-indietro") as Passo;
+        vaiAlPasso(passo);
+      });
+    });
+
+  document
+    .getElementById("modulo-demo")!
+    .addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nomeInput = document.getElementById(
+        "demo-nome",
+      ) as HTMLInputElement;
+      const emailInput = document.getElementById(
+        "demo-email",
+      ) as HTMLInputElement;
+      const errore = document.getElementById("errore-dati-demo")!;
+
+      if (!nomeInput.value.trim() || !emailInput.value.trim()) {
+        errore.textContent =
+          "Compila entrambi i campi per continuare (dati non salvati).";
+        errore.hidden = false;
+        return;
+      }
+      errore.hidden = true;
+      stato.nome = nomeInput.value.trim();
+      stato.email = emailInput.value.trim();
+      disegnaRiepilogo();
+      vaiAlPasso("riepilogo");
+    });
+
+  document.getElementById("conferma-demo")!.addEventListener("click", () => {
+    disegnaAnteprimeEmail();
+    vaiAlPasso("conferma");
+  });
+
+  document.getElementById("ricomincia-demo")!.addEventListener("click", () => {
+    stato.giorno = null;
+    stato.orario = null;
+    stato.nome = "";
+    stato.email = "";
+    (document.getElementById("modulo-demo") as HTMLFormElement).reset();
+    vaiAlPasso("giorno");
+  });
+
+  disegnaCalendario();
+</script>
