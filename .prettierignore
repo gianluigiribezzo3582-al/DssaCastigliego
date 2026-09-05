@@ -3,3 +3,4 @@ node_modules/
 .astro/
 package-lock.json
 public/admin/config.yml
+public/robots.txt

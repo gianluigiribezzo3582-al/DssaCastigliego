@@ -11,6 +11,7 @@
     "prebuild": "node scripts/copy-cms.mjs",
     "dev:functions": "npm run build && wrangler pages dev ./dist --compatibility-date=2024-09-01",
     "build": "astro build",
+    "postbuild": "node scripts/generate-headers.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
