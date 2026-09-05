@@ -87,8 +87,9 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
           <h2 class="text-sm font-semibold text-[var(--color-text)]">Studio</h2>
           <p class="mt-2 text-sm text-[var(--color-text-muted)]">
             {site.indirizzoStudio.via}<br />
-            {site.indirizzoStudio.cap}
-            {site.indirizzoStudio.citta} ({site.indirizzoStudio.provincia})
+            {
+              `${site.indirizzoStudio.cap} ${site.indirizzoStudio.citta} (${site.indirizzoStudio.provincia})`
+            }
           </p>
           <!-- Mappa statica segnaposto: nessun iframe di Google Maps, per privacy.
                Sostituire con un'immagine statica reale o un link esterno prima della pubblicazione.

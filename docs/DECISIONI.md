@@ -166,4 +166,21 @@ protezione antispam marginale aggiuntiva.
 
 ---
 
+## 12. Espressioni adiacenti in Astro: usare un solo template literal, non `{a} {b}`
+
+**Deciso/imparato:** scrivere due espressioni Astro adiacenti su righe separate, es.
+`{new Date().getFullYear()}` seguito a capo da `{site.nome}`, perde lo spazio tra le
+due quando Prettier va a capo automaticamente (il whitespace tra un `}` e un `{` a
+inizio riga viene collassato in fase di compilazione, non solo di formattazione).
+In `Footer.astro` questo aveva prodotto "© 2026Elisa Castigliego" senza spazio.
+Corretto racchiudendo tutto in un solo template literal: `{` `© ${anno} ${nome}` `}`
+— un'unica espressione, che Prettier non può spezzare in un punto che perda lo spazio.
+
+**Come applicarlo:** ogni volta che due valori dinamici vanno concatenati con un
+separatore letterale (spazio, trattino...), preferire un singolo template literal a
+due espressioni `{a} {b}` adiacenti, per non dipendere da come li andrà a capo
+Prettier.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
