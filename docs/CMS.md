@@ -18,6 +18,17 @@ Il bundle di Sveltia CMS (`public/admin/sveltia-cms.js`) è **self-hosted**: vie
 copiato automaticamente da `node_modules` ad ogni `npm run dev`/`npm run build`
 (script `scripts/copy-cms.mjs`), non viene mai scaricato da un CDN esterno.
 
+**Lingua dell'interfaccia**: le etichette dei campi (quelle scritte in `config.yml`)
+sono in italiano indipendentemente da tutto. L'interfaccia del programma (pulsanti,
+menu) segue invece la lingua del browser di chi la usa: con un browser impostato in
+italiano compare già tradotta (pacchetto `@sveltia/cms` ≥ 0.209, che include la
+traduzione italiana — versione in uso in questo repository).
+
+**Guida sempre a portata di clic**: su `/admin` c'è un bottone fisso "Guida per
+Elisa" in basso a destra, che apre `/admin/guida` — la stessa guida di
+`/docs/GUIDA-ELISA.md`, pubblicata come pagina del sito per essere raggiungibile
+anche una volta online, non solo aprendo il repository.
+
 ## Cosa NON funziona ancora: il login "vero" con GitHub
 
 In produzione, per permettere a Elisa di accedere da qualunque computer (non solo dal

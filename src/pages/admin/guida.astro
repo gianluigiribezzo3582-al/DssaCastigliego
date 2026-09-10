@@ -1,0 +1,28 @@
+---
+// Versione pubblicata e leggibile della guida non tecnica per Elisa. Il contenuto
+// vive in un solo punto (/docs/GUIDA-ELISA.md, letto anche da chi lavora al
+// progetto) e viene importato qui così è raggiungibile da un link diretto dentro
+// /admin, sia in locale sia una volta pubblicato il sito.
+import Layout from "../../layouts/Layout.astro";
+import { Content } from "../../../docs/GUIDA-ELISA.md";
+---
+
+<Layout
+  title="Guida per Elisa"
+  description="Guida non tecnica per modificare i contenuti del sito dal pannello /admin."
+  noindex
+>
+  <article
+    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+  >
+    <p class="mb-6">
+      <a
+        class="font-semibold text-[var(--color-primary)] underline"
+        href="/admin"
+      >
+        ← Torna alla redazione dei contenuti
+      </a>
+    </p>
+    <Content />
+  </article>
+</Layout>

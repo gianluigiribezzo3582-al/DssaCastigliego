@@ -183,4 +183,34 @@ Prettier.
 
 ---
 
+## 13. Sveltia CMS aggiornato a 0.209.1 per l'interfaccia in italiano
+
+**Deciso:** la versione inizialmente installata (0.205.4) non includeva una
+traduzione italiana dell'interfaccia (pulsanti, menu — i campi dei contenuti erano
+già in italiano perché scritti a mano in `config.yml`). Verificato che la 0.209.1
+include `it.json`; aggiornata la dipendenza. Sveltia rileva la lingua del browser
+automaticamente, quindi con un browser in italiano l'interfaccia comparirà già
+tradotta (verificato in locale).
+
+**Costo per cambiare idea:** basso, è un aggiornamento di una singola dipendenza; il
+file `config.yml` non è stato toccato.
+
+## 14. Link fisso "Guida per Elisa" su `/admin`, pagina guida pubblicata su `/admin/guida`
+
+**Deciso:** per rendere la guida (`/docs/GUIDA-ELISA.md`, prima leggibile solo aprendo
+il repository) raggiungibile con un clic dalla stessa schermata del CMS, è stata
+creata `src/pages/admin/guida.astro`, che importa e rende lo stesso file Markdown
+(fonte unica, nessuna duplicazione) dentro il layout del sito. Su `src/pages/admin/index.astro`
+è stato aggiunto un bottone fisso in basso a destra che apre quella pagina in una
+nuova scheda. Verificato che Sveltia CMS aggiunge la propria interfaccia al `<body>`
+senza svuotarlo, quindi il bottone resta visibile sopra/accanto alla UI del CMS.
+
+**Alternative scartate:** cercare un'opzione nativa di Sveltia per un link di aiuto
+personalizzato — non esiste nella configurazione (`display_url` è solo un link al
+sito pubblico, non un link libero).
+
+**Costo per cambiare idea:** basso — è un singolo elemento HTML con poco CSS in linea.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

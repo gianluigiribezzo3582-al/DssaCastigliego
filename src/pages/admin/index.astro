@@ -16,8 +16,46 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Redazione contenuti — Elisa Castigliego</title>
     <script is:inline src="/admin/sveltia-cms.js" type="module"></script>
+    <style>
+      /*
+       * Link fisso alla guida per Elisa, sempre visibile sopra l'interfaccia di
+       * Sveltia CMS (che si aggiunge al body senza svuotarlo, quindi questo
+       * elemento resta al suo posto). CSS minimo e in linea: questa pagina non
+       * carica Tailwind/global.css di proposito, per non interferire con lo
+       * stile proprio del CMS.
+       */
+      #guida-elisa-link {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        background: #b5502d;
+        color: #fbf6f0;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      }
+      #guida-elisa-link:hover,
+      #guida-elisa-link:focus-visible {
+        background: #93401f;
+      }
+    </style>
   </head>
   <body>
     <!-- Sveltia CMS crea qui la propria interfaccia. -->
+    <a id="guida-elisa-link" href="/admin/guida" target="_blank" rel="noopener">
+      Guida per Elisa
+    </a>
   </body>
 </html>

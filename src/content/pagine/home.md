@@ -1,8 +1,8 @@
 ---
-seoTitle: "Elisa Castigliego — Psicologa a Bologna"
-seoDescription: "Studio di psicologia a Bologna. Consulenza psicologica per adulti, in presenza o online. Primo contatto tramite modulo, email o WhatsApp."
-titolo: "Uno spazio di ascolto, a Bologna"
-sottotitolo: "Psicologa per adulti — colloqui in studio o online"
+seoTitle: Elisa Castigliego — Psicologa a Bologna
+seoDescription: Studio di psicologia a Bologna. Consulenza psicologica per adulti, in presenza o online. Primo contatto tramite modulo, email o WhatsApp.
+titolo: Uno spazio di ascolto, a Bologna
+sottotitolo: Psicologa per adulti — colloqui in studio o online
 draftNote: "[BOZZA]"
 ---
 

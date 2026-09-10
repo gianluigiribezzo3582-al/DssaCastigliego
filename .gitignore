@@ -33,3 +33,6 @@ public/admin/sveltia-cms.js
 
 # jetbrains setting folder
 .idea/
+
+# altro
+.appunti

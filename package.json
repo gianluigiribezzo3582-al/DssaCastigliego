@@ -26,7 +26,7 @@
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource/work-sans": "^5.3.0",
     "@lucide/astro": "^1.41.0",
-    "@sveltia/cms": "^0.205.4",
+    "@sveltia/cms": "^0.209.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.1",
     "tailwindcss": "^4.3.3"

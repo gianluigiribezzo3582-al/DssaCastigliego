@@ -3,6 +3,9 @@
 Questa guida spiega come modificare i testi del sito, aggiungere una domanda alla
 pagina FAQ e pubblicare le modifiche, usando solo il browser.
 
+Questa stessa guida è raggiungibile in ogni momento con un clic dal bottone
+**"Guida per Elisa"**, sempre visibile in basso a destra nella schermata `/admin`.
+
 ## Come si apre l'area di modifica
 
 Vai su `/admin` del sito (es. `www.tuo-dominio.it/admin`) e accedi con il pulsante di
