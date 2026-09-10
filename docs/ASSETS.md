@@ -7,10 +7,22 @@ asset (fotografo, illustratore) sa esattamente cosa produrre.
 
 ## Fotografia di Elisa
 
-Un solo file sorgente (`src/assets/placeholder.jpeg`, oggi una foto fittizia) passa
-sempre attraverso un unico componente, **`src/components/RitrattoElisa.astro`**: il
-giorno in cui arriva la fotografia definitiva, sostituire quel file (stesso nome) o
-aggiornare l'unica riga di import nel componente — nessun'altra pagina va toccata.
+Un solo componente, **`src/components/RitrattoElisa.astro`**, controlla il ritratto
+mostrato in tutto il sito. Ora è modificabile in due modi:
+
+- **Dal CMS** (il modo pensato per Elisa): `/admin` → "Contatti e dati dello
+  studio" → campo "Foto del ritratto". Caricando lì una foto, questa sostituisce
+  ovunque quella segnaposto, senza intervento di uno sviluppatore. In questo caso
+  l'immagine viene mostrata così com'è caricata (non passa dalla pipeline di
+  ottimizzazione di Astro — vedi il compromesso spiegato nel commento del
+  componente e in `/docs/DECISIONI.md`), e la **stessa foto** viene ritagliata via
+  CSS nelle tre inquadrature sotto: per un risultato pulito conviene caricare una
+  foto già abbastanza quadrata/verticale, con il soggetto centrato e non troppo
+  vicino ai bordi.
+- **Da codice** (finché il campo CMS resta vuoto): il file sorgente
+  `src/assets/placeholder.jpeg` (oggi una foto fittizia), ottimizzato
+  automaticamente da Astro in build (WebP, dimensioni per variante). Sostituendo
+  quel file o il campo nel CMS non serve toccare nessun'altra pagina.
 
 Il componente serve tre inquadrature, con queste proporzioni esatte (la pipeline
 immagini di Astro si occupa di ritaglio/ridimensionamento/formati moderni, ma la foto

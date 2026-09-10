@@ -49,6 +49,22 @@ describe("onRequestPost /api/contatto", () => {
     fetchSpy.mockRestore();
   });
 
+  it("in modalità mock restituisce un'anteprima leggibile dell'email nella risposta JSON, utile per una demo", async () => {
+    const risposta = await onRequestPost(contesto(campiValidi));
+    const corpo = await risposta.json();
+
+    expect(corpo.ok).toBe(true);
+    expect(typeof corpo.anteprimaEmail).toBe("string");
+    expect(corpo.anteprimaEmail).toContain(campiValidi.nome);
+    expect(corpo.anteprimaEmail).toContain(campiValidi.messaggio);
+  });
+
+  it("non include l'anteprima email nel redirect senza JavaScript (non applicabile a una risposta HTML)", async () => {
+    const risposta = await onRequestPost(contesto(campiValidi, false));
+    expect(risposta.status).toBe(303);
+    expect(await risposta.text()).toBe("");
+  });
+
   it("restituisce errori di validazione se un campo obbligatorio manca", async () => {
     const risposta = await onRequestPost(
       contesto({ ...campiValidi, nome: "" }),

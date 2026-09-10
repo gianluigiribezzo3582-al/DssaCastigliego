@@ -33,6 +33,25 @@ import { site } from "../config/site";
   >
   </p>
 
+  <!-- Mostrata solo in modalità mock (MAIL_DRIVER=mock, quella di sviluppo/demo):
+       anteprima del testo dell'email che partirebbe. Non è mai presente quando
+       il sito gira con MAIL_DRIVER=brevo (invio reale). -->
+  <div
+    id="anteprima-email-contatto"
+    hidden
+    class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+  >
+    <p
+      class="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]"
+    >
+      Anteprima email (modalità dimostrazione — nessun invio reale)
+    </p>
+    <pre
+      id="anteprima-email-contatto-testo"
+      class="mt-2 whitespace-pre-wrap font-sans text-sm text-[var(--color-text)]">
+    </pre>
+  </div>
+
   <div>
     <label
       for="nome"
@@ -223,6 +242,10 @@ import { site } from "../config/site";
     "carica_ts",
   ) as HTMLInputElement | null;
   const stato = document.getElementById("stato-invio");
+  const boxAnteprima = document.getElementById("anteprima-email-contatto");
+  const testoAnteprima = document.getElementById(
+    "anteprima-email-contatto-testo",
+  );
 
   if (caricaTs) caricaTs.value = String(Date.now());
 
@@ -261,6 +284,7 @@ import { site } from "../config/site";
       "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-bg-alt)] text-[var(--color-text)]";
     stato.textContent = "Invio in corso…";
     stato.hidden = false;
+    if (boxAnteprima) boxAnteprima.hidden = true;
 
     try {
       const risposta = await fetch(modulo.action, {
@@ -276,6 +300,10 @@ import { site } from "../config/site";
           "rounded-[var(--radius-md)] p-4 text-sm bg-[var(--color-success-bg)] text-[var(--color-success-text)]";
         stato.textContent =
           "Messaggio inviato. Grazie: verrà riscontrato secondo i tempi indicati nella pagina Emergenze/Contatti.";
+        if (corpo.anteprimaEmail && boxAnteprima && testoAnteprima) {
+          testoAnteprima.textContent = corpo.anteprimaEmail;
+          boxAnteprima.hidden = false;
+        }
         modulo.reset();
         if (caricaTs) caricaTs.value = String(Date.now());
       } else {

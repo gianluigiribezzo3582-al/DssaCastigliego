@@ -1,10 +1,19 @@
 ---
-// Punto unico di importazione del ritratto di Elisa: quando arriverà la fotografia
-// definitiva basterà sostituire src/assets/placeholder.jpeg (stesso nome file) oppure
-// aggiornare l'unica riga di import qui sotto. Nessun altro file del sito importa
-// direttamente l'immagine. Vedi /docs/ASSETS.md per le proporzioni richieste.
+// Punto unico da cui passa il ritratto di Elisa in tutto il sito.
+//
+// Di default mostra src/assets/placeholder.jpeg (ottimizzato automaticamente da
+// Astro: WebP, dimensioni per variante). Se dal CMS viene caricata una foto
+// (campo "Foto del ritratto" nella sezione "Contatti e dati dello studio" di
+// /admin, salvata in site.fotoRitratto), viene mostrata quella al suo posto —
+// senza bisogno di modifiche al codice. In quel caso l'immagine non passa dalla
+// pipeline di ottimizzazione di Astro (i file caricati dal CMS vivono in
+// public/, non in src/assets, e Astro non può ottimizzare a tempo di build un
+// percorso che cambia a piacere): è il compromesso scelto per rendere la foto
+// editabile da Elisa senza intervento di uno sviluppatore. Vedi /docs/ASSETS.md
+// e /docs/DECISIONI.md.
 import { Image } from "astro:assets";
 import placeholder from "../assets/placeholder.jpeg";
+import { site } from "../config/site";
 
 interface Props {
   /** Inquadratura richiesta dal layout che la usa. */
@@ -32,13 +41,29 @@ const dimensioni = {
 } as const;
 
 const { width, height } = dimensioni[variant];
+const altFinale = decorative ? "" : alt;
+const fotoCaricataDalCms = site.fotoRitratto?.trim();
 ---
 
-<Image
-  src={placeholder}
-  alt={decorative ? "" : alt}
-  width={width}
-  height={height}
-  loading={loading}
-  class={`object-cover ${className}`}
-/>
+{
+  fotoCaricataDalCms ? (
+    <img
+      src={fotoCaricataDalCms}
+      alt={altFinale}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding="async"
+      class={`object-cover ${className}`}
+    />
+  ) : (
+    <Image
+      src={placeholder}
+      alt={altFinale}
+      width={width}
+      height={height}
+      loading={loading}
+      class={`object-cover ${className}`}
+    />
+  )
+}

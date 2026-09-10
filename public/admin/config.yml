@@ -99,6 +99,11 @@ collections:
         label: "Contatti e dati dello studio"
         file: "src/content/dati-sito.json"
         fields:
+          - label: "Foto del ritratto"
+            name: "fotoRitratto"
+            widget: "image"
+            required: false
+            hint: "Sostituisce ovunque la foto segnaposto attuale (home, Chi sono, Contatti). Se lasci questo campo vuoto resta la foto segnaposto. Funziona meglio con una foto abbastanza quadrata/verticale, senza soggetti troppo vicini ai bordi: viene ritagliata automaticamente in modo diverso nelle varie pagine."
           - label: "Contatti"
             name: "contatti"
             widget: "object"

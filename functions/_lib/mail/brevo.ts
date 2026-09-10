@@ -1,34 +1,12 @@
 import type { DatiContatto } from "../validazione";
 import type { DriverMail, EsitoInvio } from "./tipi";
+import { testoEmail } from "./formato";
 
 export interface ConfigurazioneBrevo {
   apiKey: string;
   mittenteEmail: string;
   mittenteNome: string;
   destinatarioEmail: string;
-}
-
-function testoEmail(dati: DatiContatto): string {
-  const contattoPreferito = {
-    email: "email",
-    telefono: "telefono",
-    whatsapp: "WhatsApp",
-  }[dati.preferenzaContatto];
-
-  return [
-    `Nuova richiesta dal modulo di contatto del sito.`,
-    ``,
-    `Nome/identificativo: ${dati.nome}`,
-    dati.email ? `Email: ${dati.email}` : null,
-    dati.telefono ? `Telefono: ${dati.telefono}` : null,
-    `Preferenza di contatto: ${contattoPreferito}`,
-    dati.disponibilita ? `Disponibilità indicata: ${dati.disponibilita}` : null,
-    ``,
-    `Messaggio:`,
-    dati.messaggio,
-  ]
-    .filter((riga) => riga !== null)
-    .join("\n");
 }
 
 /**

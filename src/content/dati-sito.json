@@ -1,4 +1,5 @@
 {
+  "fotoRitratto": "",
   "contatti": {
     "email": "{{EMAIL_CONTATTO}}",
     "telefono": "{{TELEFONO_CONTATTO}}",

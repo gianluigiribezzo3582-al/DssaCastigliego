@@ -2,9 +2,12 @@
 // JavaScript (fetch con Accept: application/json), HTML per la navigazione senza
 // JavaScript (redirect 303 sul successo, pagina minimale sull'errore).
 
-export function rispostaSuccesso(vuoleJson: boolean): Response {
+export function rispostaSuccesso(
+  vuoleJson: boolean,
+  extra?: Record<string, unknown>,
+): Response {
   if (vuoleJson) {
-    return new Response(JSON.stringify({ ok: true }), {
+    return new Response(JSON.stringify({ ok: true, ...extra }), {
       status: 200,
       headers: { "content-type": "application/json" },
     });

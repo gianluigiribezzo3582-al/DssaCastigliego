@@ -24,8 +24,8 @@ menu) segue invece la lingua del browser di chi la usa: con un browser impostato
 italiano compare già tradotta (pacchetto `@sveltia/cms` ≥ 0.209, che include la
 traduzione italiana — versione in uso in questo repository).
 
-**Guida sempre a portata di clic**: su `/admin` c'è un bottone fisso "Guida per
-Elisa" in basso a destra, che apre `/admin/guida` — la stessa guida di
+**Guida sempre a portata di clic**: su `/admin` c'è un bottone fisso "Guida
+all'utilizzo" in basso a destra, che apre `/admin/guida` — la stessa guida di
 `/docs/GUIDA-ELISA.md`, pubblicata come pagina del sito per essere raggiungibile
 anche una volta online, non solo aprendo il repository.
 
@@ -109,14 +109,36 @@ Apri `/admin` sul sito pubblicato, scegli "Login with GitHub", autorizza l'app: 
 dovrebbe tornare alla schermata di redazione con l'elenco delle collezioni (Pagine,
 Aree di intervento, FAQ, Contatti e dati dello studio).
 
+### Passo 6 — Dare accesso a chi modificherà davvero i contenuti (es. Elisa)
+
+Il login "con GitHub" autentica sempre una persona tramite un **account GitHub
+reale**: non esiste un accesso anonimo o condiviso senza account. Questo vale
+anche per Elisa: per poter salvare modifiche (non solo lavorare in locale) le
+serve un account GitHub proprio, aggiunto come collaboratore della repository.
+Due strade, entrambe valide:
+
+- **Account personale di Elisa**: ne crea uno gratuito su github.com (basta
+  un'email), e va invitata come collaboratrice della repository
+  (**Settings → Collaborators → Add people** sulla repository GitHub).
+- **Un account unico per lo studio** (es. `studio.castigliego`), creato una volta
+  sola e usato solo per questo scopo, se si preferisce non legare l'accesso alla
+  sua identità personale — stesso procedimento, invitato come collaboratore.
+
+In entrambi i casi è un'operazione da pochi minuti, una tantum: dopo aver accettato
+l'invito (arriva via email), l'accesso a `/admin` resta valido finché non viene
+rimosso. Nessuno di questi due passaggi (creare l'account, invitarlo) è stato
+fatto in autonomia in questa sessione, per lo stesso motivo per cui non è stata
+creata la GitHub App: richiede un account reale, di cui solo voi potete decidere
+titolarità e credenziali.
+
 ## Struttura delle collezioni
 
-| Collezione                   | Cosa contiene                                                                 | File                         |
-| ---------------------------- | ----------------------------------------------------------------------------- | ---------------------------- |
-| Pagine del sito              | Home, Chi sono, Come lavoro                                                   | `src/content/pagine/*.md`    |
-| Aree di intervento           | Le schede delle aree (ansia, relazioni...)                                    | `src/content/aree/*.md`      |
-| Domande frequenti            | Le voci della pagina FAQ                                                      | `src/content/faq/*.md`       |
-| Contatti e dati dello studio | Email, telefono, WhatsApp, indirizzo, orari, Albo, P.IVA, numeri di emergenza | `src/content/dati-sito.json` |
+| Collezione                   | Cosa contiene                                                                                    | File                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------- |
+| Pagine del sito              | Home, Chi sono, Come lavoro                                                                      | `src/content/pagine/*.md`    |
+| Aree di intervento           | Le schede delle aree (ansia, relazioni...)                                                       | `src/content/aree/*.md`      |
+| Domande frequenti            | Le voci della pagina FAQ                                                                         | `src/content/faq/*.md`       |
+| Contatti e dati dello studio | Email, telefono, WhatsApp, indirizzo, orari, Albo, P.IVA, numeri di emergenza, foto del ritratto | `src/content/dati-sito.json` |
 
 Le etichette dei campi in `config.yml` sono scritte in italiano semplice, pensate per
 chi non ha familiarità con il codice (es. "Titolo per la scheda del browser e per

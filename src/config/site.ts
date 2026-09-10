@@ -16,6 +16,10 @@ export const site = {
   citta: "Bologna",
   titolareTrattamento: "Elisa Castigliego",
 
+  // Percorso del ritratto caricato dal CMS (vuoto = usa il segnaposto di default,
+  // vedi src/components/RitrattoElisa.astro).
+  fotoRitratto: datiSito.fotoRitratto,
+
   albo: datiSito.albo,
   partitaIva: datiSito.partitaIva,
   codiceFiscale: datiSito.codiceFiscale,

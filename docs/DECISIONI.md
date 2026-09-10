@@ -195,7 +195,7 @@ tradotta (verificato in locale).
 **Costo per cambiare idea:** basso, è un aggiornamento di una singola dipendenza; il
 file `config.yml` non è stato toccato.
 
-## 14. Link fisso "Guida per Elisa" su `/admin`, pagina guida pubblicata su `/admin/guida`
+## 14. Link fisso "Guida all'utilizzo" su `/admin`, pagina guida pubblicata su `/admin/guida`
 
 **Deciso:** per rendere la guida (`/docs/GUIDA-ELISA.md`, prima leggibile solo aprendo
 il repository) raggiungibile con un clic dalla stessa schermata del CMS, è stata
@@ -210,6 +210,47 @@ personalizzato — non esiste nella configurazione (`display_url` è solo un lin
 sito pubblico, non un link libero).
 
 **Costo per cambiare idea:** basso — è un singolo elemento HTML con poco CSS in linea.
+
+---
+
+## 15. Foto del ritratto editabile dal CMS, con fallback al segnaposto ottimizzato
+
+**Deciso:** aggiunto un campo immagine "Foto del ritratto" in `dati-sito.json` /
+`config.yml`. `RitrattoElisa.astro` ora sceglie tra due percorsi: se il campo è
+vuoto (default), usa ancora l'import statico di `placeholder.jpeg` tramite
+`astro:assets` (ottimizzazione WebP + resize automatico); se è valorizzato dal
+CMS, renderizza un `<img>` semplice puntando al file caricato in
+`public/immagini-cms/`.
+
+**Perché non un'unica soluzione ottimizzata:** la pipeline immagini di Astro
+richiede un import statico noto a tempo di build per ottimizzare davvero
+un'immagine (resize, conversione WebP); un percorso che può cambiare a piacere
+via CMS non può passarci allo stesso modo. Si è scelto di sacrificare
+l'ottimizzazione automatica per la foto caricata da Elisa, a favore di una reale
+autonomia editoriale — era la richiesta esplicita.
+
+**Costo per cambiare idea:** medio-basso. Se in futuro servisse ottimizzare anche
+la foto caricata dal CMS, si potrebbe aggiungere una Cloudflare Pages Function o
+un Image Resizing di Cloudflare lato CDN; non necessario oggi vista la scala del
+sito.
+
+## 16. Anteprima dell'email visibile nel browser in modalità mock
+
+**Deciso:** il driver `mock` del form di contatto ora restituisce (solo alla
+Function, mai nei log) il testo completo dell'email che sarebbe partita; la
+Function lo include nella risposta JSON solo quando presente; `ContactForm.astro`
+lo mostra in un riquadro "Anteprima email" dopo un invio riuscito. Richiesto per
+poter mostrare alla cliente, in una call, cosa succede davvero quando si invia il
+form, senza dover leggere log oscurati nel terminale.
+
+**Perché non viola il vincolo di privacy/non-persistenza:** il testo torna solo
+al browser della stessa persona che ha appena scritto quei dati (non a terzi, non
+salvato, non loggato in chiaro sul server — i log restano oscurati come prima).
+Il driver `brevo` (produzione) non valorizza mai questo campo: in produzione
+questa anteprima non compare mai, a prescindere da cosa succeda nel browser.
+
+**Costo per cambiare idea:** basso — un campo opzionale (`anteprimaEmail`) su un
+tipo esistente, popolato da un solo driver.
 
 ---
 

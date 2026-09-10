@@ -90,5 +90,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     });
   }
 
-  return rispostaSuccesso(accettaJson);
+  // anteprimaEmail è valorizzata solo dal driver "mock" (mai da "brevo"): torna
+  // solo alla stessa persona che ha appena inviato il modulo, non viene salvata
+  // né loggata. Vedi functions/_lib/mail/mock.ts.
+  return rispostaSuccesso(
+    accettaJson,
+    esitoInvio.anteprimaEmail
+      ? { anteprimaEmail: esitoInvio.anteprimaEmail }
+      : undefined,
+  );
 };

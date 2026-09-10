@@ -4,7 +4,7 @@ Questa guida spiega come modificare i testi del sito, aggiungere una domanda all
 pagina FAQ e pubblicare le modifiche, usando solo il browser.
 
 Questa stessa guida è raggiungibile in ogni momento con un clic dal bottone
-**"Guida per Elisa"**, sempre visibile in basso a destra nella schermata `/admin`.
+**"Guida all'utilizzo"**, sempre visibile in basso a destra nella schermata `/admin`.
 
 ## Come si apre l'area di modifica
 
@@ -54,12 +54,18 @@ Per cambiare l'ordine delle domande esistenti, apri ciascuna e modifica il numer
 Stesso procedimento, nella sezione **"Aree di intervento"**: Titolo, Riassunto breve
 (quello che si vede nelle anteprime), Ordine, e il testo completo della scheda.
 
-## Modificare email, telefono, WhatsApp, indirizzo, orari
+## Modificare email, telefono, WhatsApp, indirizzo, orari, foto
 
 Vai su **"Contatti e dati dello studio"**. Qui trovi tutti i dati che compaiono nel
 resto del sito (footer, pagina contatti, pagina emergenze, dati dell'Albo). Modificando
 un valore qui, si aggiorna automaticamente ovunque compaia nel sito — non serve
 cercarlo pagina per pagina.
+
+Nella stessa sezione trovi anche **"Foto del ritratto"**: caricando lì una foto,
+sostituisce quella segnaposto in home, "Chi sono" e nei contatti. Per un risultato
+pulito, meglio una foto abbastanza quadrata o verticale, con te centrata e non
+troppo vicina ai bordi: la stessa foto viene ritagliata in modo un po' diverso
+nelle varie pagine.
 
 Il numero di WhatsApp va inserito solo con le cifre, senza il "+" e senza spazi
 (es. per l'Italia: `39` seguito dal numero di cellulare senza lo 0 iniziale).
