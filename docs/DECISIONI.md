@@ -254,4 +254,73 @@ tipo esistente, popolato da un solo driver.
 
 ---
 
+## 17. Protezione di `/admin`: Basic Auth via middleware, non un servizio esterno
+
+**Deciso:** scritto `functions/_middleware.ts`, che applica HTTP Basic Auth a
+`/admin` e ogni sotto-percorso, attiva solo se sono impostate due variabili
+d'ambiente (assenti di default). Consigliata anche Cloudflare Access come
+protezione più solida, ma non attivabile in autonomia (richiede il dashboard
+Cloudflare) — documentata in `/docs/DEPLOY.md`.
+
+**Perché non solo Cloudflare Access:** Access richiede una configurazione
+nell'account Cloudflare, non fattibile in questa sessione. Basic Auth invece è
+puro codice, attivabile subito con due secret, quindi una protezione reale è
+disponibile da subito invece di restare bloccata in attesa di un passaggio
+manuale.
+
+**Costo per cambiare idea:** basso — rimuovere `functions/_middleware.ts` (o
+semplicemente non impostare le due variabili) riporta `/admin` allo stato
+precedente, senza toccare nient'altro.
+
+## 18. Messaggio di conferma del form più caldo, meno informativo
+
+**Deciso:** il messaggio dopo l'invio del form è passato da un testo
+informativo ("verrà riscontrato secondo i tempi indicati...") a uno più
+personale ("Grazie per aver scritto, ti contatterò il prima possibile!"), su
+richiesta esplicita. L'informazione sui tempi di risposta resta comunque
+disponibile nella pagina Emergenze, che il messaggio linka già in altri punti
+del sito (footer, pagina emergenze).
+
+## 19. Nota "da rimuovere" nella pagina contatti, in corsivo
+
+**Deciso:** il paragrafo che spiega il funzionamento tecnico del modulo
+("funziona anche senza JavaScript") è stato reso in corsivo con un'etichetta
+esplicita `[Nota per Elisa — rimuovi questo paragrafo prima di pubblicare il
+sito:]`, seguendo lo stesso principio già usato per `[BOZZA]` altrove nel sito:
+segnalare in modo inequivocabile cosa è contenuto provvisorio.
+
+## 20. Sfondi fotografici decorativi: foto reali con licenza libera, non generate
+
+**Deciso:** aggiunte due fotografie (non generate da IA, licenza Unsplash
+libera per uso commerciale) come sfondo molto discreto (opacità 7-10%) in due
+punti del sito. Scelte deliberatamente **astratte** (trama di tessuto, tegole
+in terracotta) invece di foto "a tema psicologia" (persone, mani, divani), per
+restare coerenti con l'istruzione originale di evitare l'immaginario da stock
+tipico del settore. Dettagli, fonti e licenze in `/docs/ASSETS.md`.
+
+**Scelta tecnica rilevante:** implementate come componente `<Image>` di Astro
+(elemento `<img>`, governato da `img-src` nella CSP) e non come
+`background-image` via attributo `style` inline — quest'ultimo sarebbe stato
+bloccato dalla Content Security Policy (`style-src` senza `unsafe-inline`,
+scelta deliberatamente restrittiva, vedi fase 7). Aggiunto anche un test
+(`tests/headers.test.ts`) che verifica che nessuna pagina prodotta in build
+contenga attributi `style="..."`, per non reintrodurre il problema in futuro.
+
+## 21. Footer centrato, credito sviluppatore con link solo sul nome
+
+**Deciso:** contenuto del footer allineato al centro (richiesta esplicita) e
+aggiunta la riga "Sviluppato da Gianluigi Ribezzo" dopo il copyright, con link
+a `gianluigiribezzo.dev` **solo** sul nome (non sull'intera riga), `target="_blank"`
+perché è un link in uscita dal sito.
+
+## 22. Cookie policy: rimossi i riferimenti a `/admin` e `/demo-prenotazione`
+
+**Deciso:** la sezione sul local storage non nomina più i percorsi tecnici
+`/admin`/`/demo-prenotazione` (visibili solo a chi ci lavora, non rilevanti per
+chi visita il sito) ma parla genericamente di "strumenti riservati a chi
+gestisce il sito". Rimossa anche la sezione finale "Verifica" (nota di
+sviluppo, non contenuto per il pubblico), su richiesta esplicita.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

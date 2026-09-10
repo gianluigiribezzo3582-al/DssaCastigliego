@@ -1,4 +1,6 @@
 ---
+import Menu from "@lucide/astro/icons/menu";
+
 const voci = [
   { href: "/", label: "Home" },
   { href: "/chi-sono", label: "Chi sono" },
@@ -33,8 +35,9 @@ const isActive = (href: string) =>
       <!-- Mobile: funziona anche senza JavaScript grazie a <details>/<summary> -->
       <details class="relative md:hidden">
         <summary
-          class="flex min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] cursor-pointer list-none items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 py-2 text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
+          class="flex min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] cursor-pointer list-none items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 py-2 text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
         >
+          <Menu aria-hidden="true" size={18} />
           Menu
         </summary>
         <ul

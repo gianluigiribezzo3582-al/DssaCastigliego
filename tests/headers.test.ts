@@ -2,13 +2,26 @@
 // (nessun 'unsafe-inline', nessun dominio di terze parti) su tutte le pagine, più
 // le intestazioni di sicurezza di base. Richiede una build recente:
 // `npm run build && npm test` (il postbuild genera _headers automaticamente).
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const DIST = path.resolve(__dirname, "../dist");
 const FILE_HEADERS = path.join(DIST, "_headers");
 const disponibile = existsSync(FILE_HEADERS);
+
+function elencaFileHtml(dir: string): string[] {
+  const risultato: string[] = [];
+  for (const voce of readdirSync(dir)) {
+    const completo = path.join(dir, voce);
+    if (statSync(completo).isDirectory()) {
+      risultato.push(...elencaFileHtml(completo));
+    } else if (voce.endsWith(".html")) {
+      risultato.push(completo);
+    }
+  }
+  return risultato;
+}
 
 describe.skipIf(!disponibile)("dist/_headers", () => {
   const contenuto = disponibile ? readFileSync(FILE_HEADERS, "utf-8") : "";
@@ -39,6 +52,14 @@ describe.skipIf(!disponibile)("dist/_headers", () => {
   it("include una regola specifica per la home e per /contatti", () => {
     expect(contenuto).toMatch(/^\/$/m);
     expect(contenuto).toMatch(/^\/contatti$/m);
+  });
+
+  it("nessuna pagina usa attributi style inline (bloccati dalla CSP style-src senza unsafe-inline)", () => {
+    const fileHtml = elencaFileHtml(DIST);
+    const conStyleInline = fileHtml.filter((f) =>
+      /\sstyle="/.test(readFileSync(f, "utf-8")),
+    );
+    expect(conStyleInline.map((f) => path.relative(DIST, f))).toEqual([]);
   });
 });
 

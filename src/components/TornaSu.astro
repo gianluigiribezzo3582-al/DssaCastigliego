@@ -1,0 +1,53 @@
+---
+// Piccola "bubble" fissa in basso a destra che riporta all'inizio della pagina.
+// Compare solo dopo aver scorso un po' (non invadente in cima alla pagina) ed è
+// completamente operabile da tastiera. Nessuna dipendenza esterna: solo vanilla
+// JS, poche righe.
+---
+
+<button
+  id="torna-su"
+  type="button"
+  aria-label="Torna all'inizio della pagina"
+  class="fixed right-5 bottom-5 z-40 hidden h-12 w-12 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-primary-contrast)] shadow-[var(--shadow-card)] transition-opacity duration-[var(--motion-duration)] hover:bg-[var(--color-primary-hover)]"
+>
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    width="22"
+    height="22"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M12 19V5M5 12l7-7 7 7"></path>
+  </svg>
+</button>
+
+<script>
+  const bottone = document.getElementById("torna-su");
+
+  function scorrimentoRidotto(): boolean {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function aggiornaVisibilita() {
+    if (!bottone) return;
+    const visibile = window.scrollY > 400;
+    bottone.classList.toggle("hidden", !visibile);
+    bottone.classList.toggle("flex", visibile);
+  }
+
+  window.addEventListener("scroll", aggiornaVisibilita, { passive: true });
+  aggiornaVisibilita();
+
+  bottone?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: scorrimentoRidotto() ? "auto" : "smooth",
+    });
+    bottone?.blur();
+  });
+</script>

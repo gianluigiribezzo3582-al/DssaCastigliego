@@ -110,4 +110,25 @@ poi riportare i punteggi reali.
 
 ---
 
+## 8. Protezione di `/admin` non ancora attiva
+
+**Cosa serviva:** impedire a chiunque indovini l'indirizzo di aprire `/admin`.
+
+**Cosa ho fatto nel frattempo:** scritto per intero `functions/_middleware.ts`,
+che blocca `/admin` (e ogni sotto-percorso) con Basic Auth non appena sono
+impostate le variabili d'ambiente `ADMIN_BASIC_AUTH_USER`/`ADMIN_BASIC_AUTH_PASS`
+— testato dal vivo con Wrangler, funziona correttamente (401 senza credenziali o
+con credenziali sbagliate, 200 con quelle giuste; le pagine pubbliche non sono
+toccate). Finché quelle due variabili non sono impostate (repository appena
+clonato, sviluppo locale), `/admin` resta aperto come prima: non ho impostato
+alcuna password io stesso, perché sceglierla spetta a voi.
+
+**Cosa serve da un umano:** impostare `ADMIN_BASIC_AUTH_USER`/`ADMIN_BASIC_AUTH_PASS`
+come secret su Cloudflare Pages prima di considerare il sito pubblicato — procedura
+in `/docs/DEPLOY.md`, sezione 3. Consigliata anche l'attivazione di Cloudflare
+Access per una protezione più solida (richiede il dashboard Cloudflare, non
+attivabile in autonomia).
+
+---
+
 _Le voci successive vengono aggiunte in fondo a questo file man mano che emergono._

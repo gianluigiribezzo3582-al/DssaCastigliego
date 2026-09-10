@@ -1,4 +1,9 @@
 ---
+import Mail from "@lucide/astro/icons/mail";
+import MessageCircle from "@lucide/astro/icons/message-circle";
+import Phone from "@lucide/astro/icons/phone";
+import { Image } from "astro:assets";
+import linoTexture from "../assets/sfondi/lino-texture.jpg";
 import { site } from "../config/site";
 
 const waTesto = encodeURIComponent(
@@ -8,10 +13,19 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
 ---
 
 <footer
-  class="mt-[var(--space-12)] border-t border-[var(--color-border)] bg-[var(--color-bg-alt)]"
+  class="relative mt-[var(--space-12)] overflow-hidden border-t border-[var(--color-border)] bg-[var(--color-bg-alt)]"
 >
-  <div class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6">
-    <div class="grid gap-8 sm:grid-cols-3">
+  <Image
+    src={linoTexture}
+    alt=""
+    width={1600}
+    height={900}
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.1]"
+  />
+  <div
+    class="relative mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6"
+  >
+    <div class="grid gap-8 text-center sm:grid-cols-3">
       <div>
         <p
           class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]"
@@ -33,26 +47,29 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
         <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
               href={`mailto:${site.contatti.email}`}
             >
+              <Mail aria-hidden="true" size={15} />
               {site.contatti.email}
             </a>
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
               href={`tel:${site.contatti.telefono}`}
             >
+              <Phone aria-hidden="true" size={15} />
               {site.contatti.telefono}
             </a>
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
               href={waHref}
               rel="noopener"
             >
+              <MessageCircle aria-hidden="true" size={15} />
               WhatsApp (solo appuntamenti e questioni pratiche)
             </a>
           </li>
@@ -93,7 +110,7 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
     </div>
 
     <p
-      class="mt-8 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)]"
+      class="mt-8 border-t border-[var(--color-border)] pt-6 text-center text-xs text-[var(--color-text-muted)]"
     >
       Questo sito non gestisce emergenze o urgenze psicologiche. In caso di
       pericolo immediato chiamare il 112. Vedi la pagina <a
@@ -102,8 +119,13 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
       >.
     </p>
 
-    <p class="mt-4 text-xs text-[var(--color-text-muted)]">
-      {`© ${new Date().getFullYear()} ${site.nome}`}
+    <p class="mt-4 text-center text-xs text-[var(--color-text-muted)]">
+      {`© ${new Date().getFullYear()} ${site.nome} - Sviluppato da `}<a
+        class="hover:text-[var(--color-primary)] hover:underline"
+        href="https://gianluigiribezzo.dev"
+        target="_blank"
+        rel="noopener">Gianluigi Ribezzo</a
+      >
     </p>
   </div>
 </footer>

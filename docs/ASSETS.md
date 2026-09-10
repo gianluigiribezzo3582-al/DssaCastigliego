@@ -102,7 +102,29 @@ scritto a mano (mai generato), nessun filtro o elaborazione generativa.
 
 ## Icone di interfaccia
 
-Le icone eventualmente necessarie (frecce, pulsanti social, ecc.) devono provenire da
-una libreria open source già installata nel progetto, **`@lucide/astro`**
-(pacchetto `@lucide/astro`, icone SVG open source, non generate) — non creare o
-generare nuove icone.
+Le icone dell'interfaccia (email, telefono, WhatsApp, menu, indirizzo, frecce dei
+passaggi in home, torna-su) provengono tutte da **`@lucide/astro`**, libreria open
+source già installata nel progetto — nessuna icona generata o disegnata ad hoc.
+Se ne servissero altre in futuro, stessa fonte: `import NomeIcona from "@lucide/astro/icons/nome-icona"`.
+
+## Fotografie decorative di sfondo
+
+Due sezioni del sito (home, "Per chi lavoro"; footer di ogni pagina) hanno uno
+sfondo fotografico molto discreto (opacità 7-10%), per dare calore senza
+distrarre dal testo. Sono **fotografie reali con licenza libera**, non generate:
+
+| File                                      | Soggetto                              | Fotografo     | Fonte                                                                                        | Licenza                                   |
+| ----------------------------------------- | ------------------------------------- | ------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `src/assets/sfondi/tegole-terracotta.jpg` | Tegole in terracotta, primo piano     | Peter Muscutt | [Unsplash](https://unsplash.com/photos/brown-roof-tiles-in-close-up-photography-Jii1bSg3Q_I) | Unsplash License (uso commerciale libero) |
+| `src/assets/sfondi/lino-texture.jpg`      | Trama di tessuto di lino, primo piano | Annie Spratt  | [Unsplash](https://unsplash.com/photos/beige-linen-fabric-texture-background-xTaOPMa6wAE)    | Unsplash License (uso commerciale libero) |
+
+Scelte deliberatamente **astratte/materiche** (una trama, un tessuto) invece di
+foto "a tema psicologia" (persone, mani, divani da studio): è la stessa logica
+del vincolo originale "evita il verde salvia e le mani intrecciate" applicata
+anche a queste immagini di sfondo — vedi `/docs/DECISIONI.md`.
+
+Sono sostituibili in qualunque momento senza toccare il layout: basta cambiare
+il file all'interno di `src/assets/sfondi/` (stesso nome) o l'import nel
+componente che lo usa (`src/pages/index.astro`, `src/components/Footer.astro`).
+Se in futuro arriva un illustratore, queste sono le prime due immagini che
+probabilmente conviene sostituire con un suo lavoro originale.

@@ -23,3 +23,11 @@ RATE_LIMIT_SALT=cambia-questo-valore-in-locale
 # Punto di innesto per Cloudflare Turnstile, predisposto ma NON attivo.
 # Lasciare vuoto per mantenere Turnstile disattivato.
 TURNSTILE_SECRET_KEY=
+
+# Protezione (Basic Auth) di /admin: se ENTRAMBE sono impostate, /admin chiede
+# nome utente e password prima di mostrare qualunque cosa. Lasciare vuote per
+# provare il CMS in locale senza password. Vedi /docs/DEPLOY.md prima di andare
+# online: vanno impostate come secret su Cloudflare Pages, mai lasciate vuote
+# in produzione.
+ADMIN_BASIC_AUTH_USER=
+ADMIN_BASIC_AUTH_PASS=
