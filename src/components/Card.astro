@@ -10,7 +10,7 @@ const Tag = href ? "a" : "div";
 
 <Tag
   href={href}
-  class={`block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-card)] ${href ? "transition-transform duration-[var(--motion-duration)] hover:-translate-y-0.5" : ""} ${className}`}
+  class={`flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-card)] ${href ? "transition-transform duration-[var(--motion-duration)] hover:-translate-y-0.5" : ""} ${className}`}
 >
   <slot />
 </Tag>
