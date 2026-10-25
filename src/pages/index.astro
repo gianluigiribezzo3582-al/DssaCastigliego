@@ -108,17 +108,14 @@ const sezioni = await Promise.all(
             <div class="prose-content mt-5">
               <sezione.Content />
             </div>
+            {indice === sezioni.length - 1 && (
+              <div class="mt-2">
+                <Button href={percorso("/contatti")}>Scrivimi</Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
     ))
   }
-
-  <section
-    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 text-center sm:px-6 sm:py-16"
-  >
-    <div class="flex justify-center">
-      <Button href={percorso("/contatti")}>Scrivimi</Button>
-    </div>
-  </section>
 </Layout>
