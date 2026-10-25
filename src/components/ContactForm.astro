@@ -1,11 +1,12 @@
 ---
+import { percorso } from "../lib/percorsi";
 import { site } from "../config/site";
 ---
 
 <form
   id="modulo-contatto"
   method="post"
-  action="/api/contatto"
+  action={percorso("/api/contatto")}
   class="space-y-5"
   novalidate
 >
@@ -204,7 +205,7 @@ import { site } from "../config/site";
       <span>
         Ho preso visione dell'<a
           class="underline"
-          href="/privacy"
+          href={percorso("/privacy")}
           target="_blank"
           rel="noopener"
         >

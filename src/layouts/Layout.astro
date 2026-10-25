@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../lib/percorsi";
 import "../styles/global.css";
 import SkipLink from "../components/SkipLink.astro";
 import Header from "../components/Header.astro";
@@ -41,7 +42,7 @@ const jsonLdCompleto = senzaSchemaOrganizzazione
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={percorso("/favicon.svg")} />
 
     <title>{titoloCompleto}</title>
     <meta name="description" content={description} />

@@ -361,4 +361,19 @@ storia git (commit precedente a questo).
 
 ---
 
+## 24. Pubblicazione su GitHub Pages con base path e modulo disattivabile
+
+**Deciso:** il primo deploy su GitHub Pages falliva perché Pages usava Jekyll. Aggiunto
+un workflow Actions che compila Astro e pubblica `dist/`. Poiché GitHub Pages serve il
+sito in una sottocartella, `astro.config.mjs` legge `SITE_URL`/`BASE_PATH` dall'ambiente
+e tutti i link interni passano da `percorso()`. Il modulo di contatto, che richiede una
+Function, è sostituito sulla build GitHub Pages da un riquadro email
+(`PUBLIC_MODULO_CONTATTO=off`), per non far credere a chi scrive di aver inviato un
+messaggio che non arriverebbe mai.
+
+**Costo per cambiare idea:** nullo per tornare a Cloudflare Pages: senza quelle
+variabili la build è identica a prima (base `/`, modulo attivo).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

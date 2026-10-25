@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../../lib/percorsi";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -19,11 +20,11 @@ import Layout from "../../layouts/Layout.astro";
       <p class="mt-4 text-[var(--color-text-muted)]">
         Grazie per aver scritto, ti contatterò il prima possibile! Per
         situazioni urgenti, consulta la pagina
-        <a class="underline" href="/emergenze">emergenze</a>.
+        <a class="underline" href={percorso("/emergenze")}>emergenze</a>.
       </p>
       <a
         class="mt-8 inline-flex min-h-[var(--touch-target-min)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 font-semibold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]"
-        href="/"
+        href={percorso("/")}
       >
         Torna alla home
       </a>

@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../../lib/percorsi";
 // Pagina "guscio" per Sveltia CMS: passa dalla routing di Astro (invece di stare
 // come semplice file statico in public/) così `/admin` funziona in modo identico
 // in `astro dev`, `astro preview` e nella build di produzione — Astro risolve
@@ -15,7 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Redazione contenuti — Elisa Castigliego</title>
-    <script is:inline src="/admin/sveltia-cms.js" type="module"></script>
+    <script is:inline src={percorso("/admin/sveltia-cms.js")} type="module"
+    ></script>
     <style>
       /*
        * Link fisso alla guida per Elisa, sempre visibile sopra l'interfaccia di
@@ -54,7 +56,12 @@
   </head>
   <body>
     <!-- Sveltia CMS crea qui la propria interfaccia. -->
-    <a id="guida-elisa-link" href="/admin/guida" target="_blank" rel="noopener">
+    <a
+      id="guida-elisa-link"
+      href={percorso("/admin/guida")}
+      target="_blank"
+      rel="noopener"
+    >
       Guida all'utilizzo
     </a>
   </body>

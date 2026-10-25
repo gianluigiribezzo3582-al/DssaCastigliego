@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../lib/percorsi";
 import Mail from "@lucide/astro/icons/mail";
 import MapPin from "@lucide/astro/icons/map-pin";
 import MessageCircle from "@lucide/astro/icons/message-circle";
@@ -103,25 +104,25 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
           <li>
             <a
               class="underline hover:text-[var(--color-primary)]"
-              href="/emergenze">In caso di emergenza</a
+              href={percorso("/emergenze")}>In caso di emergenza</a
             >
           </li>
           <li>
             <a
               class="underline hover:text-[var(--color-primary)]"
-              href="/privacy">Privacy policy</a
+              href={percorso("/privacy")}>Privacy policy</a
             >
           </li>
           <li>
             <a
               class="underline hover:text-[var(--color-primary)]"
-              href="/cookie-policy">Cookie policy</a
+              href={percorso("/cookie-policy")}>Cookie policy</a
             >
           </li>
           <li>
             <a
               class="underline hover:text-[var(--color-primary)]"
-              href="/note-legali">Note legali</a
+              href={percorso("/note-legali")}>Note legali</a
             >
           </li>
         </ul>
@@ -134,7 +135,7 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
       Questo sito non gestisce emergenze o urgenze psicologiche. In caso di
       pericolo immediato chiamare il 112. Vedi la pagina <a
         class="underline"
-        href="/emergenze">emergenze</a
+        href={percorso("/emergenze")}>emergenze</a
       >.
     </p>
 
