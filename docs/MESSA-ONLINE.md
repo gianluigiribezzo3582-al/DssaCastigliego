@@ -116,6 +116,10 @@ email" al posto del modulo: il sito è comunque pubblicabile.
    il dominio autenticato).
 6. **SMTP & API → API Keys → Generate a new API key**: copia la chiave (si vede una
    sola volta).
+   **Importante:** in Brevo → menu del profilo → **Security → Authorised IPs**
+   disattiva il blocco degli IP sconosciuti ("Deactivate blocking"). Le funzioni di
+   Netlify inviano da indirizzi sempre diversi: con il blocco attivo Brevo rifiuta
+   ogni invio (errore 401 nei log della function).
 7. Su **Netlify → Environment variables** aggiungi:
 
 | Chiave                 | Valore                                                                    |
