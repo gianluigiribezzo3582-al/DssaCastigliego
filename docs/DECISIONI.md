@@ -512,4 +512,15 @@ log della function.
 
 ---
 
+## 33. Login del CMS tramite il provider OAuth di Netlify
+
+**Deciso:** con il sito su Netlify, il login GitHub di Sveltia usa il provider OAuth
+integrato di Netlify (`base_url: https://api.netlify.com` in `config.yml`) invece del
+Worker Cloudflare: niente servizi aggiuntivi da pubblicare, solo una GitHub OAuth
+App registrata in Netlify. Prima `base_url` era ancora il segnaposto
+`{{URL_WORKER_OAUTH}}`, e "Accedi con GitHub" portava a una pagina 404. Il Worker
+resta nel repository come alternativa in caso di passaggio a Cloudflare.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

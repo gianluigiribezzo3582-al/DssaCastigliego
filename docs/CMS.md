@@ -29,18 +29,55 @@ all'utilizzo" in basso a destra, che apre `/admin/guida` — la stessa guida di
 `/docs/GUIDA-ELISA.md`, pubblicata come pagina del sito per essere raggiungibile
 anche una volta online, non solo aprendo il repository.
 
-## Cosa NON funziona ancora: il login "vero" con GitHub
+## Login con GitHub tramite Netlify (procedura attuale)
 
-In produzione, per permettere a Elisa di accedere da qualunque computer (non solo dal
-proprio, con la repository locale), serve un login GitHub via OAuth. Questo richiede
-una **GitHub App**, che non è stata creata: la sua creazione richiede un account
-GitHub con diritti di amministrazione sul repository, che l'esecuzione autonoma di
-questa sessione non doveva né poteva effettuare (vedi `/docs/BLOCCHI.md`).
+Su `/admin` ci sono due accessi distinti:
 
-Il codice del Worker Cloudflare che gestisce il login (`worker-oauth/src/index.ts`) è
-però **scritto per intero e pronto**: implementa lo stesso protocollo usato da Decap
-CMS (popup + `postMessage`), non richiede altre dipendenze, e va semplicemente
-pubblicato e collegato. Ecco la procedura.
+1. **La password della pagina** (`ADMIN_BASIC_AUTH_USER`/`PASS` su Netlify): tiene
+   fuori gli estranei.
+2. **"Accedi con GitHub"**: serve a Sveltia per **salvare**. Ogni modifica diventa
+   un commit su `main` e Netlify ripubblica il sito da solo in un paio di minuti.
+
+Per il secondo accesso si usa il provider OAuth integrato in Netlify (già impostato
+in `public/admin/config.yml`: `base_url: https://api.netlify.com`), senza servizi
+aggiuntivi. Configurazione una tantum:
+
+**A. Crea una GitHub OAuth App** (account `gianluigiribezzo3582-al`)
+
+1. github.com → foto profilo → **Settings → Developer settings → OAuth Apps → New
+   OAuth App**.
+2. Compila:
+   - **Application name**: `CMS Elisa Castigliego`
+   - **Homepage URL**: `https://www.elisacastigliegopsicologa.it`
+   - **Authorization callback URL**: `https://api.netlify.com/auth/done`
+3. **Register application** → copia il **Client ID** → **Generate a new client
+   secret** e copia anche quello (si vede una sola volta).
+
+**B. Installa il provider su Netlify**
+
+Netlify → il progetto → **Project configuration → Access & security → OAuth →
+Authentication providers → Install provider → GitHub** → incolla Client ID e Client
+secret → **Install**.
+
+**C. Chi può salvare**
+
+Può salvare solo chi ha un account GitHub con permesso di scrittura sulla
+repository: il proprietario (tu) e i collaboratori invitati (vedi Passo 6 più sotto
+per dare accesso a Elisa).
+
+**D. Prova**
+
+Apri `https://www.elisacastigliegopsicologa.it/admin/`, inserisci la password della
+pagina, poi **Accedi con GitHub** → autorizza l'app nel popup. Modifica un testo,
+**Salva**, e controlla che in GitHub compaia un nuovo commit e che Netlify faccia
+un nuovo deploy.
+
+## Alternativa (non usata): login tramite Worker Cloudflare
+
+Se in futuro il sito passasse a Cloudflare Pages, il login si può fare con il Worker
+già scritto in `worker-oauth/src/index.ts` (stesso protocollo di Decap CMS: popup +
+`postMessage`) e una GitHub App. In quel caso in `config.yml` `base_url` va
+sostituito con l'indirizzo del Worker. Procedura:
 
 ### Passo 1 — Creare la repository su GitHub (se non esiste già)
 
@@ -110,6 +147,8 @@ dovrebbe tornare alla schermata di redazione con l'elenco delle collezioni (Pagi
 Aree di intervento, FAQ, Contatti e dati dello studio).
 
 ### Passo 6 — Dare accesso a chi modificherà davvero i contenuti (es. Elisa)
+
+(Vale per entrambe le procedure, Netlify o Worker.)
 
 Il login "con GitHub" autentica sempre una persona tramite un **account GitHub
 reale**: non esiste un accesso anonimo o condiviso senza account. Questo vale
