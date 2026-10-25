@@ -488,4 +488,16 @@ pagine pubbliche restano senza `unsafe-inline` né domini terzi (test in
 
 ---
 
+## 31. Logo come anteprima di condivisione
+
+**Deciso:** il logo fornito (JPEG 1600×1600 con angoli neri al posto della
+trasparenza) è stato ritagliato lungo il cerchio con un bordo antialias
+(`src/assets/logo/logo.png`, trasparente) e centrato su una tela 1200×630 con lo
+sfondo crema del sito (`src/assets/social/anteprima.png`). In build l'immagine
+Open Graph è un JPEG di circa 33 KB invece di un PNG di circa 230 KB: alcune app,
+WhatsApp compreso, possono ignorare anteprime troppo pesanti. Il logo circolare
+resta intero anche quando un'app ritaglia l'anteprima a quadrato.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
