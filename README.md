@@ -70,6 +70,7 @@ tests/              test automatici (Vitest)
 
 ## Documentazione
 
+- `/docs/MESSA-ONLINE.md` — **guida passo per passo per pubblicare il sito** (Netlify, Aruba, Brevo)
 - `/docs/REPORT.md` — stato del progetto, cosa manca, cosa verificare
 - `/docs/DECISIONI.md` — decisioni prese in autonomia e alternative scartate
 - `/docs/BLOCCHI.md` — cosa è stato bloccato e perché

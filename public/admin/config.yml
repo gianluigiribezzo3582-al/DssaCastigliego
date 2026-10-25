@@ -11,13 +11,13 @@
 
 backend:
   name: github
-  repo: "{{GITHUB_OWNER}}/{{GITHUB_REPO}}" # SEGNAPOSTO — vedi /docs/CMS.md
+  repo: "gianluigiribezzo3582-al/DssaCastigliego"
   branch: main
   base_url: "{{URL_WORKER_OAUTH}}" # SEGNAPOSTO — origine del Worker in /worker-oauth
 
 local_backend: true
 
-site_url: "{{DOMINIO_SITO}}"
+site_url: "https://www.elisacastigliegopsicologa.it"
 logo_url: "/favicon.svg"
 
 media_folder: "public/immagini-cms"

@@ -4,19 +4,15 @@ import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
-// Usato solo in sviluppo locale: in produzione il dominio arriva dall'ambiente
-// (vedi sotto). Serve per canonical assoluti, sitemap.xml e Open Graph.
-const DOMINIO_SEGNAPOSTO = "https://www.esempio-elisa-castigliego.it";
+// Dominio ufficiale del sito, usato per canonical assoluti, sitemap.xml,
+// robots.txt e Open Graph. SITE_URL lo sostituisce solo per la copia di
+// anteprima su GitHub Pages (vedi il workflow), dove BASE_PATH indica anche la
+// sottocartella in cui vive il sito.
+const DOMINIO_SITO = "https://www.elisacastigliegopsicologa.it";
 
 // https://astro.build/config
-// Dominio del sito, in ordine di priorità:
-// - SITE_URL: impostato a mano (es. dal workflow di GitHub Pages);
-// - URL: impostato automaticamente da Netlify in build, è il dominio principale
-//   del sito (quello personalizzato, una volta collegato, es. il dominio Aruba);
-// - il segnaposto, solo per lo sviluppo locale.
-// BASE_PATH serve solo su GitHub Pages, dove il sito vive in una sottocartella.
 export default defineConfig({
-  site: process.env.SITE_URL || process.env.URL || DOMINIO_SEGNAPOSTO,
+  site: process.env.SITE_URL || DOMINIO_SITO,
   base: process.env.BASE_PATH || "/",
   output: "static",
   integrations: [
