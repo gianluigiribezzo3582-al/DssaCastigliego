@@ -108,13 +108,13 @@ const sezioni = await Promise.all(
             <div class="prose-content mt-5">
               <sezione.Content />
             </div>
-            {indice === sezioni.length - 1 && (
-              <div class="mt-2">
-                <Button href={percorso("/contatti")}>Scrivimi</Button>
-              </div>
-            )}
           </div>
         </div>
+        {indice === sezioni.length - 1 && (
+          <div class="mt-8 flex justify-center px-4 sm:mt-10">
+            <Button href={percorso("/contatti")}>Scrivimi</Button>
+          </div>
+        )}
       </section>
     ))
   }
