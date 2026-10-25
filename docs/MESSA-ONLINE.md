@@ -182,10 +182,11 @@ email" al posto del modulo: il sito è comunque pubblicabile.
 
 - **Telefono/WhatsApp dello studio**: quando ci sarà il numero, compilalo da `/admin`
   → "Contatti e dati dello studio" (oppure in `src/content/dati-sito.json`).
-- **Modifiche da `/admin` direttamente online**: oggi il CMS funziona solo in locale.
-  Per farlo funzionare sul sito serve una GitHub App e il piccolo servizio di login in
-  `worker-oauth/`: procedura in `/docs/CMS.md`. Nel frattempo le modifiche si fanno
-  dal repository GitHub (ogni modifica su `main` ripubblica il sito da sola).
+- **Modifiche da `/admin` direttamente online**: dopo la password della pagina,
+  Sveltia chiede "Accedi con GitHub". Per attivarlo: GitHub OAuth App + provider
+  OAuth su Netlify, circa 10 minuti, procedura in `/docs/CMS.md` ("Login con
+  GitHub tramite Netlify"). Chi salva deve avere un account GitHub con accesso
+  alla repository.
 
 ## Se qualcosa non va
 

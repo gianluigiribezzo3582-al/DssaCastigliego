@@ -5,15 +5,16 @@
 # `local_backend: true`, che apre una cartella del progetto direttamente dal browser
 # (File System Access API) e legge/scrive i file senza bisogno di credenziali.
 #
-# In produzione, perché il pulsante "Login con GitHub" funzioni, vanno completate le
-# righe "repo:" qui sotto e pubblicato il Worker OAuth in /worker-oauth — procedura
-# passo-passo in /docs/CMS.md. Finché non viene fatto, resta solo il backend locale.
+# In produzione il pulsante "Accedi con GitHub" usa il provider OAuth di Netlify
+# (api.netlify.com): va installato una volta in Netlify con una GitHub OAuth App —
+# procedura in /docs/CMS.md, "Login con GitHub tramite Netlify".
 
 backend:
   name: github
   repo: "gianluigiribezzo3582-al/DssaCastigliego"
   branch: main
-  base_url: "{{URL_WORKER_OAUTH}}" # SEGNAPOSTO — origine del Worker in /worker-oauth
+  base_url: "https://api.netlify.com"
+  auth_endpoint: "auth"
 
 local_backend: true
 
