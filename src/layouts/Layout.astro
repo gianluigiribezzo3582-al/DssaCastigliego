@@ -78,7 +78,7 @@ const immagineSchema = fotoRitratto
       (await getImage({ src: fotoRitratto, width: 800, format: "jpeg" })).src,
       Astro.site,
     ).href
-  : new URL(percorso("/favicon.svg"), Astro.site).href;
+  : new URL(percorso("/icon-512.png"), Astro.site).href;
 
 const { colori } = risolviTema(coloriScelti);
 
@@ -100,7 +100,15 @@ const jsonLdCompleto = senzaSchemaOrganizzazione
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={percorso("/favicon.svg")} />
+    <link rel="icon" href={percorso("/favicon.ico")} sizes="48x48" />
+    <link
+      rel="icon"
+      type="image/png"
+      href={percorso("/icon-192.png")}
+      sizes="192x192"
+    />
+    <link rel="apple-touch-icon" href={percorso("/apple-touch-icon.png")} />
+    <link rel="manifest" href={percorso("/site.webmanifest")} />
 
     <title>{titoloCompleto}</title>
     <meta name="description" content={description} />
