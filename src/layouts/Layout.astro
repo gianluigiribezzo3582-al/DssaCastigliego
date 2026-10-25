@@ -10,6 +10,8 @@ import { fotoPer } from "../lib/foto";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { site } from "../config/site";
+import coloriScelti from "../content/tema.json";
+import { risolviTema } from "../lib/tema";
 
 interface Props {
   title: string;
@@ -76,6 +78,8 @@ const immagineSchema = fotoRitratto
     ).href
   : new URL(percorso("/favicon.svg"), Astro.site).href;
 
+const { colori } = risolviTema(coloriScelti);
+
 const jsonLdCompleto = senzaSchemaOrganizzazione
   ? jsonLd
   : [
@@ -99,7 +103,8 @@ const jsonLdCompleto = senzaSchemaOrganizzazione
     <title>{titoloCompleto}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.nomeConTitolo} />
-    <meta name="theme-color" content="#FBF6F0" />
+    <meta name="theme-color" content={colori.sfondo} />
+    <link rel="stylesheet" href={percorso("/tema.css")} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href={percorso("/sitemap-index.xml")} />
 

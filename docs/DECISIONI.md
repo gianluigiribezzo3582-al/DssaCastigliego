@@ -460,4 +460,32 @@ dati strutturati per Google (JSON-LD), che non influiscono sulle anteprime.
 
 ---
 
+## 30. Colori del sito modificabili dal CMS; CSP dedicata per /admin
+
+**Deciso (richiesta della cliente):** nuova sezione del CMS "Colori del sito"
+(`src/content/tema.json`, widget colore di Sveltia) per 7 colori: sfondo, sfondo
+alternato, testo, testo secondario, colore principale, etichette, bordi. Il colore
+"hover" dei pulsanti e il colore del testo sui pulsanti sono calcolati da soli. I
+colori diventano in build un foglio di stile statico `/tema.css`
+(`src/pages/tema.css.ts`), non uno stile in linea: la CSP delle pagine pubbliche
+resta invariata.
+
+**Salvaguardia di accessibilità:** `src/lib/tema.ts` verifica il contrasto WCAG AA
+(4,5:1) di testo, testo secondario, colore principale ed etichette su entrambi gli
+sfondi; una voce non leggibile torna al valore originale (avviso nel log di build).
+Il controllo ha trovato subito un problema reale nella palette originale: il
+terracotta `#b5502d` arrivava solo a 4,22:1 sullo sfondo alternato (numeri delle
+sezioni). È stato scurito del 5% in `#ac4c2b` (5,11 e 4,58:1; testo bianco sui
+pulsanti 5,49:1), differenza non percepibile.
+
+**Bug trovato e corretto:** la CSP restrittiva si applicava anche a `/admin`, dove
+Sveltia carica da CDN font, icone e traduzioni (`cdn.jsdelivr.net`, `unpkg.com`) e
+usa stili in linea: in produzione l'interfaccia sarebbe comparsa rotta e in
+inglese. Ora `/admin` ha una CSP dedicata con le sole eccezioni necessarie
+(`scripts/generate-headers.mjs`), verificata in un browser senza violazioni; le
+pagine pubbliche restano senza `unsafe-inline` né domini terzi (test in
+`tests/headers.test.ts`).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
