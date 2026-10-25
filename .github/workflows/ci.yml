@@ -28,6 +28,9 @@ jobs:
       - name: Type-check delle Cloudflare Pages Functions
         run: npx tsc --noEmit -p functions/tsconfig.json
 
+      - name: Type-check delle Netlify Functions
+        run: npx tsc --noEmit -p netlify/tsconfig.json
+
       - name: Build
         run: npm run build
 
