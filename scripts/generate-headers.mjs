@@ -70,6 +70,36 @@ function costruisciCsp(hashScript) {
   ].join("; ");
 }
 
+/**
+ * CSP della sola interfaccia del CMS (/admin e /admin/, non /admin/guida).
+ * Sveltia CMS carica da CDN il font delle icone e dell'interfaccia
+ * (cdn.jsdelivr.net) e le traduzioni (unpkg.com), usa stili in linea e parla con
+ * l'API di GitHub: con la CSP delle pagine pubbliche l'interfaccia comparirebbe
+ * rotta e in inglese. Le eccezioni valgono solo qui, dietro password.
+ */
+function costruisciCspCms(hashScript) {
+  const scriptSrc = [
+    "'self'",
+    "https://unpkg.com",
+    ...hashScript.map((h) => `'sha256-${h}'`),
+  ];
+  return [
+    `default-src 'self'`,
+    `script-src ${scriptSrc.join(" ")}`,
+    `style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net`,
+    `img-src 'self' data: blob: https://*.githubusercontent.com`,
+    `media-src 'self' blob:`,
+    `font-src 'self' data: https://cdn.jsdelivr.net`,
+    `connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://api.github.com https://www.githubstatus.com`,
+    `worker-src 'self' blob:`,
+    `frame-src blob:`,
+    `object-src 'none'`,
+    `base-uri 'none'`,
+    `form-action 'self'`,
+    `frame-ancestors 'none'`,
+  ].join("; ");
+}
+
 function main() {
   const file = elencaFileHtml(DIST);
   const blocchi = [];
@@ -78,8 +108,9 @@ function main() {
     const html = readFileSync(f, "utf-8");
     const script = estraiScriptInline(html);
     const hash = script.map(hashSha256Base64);
-    const csp = costruisciCsp(hash);
     const percorso = percorsoPubblico(f);
+    const csp =
+      percorso === "/admin" ? costruisciCspCms(hash) : costruisciCsp(hash);
 
     const pattern = percorso === "/" ? ["/"] : [percorso, `${percorso}/`];
     for (const p of pattern) {

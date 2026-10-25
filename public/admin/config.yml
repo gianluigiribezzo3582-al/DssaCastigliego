@@ -133,3 +133,19 @@ collections:
                 fields:
                   - { label: "Nome del servizio", name: "nome", widget: "string" }
                   - { label: "Numero di telefono", name: "numero", widget: "string" }
+
+  - name: "aspetto"
+    label: "Colori del sito"
+    description: "La palette del sito. Se un colore non è abbastanza leggibile, il sito usa da solo quello originale (indicato sotto ogni campo)."
+    files:
+      - name: "tema"
+        label: "Colori del sito"
+        file: "src/content/tema.json"
+        fields:
+          - { label: "Sfondo delle pagine", name: "sfondo", widget: "color", allowInput: true, hint: "Colore di fondo principale. Deve restare chiaro. Originale: #fbf6f0" }
+          - { label: "Sfondo delle sezioni alternate", name: "sfondoAlternato", widget: "color", allowInput: true, hint: "Fondo di \"Di cosa mi occupo\", della parte alta della home e del piè di pagina. Originale: #f3e9de" }
+          - { label: "Testo principale", name: "testo", widget: "color", allowInput: true, hint: "Titoli e paragrafi. Deve restare scuro. Originale: #2e2622" }
+          - { label: "Testo secondario", name: "testoSecondario", widget: "color", allowInput: true, hint: "Didascalie, note, testi del piè di pagina. Originale: #5c5049" }
+          - { label: "Colore principale", name: "principale", widget: "color", allowInput: true, hint: "Pulsanti, link, numeri delle sezioni, cornice delle foto. Originale: #ac4c2b (terracotta)" }
+          - { label: "Colore delle etichette", name: "accento", widget: "color", allowInput: true, hint: "Le piccole scritte in maiuscolo sopra i titoli e nel piè di pagina. Originale: #8a5a1e" }
+          - { label: "Linee e bordi", name: "bordi", widget: "color", allowInput: true, hint: "Linee sottili di separazione e bordi dei campi. Originale: #e4d5c6" }

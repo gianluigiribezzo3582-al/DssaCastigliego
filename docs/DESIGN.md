@@ -37,6 +37,8 @@ i "cento linguaggi" di Malaguzzi): un quaderno di appunti più che un sito "da s
   tutta larghezza; tutto allineato a sinistra sullo stesso margine.
 
 Le classi sono in `src/styles/global.css`, i token in `src/styles/tokens.css`.
+I colori principali si possono cambiare anche dal CMS ("Colori del sito",
+`src/content/tema.json` → `/tema.css`), con controllo automatico del contrasto.
 
 ---
 

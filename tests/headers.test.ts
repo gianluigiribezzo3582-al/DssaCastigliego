@@ -26,18 +26,55 @@ function elencaFileHtml(dir: string): string[] {
 describe.skipIf(!disponibile)("dist/_headers", () => {
   const contenuto = disponibile ? readFileSync(FILE_HEADERS, "utf-8") : "";
 
-  it("non contiene 'unsafe-inline' né 'unsafe-eval'", () => {
-    expect(contenuto).not.toContain("unsafe-inline");
-    expect(contenuto).not.toContain("unsafe-eval");
+  // Blocchi "percorso + intestazioni" di _headers.
+  const blocchi = contenuto
+    .split(/\n\s*\n/)
+    .map((b) => b.trim())
+    .filter(Boolean)
+    .map((b) => ({ percorso: b.split("\n")[0], testo: b }));
+  // Unica eccezione ammessa: l'interfaccia del CMS (Sveltia carica font e
+  // traduzioni da CDN e usa stili in linea), dietro password. Non /admin/guida.
+  const eCms = (percorso: string) =>
+    percorso === "/admin" || percorso === "/admin/";
+  const pubblici = blocchi.filter((b) => !eCms(b.percorso));
+
+  it("le pagine pubbliche non contengono 'unsafe-inline' né 'unsafe-eval'", () => {
+    for (const b of pubblici) {
+      expect(b.testo, b.percorso).not.toContain("unsafe-inline");
+      expect(b.testo, b.percorso).not.toContain("unsafe-eval");
+    }
   });
 
-  it("non referenzia alcun dominio di terze parti nella CSP", () => {
-    const righeCsp = contenuto
-      .split("\n")
-      .filter((riga) => riga.includes("Content-Security-Policy"));
+  it("le pagine pubbliche non referenziano domini di terze parti nella CSP", () => {
+    const righeCsp = pubblici.flatMap((b) =>
+      b.testo
+        .split("\n")
+        .filter((riga) => riga.includes("Content-Security-Policy")),
+    );
     expect(righeCsp.length).toBeGreaterThan(0);
     for (const riga of righeCsp) {
       expect(riga).not.toMatch(/https?:\/\//);
+    }
+  });
+
+  it("il CMS ha una CSP dedicata, limitata ai servizi di cui Sveltia ha bisogno", () => {
+    const cms = blocchi.filter((b) => eCms(b.percorso));
+    expect(cms.map((b) => b.percorso).sort()).toEqual(["/admin", "/admin/"]);
+    for (const b of cms) {
+      const domini = [...b.testo.matchAll(/https:\/\/([^\s;]+)/g)].map(
+        (m) => m[1],
+      );
+      expect(new Set(domini)).toEqual(
+        new Set([
+          "unpkg.com",
+          "cdn.jsdelivr.net",
+          "*.githubusercontent.com",
+          "api.github.com",
+          "www.githubstatus.com",
+        ]),
+      );
+      expect(b.testo).not.toContain("unsafe-eval");
+      expect(b.testo).toContain("frame-ancestors 'none'");
     }
   });
 

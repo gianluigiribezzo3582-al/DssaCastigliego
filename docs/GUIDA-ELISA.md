@@ -17,6 +17,7 @@ Ti troverai davanti a un elenco di sezioni sulla sinistra:
 - **Pagine del sito** — titolo e sottotitolo in cima alla home, e i testi per Google
 - **Sezioni della home** — Mi presento, Di cosa mi occupo, La mia formazione
 - **Contatti e dati dello studio** — email, PEC, località, iscrizione all'Ordine, P. IVA
+- **Colori del sito** — la palette di tutto il sito
 
 ## Modificare un testo esistente
 
@@ -69,6 +70,24 @@ aggiorna automaticamente ovunque compaia — non serve cercarlo pagina per pagin
 compaiono da nessuna parte. Quando avrai il numero dello studio, basta compilarli e
 salvare. Il numero di WhatsApp va inserito solo con le cifre, senza il "+" e senza
 spazi (es. per l'Italia: `39` seguito dal numero di cellulare).
+
+## Cambiare i colori del sito
+
+Vai su **"Colori del sito"**. Ogni voce ha un quadratino colorato (cliccalo per
+scegliere il colore) e accanto il codice del colore (es. `#ac4c2b`), che puoi anche
+scrivere a mano. Sotto ogni voce trovi dove viene usato quel colore e il valore
+**originale**: per tornare indietro basta riscrivere quel codice.
+
+- **Sfondo delle pagine** e **Sfondo delle sezioni alternate** devono restare chiari.
+- **Testo principale**, **Testo secondario**, **Colore principale** e **Colore delle
+  etichette** devono restare abbastanza scuri da leggersi bene sugli sfondi.
+
+Il sito controlla da solo la leggibilità (secondo le regole di accessibilità WCAG):
+se un colore scelto non si legge abbastanza bene, per quella voce usa
+automaticamente il colore originale. Quindi, se dopo aver salvato un colore non
+cambia, probabilmente era troppo chiaro (o lo sfondo troppo scuro): prova una
+tonalità più decisa. Il colore del testo dei pulsanti (bianco o scuro) viene scelto
+da solo. Le fotografie di sfondo decorative non cambiano colore.
 
 ## Pubblicare le modifiche
 
