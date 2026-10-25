@@ -175,6 +175,14 @@ email" al posto del modulo: il sito è comunque pubblicabile.
 
 ## Se qualcosa non va
 
+- **Build fallita con "Secrets scanning found secrets in build"**: Netlify ha
+  trovato nei file del sito il valore di una variabile d'ambiente. Le variabili non
+  segrete (nome utente di `/admin`, `MAIL_DRIVER`, mittente e destinatario
+  dell'email) sono già escluse in `netlify.toml`. Se l'errore indica
+  `ADMIN_BASIC_AUTH_PASS`, `BREVO_API_KEY` o `RATE_LIMIT_SALT`, il valore scelto
+  compare nel sito (es. una password che è una parola presente nei testi):
+  **cambialo** con uno casuale, non disattivare il controllo.
+
 - **Il dominio non si apre dopo molte ore**: controlla su Aruba che non siano
   rimasti vecchi record A/AAAA per `@` o `www`, e che il CNAME punti esattamente a
   `elisacastigliegopsicologa.netlify.app`.

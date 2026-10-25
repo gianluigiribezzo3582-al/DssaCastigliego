@@ -9,6 +9,13 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Secrets scanning di Netlify: blocca la build se trova il valore di una
+  # variabile d'ambiente nei file del repository o del sito. Queste variabili NON
+  # sono segrete e i loro valori compaiono di proposito nel sito (es. l'email
+  # di Elisa, il nome utente, la parola "brevo"), quindi vanno escluse. Restano
+  # controllate le vere chiavi segrete: ADMIN_BASIC_AUTH_PASS, BREVO_API_KEY,
+  # RATE_LIMIT_SALT. Non disattivare del tutto il controllo.
+  SECRETS_SCAN_OMIT_KEYS = "ADMIN_BASIC_AUTH_USER,MAIL_DRIVER,BREVO_MITTENTE_EMAIL,BREVO_MITTENTE_NOME,DESTINATARIO_EMAIL"
 
 # Modulo di contatto: netlify/functions/contatto.ts (su /api/contatto).
 # Protezione di /admin: netlify/edge-functions/proteggi-admin.ts.
