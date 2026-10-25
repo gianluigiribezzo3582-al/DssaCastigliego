@@ -49,7 +49,11 @@ aggiuntivi. Configurazione una tantum:
 2. Compila:
    - **Application name**: `CMS Elisa Castigliego`
    - **Homepage URL**: `https://www.elisacastigliegopsicologa.it`
-   - **Authorization callback URL**: `https://api.netlify.com/auth/done`
+   - **Redirect URI** (nelle versioni precedenti di GitHub si chiamava
+     "Authorization callback URL"): `https://api.netlify.com/auth/done`
+   - **Allow wildcard matching** ed **Enable Device Flow**: non spuntati.
+   - **Expire user access tokens**: meglio **non** spuntato, altrimenti l'accesso al
+     CMS scade dopo poche ore e bisogna rifare il login.
 3. **Register application** → copia il **Client ID** → **Generate a new client
    secret** e copia anche quello (si vede una sola volta).
 
