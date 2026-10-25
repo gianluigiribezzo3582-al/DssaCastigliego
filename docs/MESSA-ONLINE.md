@@ -135,13 +135,13 @@ email" al posto del modulo: il sito è comunque pubblicabile.
 ## 5. Controlli finali (≈ 15 minuti)
 
 - [ ] `https://www.elisacastigliegopsicologa.it` si apre con il lucchetto.
-- [ ] Le tre foto, i testi e i link del footer sono corretti, anche da telefono.
+- [ ] Foto, testi e link del footer sono corretti, anche da telefono.
 - [ ] `/admin` chiede la password.
 - [ ] Il modulo invia davvero (passo 4.9).
 - [ ] `https://www.elisacastigliegopsicologa.it/robots.txt` e
       `/sitemap-index.xml` si aprono.
 - [ ] Anteprima social: incolla il link del sito in WhatsApp e controlla che compaia
-      la foto di Elisa con il titolo.
+      il logo con il titolo.
 - [ ] Dati strutturati: https://search.google.com/test/rich-results con l'indirizzo
       del sito (deve riconoscere "Psychologist" senza errori).
 
