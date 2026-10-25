@@ -4,28 +4,16 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import { fotoPer } from "../lib/foto";
 import tegoleTerracotta from "../assets/sfondi/tegole-terracotta.jpg";
 
 const homeEntry = await getEntry("pagine", "home");
 
-// Foto delle sezioni: src/assets/foto/<id-sezione>.<estensione>, es.
-// src/assets/foto/mi-presento.jpg. Se il file manca la build non si rompe:
-// al suo posto compare un riquadro neutro "Foto in arrivo".
-const fotoDisponibili = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/foto/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP}",
-  { eager: true },
-);
-function fotoPer(id: string): ImageMetadata | undefined {
-  const percorso = Object.keys(fotoDisponibili).find(
-    (p) =>
-      p
-        .split("/")
-        .pop()!
-        .replace(/\.[^.]+$/, "") === id,
-  );
-  return percorso ? fotoDisponibili[percorso].default : undefined;
-}
+const posizioneFoto = {
+  alto: "object-top",
+  centro: "object-center",
+  basso: "object-bottom",
+} as const;
 
 const sezioni = await Promise.all(
   (await getCollection("sezioni"))
@@ -47,8 +35,9 @@ const sezioni = await Promise.all(
     <Image
       src={tegoleTerracotta}
       alt=""
-      width={1600}
-      height={900}
+      width={1200}
+      height={675}
+      quality={35}
       loading="eager"
       class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07]"
     />
@@ -84,8 +73,9 @@ const sezioni = await Promise.all(
               <Image
                 src={sezione.foto}
                 alt={sezione.data.altFoto ?? ""}
-                width={800}
-                class="aspect-[4/5] w-full rounded-[var(--radius-lg)] object-cover shadow-[var(--shadow-card)]"
+                widths={[384, 768]}
+                sizes="(max-width: 416px) calc(100vw - 2rem), 384px"
+                class={`aspect-[4/5] w-full rounded-[var(--radius-lg)] object-cover shadow-[var(--shadow-card)] ${posizioneFoto[sezione.data.allineamentoFoto]}`}
               />
             ) : (
               <div class="flex aspect-[4/5] w-full items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)]">

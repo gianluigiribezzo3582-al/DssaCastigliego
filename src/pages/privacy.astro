@@ -2,11 +2,15 @@
 import { percorso } from "../lib/percorsi";
 import Layout from "../layouts/Layout.astro";
 import { site, whatsappHref } from "../config/site";
+
+// Le sezioni sul modulo di contatto compaiono solo dove il modulo è attivo
+// (vedi src/pages/contatti.astro e PUBLIC_MODULO_CONTATTO).
+const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
 ---
 
 <Layout
   title="Privacy Policy"
-  description="Informativa sul trattamento dei dati personali raccolti tramite il modulo di contatto di questo sito."
+  description="Informativa sul trattamento dei dati personali di chi visita il sito e di chi contatta la dott.ssa Elisa Castigliego."
 >
   <article
     class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
@@ -17,115 +21,168 @@ import { site, whatsappHref } from "../config/site";
       Privacy Policy
     </h1>
     <p class="text-sm text-[var(--color-text-muted)]">
-      Versione {site.informativaPrivacy.versione} — ultimo aggiornamento:
-      {site.informativaPrivacy.dataAggiornamento}. [BOZZA — struttura con
-      segnaposto espliciti; il testo giuridico definitivo va redatto o validato
-      da una persona competente, non generato automaticamente.]
+      {
+        `Versione ${site.informativaPrivacy.versione} — ultimo aggiornamento: ${site.informativaPrivacy.dataAggiornamento}.`
+      }
+    </p>
+
+    <p>
+      Questa informativa è resa ai sensi degli articoli 13 e 14 del Regolamento
+      (UE) 2016/679 ("GDPR") e descrive come vengono trattati i dati personali
+      di chi visita questo sito e di chi contatta la dott.ssa {site.nome}.
     </p>
 
     <h2>Titolare del trattamento</h2>
     <ul>
-      <li>{site.titolareTrattamento}, {site.titoloProfessionale}</li>
+      <li>{`${site.nomeConTitolo}, ${site.titoloProfessionale}`}</li>
       <li>{`Studio a ${site.localita}`}</li>
-      <li>Email: {site.contatti.email}</li>
-      <li>PEC: {site.contatti.pec}</li>
       <li>
-        [SEGNAPOSTO] Eventuale responsabile della protezione dei dati (se
-        nominato): {"{{DPO_NOME}}"}
+        Email: <a href={`mailto:${site.contatti.email}`}
+          >{site.contatti.email}</a
+        >
+      </li>
+      <li>
+        PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
       </li>
     </ul>
 
-    <h2>Quali dati raccoglie questo sito</h2>
+    <h2>Dati di navigazione</h2>
     <p>
-      Il sito non raccoglie dati di navigazione tramite cookie o strumenti di
-      analytics. Gli unici dati personali trattati sono quelli che l'utente
-      sceglie volontariamente di inserire nel <a href={percorso("/contatti")}
-        >modulo di contatto</a
-      >: nome o identificativo a scelta, un recapito (email o telefono), la
-      preferenza di contatto, la disponibilità indicativa e un messaggio libero.
+      Il sito non usa cookie, strumenti di statistica (analytics), pixel di
+      tracciamento né contenuti di terze parti (font, mappe, video o widget
+      esterni). Come avviene per qualunque sito web, il servizio di hosting
+      registra automaticamente alcuni dati tecnici delle richieste (ad esempio
+      indirizzo IP, data e ora, pagina richiesta, tipo di browser), che servono
+      esclusivamente a fornire il sito e a garantirne la sicurezza. Questi dati
+      non vengono usati per identificare chi visita il sito né per profilarlo.
+    </p>
+    <p>
+      Base giuridica: legittimo interesse del titolare a rendere disponibile il
+      sito in modo sicuro (art. 6, par. 1, lett. f GDPR).
+    </p>
+
+    <h2>Dati che mi invii quando mi contatti</h2>
+    <p>
+      {
+        moduloAttivo
+          ? "Se mi scrivi via email, via PEC o tramite il modulo di contatto, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
+          : "Se mi scrivi via email o via PEC, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
+      }
+      al solo scopo di rispondere alla tua richiesta ed eventualmente fissare un primo
+      colloquio.
+    </p>
+    <p>
+      Base giuridica: esecuzione di misure precontrattuali adottate su tua
+      richiesta (art. 6, par. 1, lett. b GDPR). Il conferimento dei dati è
+      facoltativo, ma senza un recapito non mi è possibile risponderti.
     </p>
     <p>
       <strong
-        >Il modulo chiede esplicitamente di non inserire informazioni sullo
-        stato di salute</strong
-      >: quei dati vengono discussi solo durante il primo colloquio, non tramite
-      il sito.
+        >Ti chiedo di non inviare informazioni sul tuo stato di salute nel primo
+        messaggio</strong
+      >: le approfondiremo insieme durante il colloquio. Se comunque le
+      comunichi, verranno trattate con la massima riservatezza, nel rispetto del
+      segreto professionale, al solo fine di rispondere alla tua richiesta.
+    </p>
+    <p>
+      Se la richiesta riguarda una persona minorenne, il primo contatto deve
+      avvenire da parte di chi esercita la responsabilità genitoriale.
     </p>
 
-    <h2>Come vengono trattati questi dati</h2>
-    <p>
-      Il messaggio inviato dal modulo viene elaborato da una funzione automatica
-      (Cloudflare Pages Function) che lo inoltra via email al titolare, senza
-      salvarlo in nessun database, file di log applicativo o sistema di
-      archiviazione del sito. L'unico luogo in cui il messaggio resta è la
-      casella di posta del titolare.
-    </p>
-    <p>
-      L'indirizzo IP di chi invia il modulo viene usato esclusivamente per un
-      controllo antispam (limite al numero di invii in un breve periodo), in
-      forma hashata (non riconducibile in chiaro) e con conservazione breve; non
-      viene mai associato al contenuto del messaggio né conservato insieme ad
-      esso.
-    </p>
-
-    <h2>Chi tratta i dati per conto del titolare (fornitori)</h2>
-    <ul>
-      <li>
-        <strong>Cloudflare</strong> — hosting del sito ed esecuzione della funzione
-        che inoltra il modulo di contatto; instradamento dell'email in ricezione (Cloudflare
-        Email Routing).
-      </li>
-      <li>
-        <strong>Brevo</strong> — invio dell'email generata dal modulo di contatto
-        verso la casella del titolare (quando attivo; in fase di sviluppo il sito
-        gira in modalità simulata, senza alcun invio reale).
-      </li>
-    </ul>
-    <p>
-      Dettaglio completo dei trattamenti, utile per il registro del titolare, in
-      <code> /docs/PRIVACY.md</code>.
-    </p>
+    {
+      moduloAttivo && (
+        <>
+          <h2>Modulo di contatto</h2>
+          <p>
+            Il messaggio inviato con il modulo viene inoltrato automaticamente
+            alla mia casella email senza essere salvato in database o archivi
+            del sito. L'indirizzo IP di chi invia il modulo viene usato solo per
+            un controllo antispam, in forma non leggibile (hash) e per pochi
+            minuti, e non viene mai associato al contenuto del messaggio.
+            L'invio dell'email è affidato al servizio Brevo (Sendinblue SAS,
+            Francia).
+          </p>
+        </>
+      )
+    }
 
     {
       whatsappHref && (
         <>
           <h2>WhatsApp</h2>
           <p>
-            Il pulsante WhatsApp presente nel sito è un semplice collegamento
-            (wa.me): non carica alcuno script di Meta e non trasmette dati
-            finché non viene cliccato volontariamente. Una volta aperta la
-            conversazione su WhatsApp, il trattamento dei dati è regolato
-            dall'informativa privacy di WhatsApp stessa. Questo canale è pensato
-            solo per appuntamenti e questioni pratiche, non per contenuti
-            clinici.
+            Il pulsante WhatsApp è un semplice collegamento: non carica alcuno
+            script di Meta e non trasmette dati finché non viene cliccato. Una
+            volta aperta la conversazione, il trattamento dei dati è regolato
+            anche dall'informativa privacy di WhatsApp. Questo canale è pensato
+            solo per appuntamenti e questioni pratiche.
           </p>
         </>
       )
     }
 
-    <h2>Per quanto tempo vengono conservati i dati</h2>
+    <h2>A chi vengono comunicati i dati</h2>
     <p>
-      Il contenuto del modulo di contatto non viene conservato dal sito:
-      transita e arriva direttamente nella casella email del titolare, dove
-      resta secondo le normali politiche di conservazione della posta
-      elettronica del titolare stesso. Le chiavi hashate usate per l'antispam
-      hanno una durata (TTL) breve, dell'ordine di pochi minuti.
+      I dati non vengono diffusi né ceduti a terzi. Possono trattarli, solo per
+      conto del titolare e per fornire i servizi tecnici necessari, i fornitori
+      di:
+    </p>
+    <ul>
+      <li>
+        hosting del sito: Netlify, Inc. (Stati Uniti), che tratta i dati di
+        navigazione descritti sopra;
+      </li>
+      <li>
+        posta elettronica e PEC, attraverso cui ricevo e conservo i messaggi.
+      </li>
+    </ul>
+    <p>
+      Quando un fornitore ha sede fuori dall'Unione europea, il trasferimento
+      dei dati avviene sulla base delle garanzie previste dagli articoli 44 e
+      seguenti del GDPR (decisione di adeguatezza UE-USA "Data Privacy
+      Framework" e/o clausole contrattuali standard approvate dalla Commissione
+      europea).
     </p>
 
-    <h2>Diritti dell'interessato</h2>
+    <h2>Per quanto tempo vengono conservati</h2>
+    <ul>
+      <li>
+        Dati di navigazione: per il tempo stabilito dal fornitore di hosting per
+        finalità di sicurezza, di norma pochi giorni o settimane.
+      </li>
+      <li>
+        Messaggi ricevuti: per il tempo necessario a gestire la richiesta. Se
+        non segue un rapporto professionale vengono cancellati; se invece inizia
+        un percorso, i dati vengono trattati secondo le regole deontologiche e
+        di legge previste per l'attività professionale, con un'informativa
+        specifica.
+      </li>
+    </ul>
+
+    <h2>I tuoi diritti</h2>
     <p>
-      [SEGNAPOSTO] In qualità di interessato puoi esercitare i diritti previsti
-      dagli articoli 15-22 del Regolamento (UE) 2016/679 (accesso, rettifica,
-      cancellazione, limitazione, portabilità, opposizione) scrivendo a {
-        site.contatti.email
-      }.
+      In qualsiasi momento puoi chiedere l'accesso ai tuoi dati, la loro
+      rettifica o cancellazione, la limitazione del trattamento, la portabilità
+      dei dati od opporti al trattamento (articoli 15-22 GDPR), scrivendo a <a
+        href={`mailto:${site.contatti.email}`}>{site.contatti.email}</a
+      > o via PEC a <a href={`mailto:${site.contatti.pec}`}
+        >{site.contatti.pec}</a
+      >.
+    </p>
+    <p>
+      Hai inoltre il diritto di proporre reclamo al Garante per la protezione
+      dei dati personali (<a
+        href="https://www.garanteprivacy.it"
+        rel="noopener"
+        target="_blank">www.garanteprivacy.it</a
+      >).
     </p>
 
-    <h2>Reclamo all'Autorità di controllo</h2>
+    <h2>Cookie</h2>
     <p>
-      Hai diritto di proporre reclamo al Garante per la protezione dei dati
-      personali qualora ritenga che il trattamento dei tuoi dati violi la
-      normativa vigente.
+      Il sito non installa alcun cookie. Dettagli nella <a
+        href={percorso("/cookie-policy")}>cookie policy</a
+      >.
     </p>
   </article>
 </Layout>

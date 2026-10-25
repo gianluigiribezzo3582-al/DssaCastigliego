@@ -6,7 +6,7 @@ import { iscrizioneOrdine, site } from "../config/site";
 
 <Layout
   title="Note legali"
-  description="Titolarità del sito, dati identificativi della professionista e note legali."
+  description="Dati identificativi della professionista, titolarità del sito e note legali."
 >
   <article
     class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
@@ -16,52 +16,56 @@ import { iscrizioneOrdine, site } from "../config/site";
     >
       Note legali
     </h1>
-    <p class="text-sm text-[var(--color-text-muted)]">
-      [BOZZA — struttura con segnaposto espliciti. Il testo definitivo va
-      scritto o verificato da una persona, non generato automaticamente: vedi
-      <code>/docs/DA-COMPILARE.md</code>.]
-    </p>
 
     <h2>Titolare del sito</h2>
     <ul>
-      <li>Nome e cognome: {site.nomeConTitolo}</li>
-      <li>Titolo professionale: {site.titoloProfessionale}</li>
-      <li>{iscrizioneOrdine}</li>
+      <li>{site.nomeConTitolo}</li>
+      <li>{`${site.titoloProfessionale} — ${iscrizioneOrdine}`}</li>
       <li>{`P. IVA ${site.partitaIva}`}</li>
       <li>{`Studio a ${site.localita}`}</li>
-      <li>Email: {site.contatti.email}</li>
-      <li>PEC: {site.contatti.pec}</li>
+      <li>
+        Email: <a href={`mailto:${site.contatti.email}`}
+          >{site.contatti.email}</a
+        >
+      </li>
+      <li>
+        PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
+      </li>
       {site.contatti.telefono && <li>Telefono: {site.contatti.telefono}</li>}
     </ul>
 
     <h2>Natura del sito</h2>
     <p>
-      Il sito ha finalità informativa e di presentazione professionale. Non
-      costituisce erogazione di prestazioni sanitarie a distanza né consulto
-      medico/psicologico online: i colloqui si svolgono in presenza, nell'ambito
-      del rapporto professionale diretto tra la dott.ssa {site.nome}
+      Il sito ha finalità esclusivamente informativa e di presentazione
+      dell'attività professionale. Non costituisce una prestazione sanitaria né
+      un consulto psicologico a distanza: i colloqui si svolgono in presenza,
+      nell'ambito del rapporto professionale diretto tra la dott.ssa {site.nome}
       e la persona che si rivolge a lei.
-    </p>
-
-    <h2>Hosting e fornitori tecnici</h2>
-    <p>
-      Il sito è ospitato su Cloudflare Pages. Il modulo di contatto utilizza,
-      quando attivo, il servizio di invio email Brevo. Dettagli completi sul
-      trattamento dei dati in <a href={percorso("/privacy")}>Privacy Policy</a>.
-    </p>
-
-    <h2>Proprietà dei contenuti</h2>
-    <p>
-      [SEGNAPOSTO] Testi, fotografie ed elementi grafici presenti sul sito sono
-      di proprietà di {site.titolareTrattamento} o utilizzati con relativa licenza.
-      È vietata la riproduzione non autorizzata.
     </p>
 
     <h2>Comunicazione sanitaria</h2>
     <p>
-      I contenuti del sito rispettano i principi di correttezza, trasparenza e
+      I contenuti del sito sono redatti nel rispetto del Codice Deontologico
+      degli Psicologi Italiani e dei principi di correttezza, trasparenza e
       prudenza previsti per la comunicazione in ambito sanitario: non contengono
-      promesse di risultato, claim comparativi né testimonianze di pazienti.
+      promesse di risultato, confronti con altri professionisti né testimonianze
+      di pazienti.
+    </p>
+
+    <h2>Proprietà dei contenuti</h2>
+    <p>
+      Testi e fotografie della dott.ssa {site.nome} presenti sul sito sono di sua
+      proprietà. Il dipinto "Viandante sul mare di nebbia" di Caspar David Friedrich
+      è un'opera di pubblico dominio; le immagini decorative di sfondo sono utilizzate
+      secondo la licenza Unsplash. Le illustrazioni di altri autori appartengono ai
+      rispettivi titolari dei diritti. Non è consentito riprodurre i contenuti, in
+      tutto o in parte, senza autorizzazione.
+    </p>
+
+    <h2>Hosting</h2>
+    <p>
+      Il sito è ospitato da Netlify, Inc. Per il trattamento dei dati personali
+      vedi la <a href={percorso("/privacy")}>Privacy Policy</a>.
     </p>
   </article>
 </Layout>

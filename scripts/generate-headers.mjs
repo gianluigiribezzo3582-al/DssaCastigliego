@@ -15,6 +15,7 @@ const INTESTAZIONI_COMUNI = [
   "Referrer-Policy: strict-origin-when-cross-origin",
   "X-Frame-Options: DENY",
   "Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()",
+  "Strict-Transport-Security: max-age=31536000",
 ];
 
 function elencaFileHtml(dir) {
@@ -92,6 +93,13 @@ function main() {
   // Fallback per qualunque risorsa non HTML (immagini, CSS, JS, sitemap...): niente
   // CSP basata su script inline (non è HTML), solo le intestazioni di sicurezza comuni.
   blocchi.unshift(["/*", INTESTAZIONI_COMUNI]);
+
+  // I file in /_astro/ hanno un hash nel nome (cambiano nome a ogni modifica):
+  // il browser può tenerli in cache per un anno senza ricontrollarli.
+  blocchi.splice(1, 0, [
+    "/_astro/*",
+    ["Cache-Control: public, max-age=31536000, immutable"],
+  ]);
 
   const testo = blocchi
     .map(([pattern, righe]) =>

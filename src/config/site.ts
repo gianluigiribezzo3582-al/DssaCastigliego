@@ -2,12 +2,9 @@
 //
 // I dati che Elisa può modificare da sola (contatti, località, dati dell'Ordine/P.IVA,
 // numeri di emergenza) vivono in src/content/dati-sito.json e sono editabili dal CMS
-// su /admin ("Contatti e dati dello studio"). I valori più strutturali (nome,
-// dominio...) restano qui perché richiedono anche modifiche al codice per essere
-// cambiati (es. il dominio è usato anche in astro.config.mjs).
-//
-// I valori ancora segnaposto sono FALSI e vanno sostituiti prima della
-// pubblicazione. Vedi /docs/DA-COMPILARE.md per la checklist completa.
+// su /admin ("Contatti e dati dello studio"). Qui restano i valori strutturali
+// (nome, titolo). Il dominio non è qui: arriva dall'ambiente di build, vedi
+// astro.config.mjs.
 import datiSito from "../content/dati-sito.json";
 
 export const site = {
@@ -34,10 +31,6 @@ export const site = {
   },
   social: datiSito.social,
   informativaPrivacy: datiSito.informativaPrivacy,
-
-  // SEGNAPOSTO: dominio reale del sito, usato anche in astro.config.mjs.
-  // Cambiarlo in entrambi i punti prima della pubblicazione — vedi /docs/DA-COMPILARE.md.
-  dominio: "https://www.esempio-elisa-castigliego.it",
 
   emergenze: {
     numeroUnicoEmergenze: "112",

@@ -1,4 +1,5 @@
-# Pubblica il sito su GitHub Pages a ogni push su main.
+# Pubblica una copia di anteprima del sito su GitHub Pages a ogni push su main.
+# Il sito ufficiale è su Netlify (netlify.toml): questa copia è marcata noindex.
 #
 # Requisito (una sola volta): su GitHub, Settings → Pages → "Build and deployment"
 # → Source: "GitHub Actions" (non "Deploy from a branch", che prova a usare Jekyll
@@ -46,6 +47,9 @@ jobs:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           PUBLIC_MODULO_CONTATTO: "off"
+          # Il sito ufficiale è su Netlify: questa copia non va indicizzata,
+          # per non creare contenuti duplicati nei motori di ricerca.
+          PUBLIC_NOINDEX: "on"
 
       - uses: actions/upload-pages-artifact@v3
         with:
