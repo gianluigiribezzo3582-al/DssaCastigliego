@@ -125,6 +125,11 @@ email" al posto del modulo: il sito è comunque pubblicabile.
    disattiva il blocco degli IP sconosciuti ("Deactivate blocking"). Le funzioni di
    Netlify inviano da indirizzi sempre diversi: con il blocco attivo Brevo rifiuta
    ogni invio (errore 401 nei log della function).
+   Anche con il blocco disattivato, al **primo invio** Brevo può mandare
+   all'email dell'account un messaggio **"Verifica un nuovo IP"** (IP di Amazon/USA:
+   sono i server di Netlify). Va scelto **"Interrompi controllo degli indirizzi IP"**:
+   non "autorizza il nuovo IP" (Netlify cambia IP quasi a ogni invio) e non
+   "cambia chiavi API" (invaliderebbe la chiave appena configurata).
 7. Su **Netlify → Environment variables** aggiungi:
 
 | Chiave                 | Valore                                                                    |
