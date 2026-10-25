@@ -1,39 +1,38 @@
 // Configurazione centrale del sito.
 //
-// I dati che Elisa può modificare da sola (contatti, indirizzo, social, orari, dati
-// dell'Albo/P.IVA, numeri di emergenza) vivono in src/content/dati-sito.json e sono
-// editabili dal CMS su /admin ("Configurazione sito" e "Dati di contatto"). I valori
-// più strutturali (nome, dominio...) restano qui perché richiedono anche modifiche al
-// codice per essere cambiati (es. il dominio è usato anche in astro.config.mjs).
+// I dati che Elisa può modificare da sola (contatti, località, dati dell'Ordine/P.IVA,
+// numeri di emergenza) vivono in src/content/dati-sito.json e sono editabili dal CMS
+// su /admin ("Contatti e dati dello studio"). I valori più strutturali (nome,
+// dominio...) restano qui perché richiedono anche modifiche al codice per essere
+// cambiati (es. il dominio è usato anche in astro.config.mjs).
 //
-// Tutti i valori marcati come segnaposto sono FALSI e vanno sostituiti prima della
+// I valori ancora segnaposto sono FALSI e vanno sostituiti prima della
 // pubblicazione. Vedi /docs/DA-COMPILARE.md per la checklist completa.
 import datiSito from "../content/dati-sito.json";
 
 export const site = {
   nome: "Elisa Castigliego",
+  nomeConTitolo: "Dott.ssa Elisa Castigliego",
   titoloProfessionale: "Psicologa",
-  citta: "Bologna",
+  citta: "San Lazzaro di Savena",
+  provincia: "BO",
+  // Testo mostrato al posto dell'indirizzo dello studio (che di proposito non
+  // compare sul sito).
+  localita: datiSito.localita,
   titolareTrattamento: "Elisa Castigliego",
-
-  // Percorso del ritratto caricato dal CMS (vuoto = usa il segnaposto di default,
-  // vedi src/components/RitrattoElisa.astro).
-  fotoRitratto: datiSito.fotoRitratto,
 
   albo: datiSito.albo,
   partitaIva: datiSito.partitaIva,
-  codiceFiscale: datiSito.codiceFiscale,
 
-  indirizzoStudio: {
-    ...datiSito.indirizzoStudio,
-    citta: "Bologna",
-    provincia: "BO",
-    paese: "IT",
+  // telefono e whatsappNumero sono vuoti finché non c'è un numero dello studio:
+  // quando sono vuoti non compaiono da nessuna parte del sito.
+  contatti: {
+    email: datiSito.contatti.email,
+    pec: datiSito.contatti.pec,
+    telefono: datiSito.contatti.telefono.trim(),
+    whatsappNumero: datiSito.contatti.whatsappNumero.trim(),
   },
-
-  contatti: datiSito.contatti,
   social: datiSito.social,
-  orari: datiSito.orari,
   informativaPrivacy: datiSito.informativaPrivacy,
 
   // SEGNAPOSTO: dominio reale del sito, usato anche in astro.config.mjs.
@@ -47,5 +46,15 @@ export const site = {
     numeriSupporto: datiSito.emergenze.numeriSupporto,
   },
 } as const;
+
+/** Dicitura completa dell'iscrizione all'Ordine, usata in footer e note legali. */
+export const iscrizioneOrdine = `Iscrizione Ordine degli Psicologi dell'${site.albo.regione} n. ${site.albo.numero}`;
+
+/** Link wa.me precompilato, oppure null se il numero WhatsApp non è impostato. */
+export const whatsappHref = site.contatti.whatsappNumero
+  ? `https://wa.me/${site.contatti.whatsappNumero}?text=${encodeURIComponent(
+      "Buongiorno, ho visto il sito e vorrei informazioni su un appuntamento.",
+    )}`
+  : null;
 
 export type Site = typeof site;

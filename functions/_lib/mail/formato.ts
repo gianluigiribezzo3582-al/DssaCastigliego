@@ -9,7 +9,6 @@ export function testoEmail(dati: DatiContatto): string {
   const contattoPreferito = {
     email: "email",
     telefono: "telefono",
-    whatsapp: "WhatsApp",
   }[dati.preferenzaContatto];
 
   return [

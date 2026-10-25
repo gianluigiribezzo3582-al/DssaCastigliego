@@ -1,7 +1,7 @@
 # Guida per modificare il sito (senza saper programmare)
 
-Questa guida spiega come modificare i testi del sito, aggiungere una domanda alla
-pagina FAQ e pubblicare le modifiche, usando solo il browser.
+Questa guida spiega come modificare i testi del sito e pubblicare le modifiche,
+usando solo il browser.
 
 Questa stessa guida è raggiungibile in ogni momento con un clic dal bottone
 **"Guida all'utilizzo"**, sempre visibile in basso a destra nella schermata `/admin`.
@@ -14,61 +14,61 @@ fondo a questa guida.
 
 Ti troverai davanti a un elenco di sezioni sulla sinistra:
 
-- **Pagine del sito** — Home, Chi sono, Come lavoro
-- **Aree di intervento** — le schede tipo "Ansia", "Relazioni", ecc.
-- **Domande frequenti** — le voci della pagina FAQ
-- **Contatti e dati dello studio** — email, telefono, WhatsApp, indirizzo, orari
+- **Pagine del sito** — titolo e sottotitolo in cima alla home, e i testi per Google
+- **Sezioni della home** — Mi presento, Di cosa mi occupo, La mia formazione
+- **Contatti e dati dello studio** — email, PEC, località, iscrizione all'Ordine, P. IVA
 
 ## Modificare un testo esistente
 
-1. Clicca sulla sezione (es. "Pagine del sito").
-2. Clicca sulla voce che vuoi modificare (es. "Chi sono").
+1. Clicca sulla sezione (es. "Sezioni della home").
+2. Clicca sulla voce che vuoi modificare (es. "Mi presento").
 3. Modifica il testo nei campi. I campi con un asterisco o segnati come obbligatori
-   vanno sempre compilati.
+   vanno sempre compilati. Per andare a capo con un nuovo paragrafo lascia una riga
+   vuota.
 4. In alto a destra, clicca **"Salva"** (o "Save").
-5. Il sito impiega di solito qualche minuto a ricomprarsi da solo con le modifiche:
+5. Il sito impiega di solito qualche minuto a ricostruirsi da solo con le modifiche:
    se non le vedi subito online, aspetta un paio di minuti e ricarica la pagina.
 
 Non serve toccare nulla che assomigli a codice (parentesi graffe, simboli strani):
-se vedi un testo tra doppie graffe come `{{ALBO_NUMERO}}`, è un segnaposto che
+se vedi un testo tra doppie graffe come `{{NUMERO_SUPPORTO_1}}`, è un segnaposto che
 aspetta ancora il dato vero — sostituiscilo con il valore corretto, senza lasciare
 le graffe.
 
-## Aggiungere una nuova domanda alla pagina FAQ
+## Le foto delle tre sezioni
 
-1. Vai su **"Domande frequenti"**.
-2. Clicca **"Nuovo/a Domande frequenti"** (o il pulsante "+").
-3. Compila:
-   - **Domanda**: la domanda così come la scriveresti tu.
-   - **Ordine di visualizzazione**: un numero. Le domande con numero più basso
-     compaiono più in alto nella pagina (es. metti "9" se vuoi che sia una delle
-     ultime).
-   - **Risposta**: il testo della risposta.
-4. Clicca **"Salva"**.
+Le foto **non** si cambiano dal pannello `/admin`: sono file nella cartella
+`src/assets/foto/` del repository, e il nome del file decide in quale sezione
+compaiono:
 
-Per cambiare l'ordine delle domande esistenti, apri ciascuna e modifica il numero in
-"Ordine di visualizzazione".
+| Sezione           | Nome del file           |
+| ----------------- | ----------------------- |
+| Mi presento       | `mi-presento.jpg`       |
+| Di cosa mi occupo | `di-cosa-mi-occupo.jpg` |
+| La mia formazione | `la-mia-formazione.jpg` |
 
-## Aggiungere una nuova area di intervento
+Vanno bene anche `.jpeg`, `.png` o `.webp`. Per sostituire una foto basta caricare un
+nuovo file con lo stesso nome. Se un file manca, al suo posto compare un riquadro
+"Foto in arrivo". Le foto vengono ritagliate in verticale (proporzioni 4:5): meglio
+che il soggetto sia centrato.
 
-Stesso procedimento, nella sezione **"Aree di intervento"**: Titolo, Riassunto breve
-(quello che si vede nelle anteprime), Ordine, e il testo completo della scheda.
+Dal pannello, in ogni sezione, puoi invece compilare:
 
-## Modificare email, telefono, WhatsApp, indirizzo, orari, foto
+- **Descrizione della foto per chi non vede**: una frase letta dai lettori di schermo
+  (es. "Ritratto della dott.ssa Elisa Castigliego"). Lasciala vuota se la foto è solo
+  decorativa.
+- **Didascalia sotto la foto**: facoltativa, ad esempio titolo e autore di un'opera
+  d'arte.
+
+## Modificare email, PEC, telefono, località, dati dell'Ordine
 
 Vai su **"Contatti e dati dello studio"**. Qui trovi tutti i dati che compaiono nel
-resto del sito (footer, pagina contatti, pagina emergenze, dati dell'Albo). Modificando
-un valore qui, si aggiorna automaticamente ovunque compaia nel sito — non serve
-cercarlo pagina per pagina.
+resto del sito (footer, pagina contatti, note legali). Modificando un valore qui, si
+aggiorna automaticamente ovunque compaia — non serve cercarlo pagina per pagina.
 
-Nella stessa sezione trovi anche **"Foto del ritratto"**: caricando lì una foto,
-sostituisce quella segnaposto in home, "Chi sono" e nei contatti. Per un risultato
-pulito, meglio una foto abbastanza quadrata o verticale, con te centrata e non
-troppo vicina ai bordi: la stessa foto viene ritagliata in modo un po' diverso
-nelle varie pagine.
-
-Il numero di WhatsApp va inserito solo con le cifre, senza il "+" e senza spazi
-(es. per l'Italia: `39` seguito dal numero di cellulare senza lo 0 iniziale).
+**Telefono e WhatsApp** sono oggi vuoti di proposito: finché restano vuoti non
+compaiono da nessuna parte. Quando avrai il numero dello studio, basta compilarli e
+salvare. Il numero di WhatsApp va inserito solo con le cifre, senza il "+" e senza
+spazi (es. per l'Italia: `39` seguito dal numero di cellulare).
 
 ## Pubblicare le modifiche
 

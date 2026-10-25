@@ -5,41 +5,32 @@ Questo file elenca ogni immagine/illustrazione che manca ancora, con percorso
 previsto, dimensioni, formato e testo alternativo suggerito, così chi realizza gli
 asset (fotografo, illustratore) sa esattamente cosa produrre.
 
-## Fotografia di Elisa
+## Foto delle tre sezioni della home
 
-Un solo componente, **`src/components/RitrattoElisa.astro`**, controlla il ritratto
-mostrato in tutto il sito. Ora è modificabile in due modi:
+La home ha tre sezioni, ognuna con una foto. Le foto vivono in
+**`src/assets/foto/`** e vengono abbinate alla sezione **in base al nome del file**
+(senza estensione), che deve coincidere con il nome del file di testo in
+`src/content/sezioni/`:
 
-- **Dal CMS** (il modo pensato per Elisa): `/admin` → "Contatti e dati dello
-  studio" → campo "Foto del ritratto". Caricando lì una foto, questa sostituisce
-  ovunque quella segnaposto, senza intervento di uno sviluppatore. In questo caso
-  l'immagine viene mostrata così com'è caricata (non passa dalla pipeline di
-  ottimizzazione di Astro — vedi il compromesso spiegato nel commento del
-  componente e in `/docs/DECISIONI.md`), e la **stessa foto** viene ritagliata via
-  CSS nelle tre inquadrature sotto: per un risultato pulito conviene caricare una
-  foto già abbastanza quadrata/verticale, con il soggetto centrato e non troppo
-  vicino ai bordi.
-- **Da codice** (finché il campo CMS resta vuoto): il file sorgente
-  `src/assets/placeholder.jpeg` (oggi una foto fittizia), ottimizzato
-  automaticamente da Astro in build (WebP, dimensioni per variante). Sostituendo
-  quel file o il campo nel CMS non serve toccare nessun'altra pagina.
+| Sezione           | File da caricare                        |
+| ----------------- | --------------------------------------- |
+| Mi presento       | `src/assets/foto/mi-presento.jpg`       |
+| Di cosa mi occupo | `src/assets/foto/di-cosa-mi-occupo.jpg` |
+| La mia formazione | `src/assets/foto/la-mia-formazione.jpg` |
 
-Il componente serve tre inquadrature, con queste proporzioni esatte (la pipeline
-immagini di Astro si occupa di ritaglio/ridimensionamento/formati moderni, ma la foto
-sorgente dovrebbe già rispettare all'incirca queste proporzioni per un risultato
-ottimale senza tagli imprevisti):
+- Estensioni accettate: `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`.
+- Se un file manca, la build non si rompe: al suo posto compare un riquadro neutro
+  "Foto in arrivo" (logica in `src/pages/index.astro`).
+- Le foto passano dalla pipeline immagini di Astro (WebP, 800 px di larghezza) e sono
+  ritagliate via CSS in **4:5 verticale** (`object-cover`): consigliato almeno
+  1600 px sul lato lungo, soggetto centrato.
+- Testo alternativo e didascalia si impostano dal CMS (campi `altFoto` e
+  `didascaliaFoto` di ogni sezione). Se la foto di "Di cosa mi occupo" è il
+  _Viandante sul mare di nebbia_ di Caspar David Friedrich (1818, pubblico dominio),
+  conviene compilare la didascalia con titolo, autore e anno.
 
-| Variante    | Proporzioni     | Dimensioni servite | Dove viene usata   |
-| ----------- | --------------- | ------------------ | ------------------ |
-| `verticale` | 3:4 (verticale) | 720×960            | Home, sezione hero |
-| `quadrata`  | 1:1 (quadrata)  | 640×640            | Pagina "Chi sono"  |
-| `piccola`   | 1:1 (quadrata)  | 240×240            | Pagina "Contatti"  |
-
-**Testo alternativo (`alt`)**: oggi impostato a un valore esplicitamente provvisorio
-("Ritratto provvisorio — foto segnaposto, in attesa della fotografia definitiva...").
-Il testo alternativo definitivo va scritto insieme a Elisa quando arriva la foto vera
-(dovrebbe restare semplice e descrittivo, es. "Elisa Castigliego, psicologa, ritratto
-in studio" — da confermare con lei, non da inventare qui).
+La vecchia foto segnaposto (`placeholder.jpeg`) e il componente `RitrattoElisa.astro`
+sono stati rimossi.
 
 **Vincoli sulla foto**: nessun ritocco generativo, nessuna estensione dei bordi con
 IA, nessun filtro generativo. Ritaglio, ridimensionamento e conversione in formati

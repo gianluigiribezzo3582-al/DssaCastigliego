@@ -51,6 +51,9 @@ invia nulla realmente.
 
 ## 4. WhatsApp
 
+Oggi non attivo: il link compare solo quando nel CMS viene inserito un numero
+WhatsApp dello studio (vedi `/docs/DECISIONI.md` §23).
+
 Il pulsante WhatsApp è un link diretto (`wa.me`), non un widget incorporato: non
 trasmette alcun dato finché non viene cliccato volontariamente. Una volta aperta la
 conversazione, il trattamento è regolato dall'informativa privacy di WhatsApp/Meta,

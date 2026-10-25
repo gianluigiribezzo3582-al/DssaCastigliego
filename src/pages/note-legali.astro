@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { site } from "../config/site";
+import { iscrizioneOrdine, site } from "../config/site";
 ---
 
 <Layout
@@ -23,28 +23,23 @@ import { site } from "../config/site";
 
     <h2>Titolare del sito</h2>
     <ul>
-      <li>Nome e cognome: {site.titolareTrattamento}</li>
+      <li>Nome e cognome: {site.nomeConTitolo}</li>
       <li>Titolo professionale: {site.titoloProfessionale}</li>
-      <li>Iscrizione all'Albo: {site.albo.regione}, n. {site.albo.numero}</li>
-      <li>Partita IVA: {site.partitaIva}</li>
-      <li>Codice fiscale: {site.codiceFiscale}</li>
-      <li>
-        Indirizzo dello studio: {site.indirizzoStudio.via}, {
-          site.indirizzoStudio.cap
-        }{" "}
-        {site.indirizzoStudio.citta} ({site.indirizzoStudio.provincia})
-      </li>
+      <li>{iscrizioneOrdine}</li>
+      <li>{`P. IVA ${site.partitaIva}`}</li>
+      <li>{`Studio a ${site.localita}`}</li>
       <li>Email: {site.contatti.email}</li>
-      <li>Telefono: {site.contatti.telefono}</li>
+      <li>PEC: {site.contatti.pec}</li>
+      {site.contatti.telefono && <li>Telefono: {site.contatti.telefono}</li>}
     </ul>
 
     <h2>Natura del sito</h2>
     <p>
       Il sito ha finalità informativa e di presentazione professionale. Non
       costituisce erogazione di prestazioni sanitarie a distanza né consulto
-      medico/psicologico online: ogni prestazione viene erogata solo nell'ambito
-      del rapporto professionale diretto tra la dott.ssa {site.nome} e la persona
-      che si rivolge a lei.
+      medico/psicologico online: i colloqui si svolgono solo in presenza,
+      nell'ambito del rapporto professionale diretto tra la dott.ssa {site.nome}
+      e la persona che si rivolge a lei.
     </p>
 
     <h2>Hosting e fornitori tecnici</h2>

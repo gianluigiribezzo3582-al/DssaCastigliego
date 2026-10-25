@@ -9,11 +9,11 @@ import { schemaPsychologist } from "../lib/jsonld";
 interface Props {
   title: string;
   description: string;
-  /** Impedisce l'indicizzazione (admin, demo prenotazione). */
+  /** Impedisce l'indicizzazione (admin, 404, pagine di servizio). */
   noindex?: boolean;
-  /** Blocchi JSON-LD aggiuntivi (FAQPage, BreadcrumbList...). Lo schema Psychologist è già incluso di default. */
+  /** Blocchi JSON-LD aggiuntivi . Lo schema Psychologist è già incluso di default. */
   jsonLd?: Record<string, unknown>[];
-  /** Disattiva lo schema Psychologist automatico (solo per pagine noindex come demo/admin). */
+  /** Disattiva lo schema Psychologist automatico (solo per pagine noindex come admin). */
   senzaSchemaOrganizzazione?: boolean;
 }
 
@@ -27,7 +27,7 @@ const {
 
 const titoloCompleto = title.includes("Elisa Castigliego")
   ? title
-  : `${title} — Elisa Castigliego, Psicologa a Bologna`;
+  : `${title} — Dott.ssa Elisa Castigliego, Psicologa a San Lazzaro di Savena (BO)`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 

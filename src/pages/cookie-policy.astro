@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { site } from "../config/site";
+import { site, whatsappHref } from "../config/site";
 ---
 
 <Layout
@@ -42,9 +42,10 @@ import { site } from "../config/site";
     <p>
       Il sito non incorpora font, script, iframe o altre risorse caricate in
       tempo reale da domini di terze parti (niente Google Fonts via CDN, niente
-      Google Maps, niente widget di chat). L'unico collegamento verso terze
-      parti è un link diretto a WhatsApp (wa.me), che si apre solo se l'utente
-      clicca volontariamente il pulsante corrispondente.
+      Google Maps, niente widget di chat).{
+        whatsappHref &&
+          " L'unico collegamento verso terze parti è un link diretto a WhatsApp (wa.me), che si apre solo se l'utente clicca volontariamente il pulsante corrispondente."
+      }
     </p>
   </article>
 </Layout>

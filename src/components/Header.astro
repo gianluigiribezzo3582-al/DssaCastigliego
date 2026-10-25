@@ -1,18 +1,18 @@
 ---
 import Menu from "@lucide/astro/icons/menu";
+import { site } from "../config/site";
 
+// Le prime tre voci sono ancore verso le sezioni della home (vedi
+// src/content/sezioni): non hanno uno stato "pagina corrente".
 const voci = [
-  { href: "/", label: "Home" },
-  { href: "/chi-sono", label: "Chi sono" },
-  { href: "/aree-di-intervento", label: "Aree di intervento" },
-  { href: "/come-lavoro", label: "Come lavoro" },
-  { href: "/faq", label: "Domande frequenti" },
+  { href: "/#mi-presento", label: "Mi presento" },
+  { href: "/#di-cosa-mi-occupo", label: "Di cosa mi occupo" },
+  { href: "/#la-mia-formazione", label: "La mia formazione" },
   { href: "/contatti", label: "Contatti" },
 ];
 
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path.startsWith(href);
+const isActive = (href: string) => !href.includes("#") && path.startsWith(href);
 ---
 
 <header class="border-b border-[var(--color-border)] bg-[var(--color-bg)]">
@@ -23,11 +23,11 @@ const isActive = (href: string) =>
       href="/"
       class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)] sm:text-xl"
     >
-      Elisa Castigliego
+      {site.nomeConTitolo}
       <span
         class="block text-xs font-normal text-[var(--color-text-muted)] sm:text-sm"
       >
-        Psicologa · Bologna
+        {`${site.titoloProfessionale} · ${site.localita}`}
       </span>
     </a>
 

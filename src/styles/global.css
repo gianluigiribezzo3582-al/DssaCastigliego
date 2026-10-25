@@ -81,7 +81,7 @@
   .skip-link {
     position: absolute;
     left: 1rem;
-    top: -3rem;
+    top: -10rem;
     z-index: 100;
     background: var(--color-primary);
     color: var(--color-primary-contrast);
