@@ -49,10 +49,15 @@ di Astro.
 
 ## Icona del sito (favicon)
 
-`public/favicon.svg` contiene oggi un monogramma "EC" molto semplice (cerchio +
-iniziali), scritto a mano in SVG — non generato, ma solo un segnaposto minimo.
-Va sostituito con un logo/monogramma reale quando disponibile (stesso percorso,
-formato SVG preferibile per la nitidezza a ogni dimensione).
+Generata dal logo (`src/assets/logo/logo.png`):
+
+- `public/favicon.ico`: 16, 32 e 48 px, sfondo trasparente (schede del browser);
+- `public/apple-touch-icon.png`: 180 px, logo su sfondo crema (iPhone/iPad: iOS non
+  gestisce la trasparenza e riempirebbe gli angoli di nero);
+- `public/icon-192.png`, `public/icon-512.png` e `public/site.webmanifest`: Android
+  ("aggiungi a schermata Home"); `icon-192.png` è anche il logo nel CMS.
+
+Per cambiarla: sostituire il logo e rigenerare questi file alle stesse dimensioni.
 
 ## Immagine Open Graph / social share
 

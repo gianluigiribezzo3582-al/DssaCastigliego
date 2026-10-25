@@ -19,7 +19,7 @@ backend:
 local_backend: true
 
 site_url: "https://www.elisacastigliegopsicologa.it"
-logo_url: "/favicon.svg"
+logo_url: "/icon-192.png"
 
 media_folder: "public/immagini-cms"
 public_folder: "/immagini-cms"

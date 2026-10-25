@@ -523,4 +523,14 @@ resta nel repository come alternativa in caso di passaggio a Cloudflare.
 
 ---
 
+## 34. Favicon dal logo
+
+**Deciso:** il segnaposto `favicon.svg` (monogramma "EC" disegnato a mano) è stato
+sostituito con icone generate dal logo: `favicon.ico` (16/32/48 px),
+`apple-touch-icon.png` (180 px su sfondo crema, perché iOS non gestisce la
+trasparenza), `icon-192.png`/`icon-512.png` con `site.webmanifest` per Android.
+`icon-512.png` è anche l'immagine di riserva nei dati strutturati.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
