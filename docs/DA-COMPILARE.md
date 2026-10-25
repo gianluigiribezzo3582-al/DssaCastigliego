@@ -12,9 +12,9 @@ passo per passo: `/docs/MESSA-ONLINE.md`):
 
 - [ ] Verificare che i numeri di supporto in `/emergenze` siano corretti e attivi
       (Telefono Azzurro 19696, Telefono Amico Italia 02 2327 2327).
-- [ ] Confermare di avere il permesso di pubblicare l'illustrazione di "La mia
-      formazione" (opera firmata da un'illustratrice/illustratore) e, se richiesto,
-      aggiungere il credito nella didascalia dal CMS.
+- [ ] Immagine per "La mia formazione" (oggi la sezione è solo testo: l'illustrazione
+      firmata è stata tolta per mancanza di permesso).
+- [ ] Logo per l'anteprima di condivisione: `src/assets/social/anteprima.png`.
 - [ ] Far rileggere privacy e note legali da chi ne ha competenza.
 - [ ] Collegare Netlify e il dominio Aruba: `/docs/DEPLOY.md`, sezione Netlify.
 - [ ] Configurare Brevo (dominio autenticato su Aruba) e le variabili d'ambiente su

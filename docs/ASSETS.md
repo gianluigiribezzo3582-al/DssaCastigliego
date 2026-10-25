@@ -5,6 +5,12 @@ Questo file elenca ogni immagine/illustrazione che manca ancora, con percorso
 previsto, dimensioni, formato e testo alternativo suggerito, così chi realizza gli
 asset (fotografo, illustratore) sa esattamente cosa produrre.
 
+## Anteprima di condivisione (logo)
+
+`src/assets/social/anteprima.png` (o `.jpg`/`.webp`), 1200 × 630 px: se presente
+diventa l'immagine Open Graph/Twitter (WhatsApp, social). Oggi non c'è, di proposito,
+in attesa del logo. Dettagli in `src/assets/social/LEGGIMI.md`.
+
 ## Foto delle tre sezioni della home
 
 La home ha tre sezioni, ognuna con una foto. Le foto vivono in

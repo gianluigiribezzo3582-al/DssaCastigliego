@@ -445,4 +445,19 @@ ufficiale. Versione principale con `www`, come consiglia Netlify; il dominio sen
 
 ---
 
+## 29. Tolta l'illustrazione senza permesso; anteprima di condivisione senza foto
+
+**Deciso:** l'illustrazione di "La mia formazione" (opera firmata di terzi) è stata
+rimossa: senza il permesso del titolare dei diritti non è pubblicabile, e citare
+l'autrice o modificare i testi non sostituisce il permesso. Senza foto, una sezione
+della home passa automaticamente a due colonne (titolo a sinistra, testo a destra)
+invece di mostrare un riquadro vuoto.
+
+L'anteprima quando il link viene condiviso (Open Graph/Twitter) non usa più il
+ritratto: su richiesta, finché non c'è un logo resta senza immagine. Il logo andrà in
+`src/assets/social/anteprima.png` e verrà usato da solo. Il ritratto resta solo nei
+dati strutturati per Google (JSON-LD), che non influiscono sulle anteprime.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
