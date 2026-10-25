@@ -16,41 +16,42 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => !href.includes("#") && path.startsWith(href);
 ---
 
-<header class="border-b border-[var(--color-border)] bg-[var(--color-bg)]">
+<header
+  class="relative border-b border-[var(--color-border)] bg-[var(--color-bg)]"
+>
   <div
-    class="mx-auto flex max-w-[var(--content-max-width)] items-center justify-between gap-4 px-4 py-4 sm:px-6"
+    class="mx-auto flex max-w-[var(--content-max-width)] items-center justify-between gap-4 px-4 py-4 sm:px-6 md:py-5"
   >
-    <a
-      href={percorso("/")}
-      class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)] sm:text-xl"
-    >
-      {site.nomeConTitolo}
+    <a href={percorso("/")} class="group text-[var(--color-text)]">
       <span
-        class="block text-xs font-normal text-[var(--color-text-muted)] sm:text-sm"
+        class="block font-[family-name:var(--font-heading)] text-lg leading-tight font-medium sm:text-xl"
       >
-        {`${site.titoloProfessionale} · ${site.localita}`}
+        {site.nomeConTitolo}
+      </span>
+      <span class="etichetta mt-1 block text-[0.6875rem]">
+        {site.titoloProfessionale}
       </span>
     </a>
 
     <nav aria-label="Principale">
       <!-- Mobile: funziona anche senza JavaScript grazie a <details>/<summary> -->
-      <details class="relative md:hidden">
+      <details class="md:hidden">
         <summary
-          class="flex min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] cursor-pointer list-none items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 py-2 text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
+          class="flex min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] cursor-pointer list-none items-center justify-center gap-2 border border-[var(--color-text)] px-3 py-2 text-xs font-semibold tracking-[0.14em] text-[var(--color-text)] uppercase [&::-webkit-details-marker]:hidden"
         >
-          <Menu aria-hidden="true" size={18} />
+          <Menu aria-hidden="true" size={16} />
           Menu
         </summary>
         <ul
-          class="absolute right-0 z-20 mt-2 w-56 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 shadow-[var(--shadow-card)]"
+          class="absolute inset-x-0 z-30 mt-4 border-y border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2"
         >
           {
             voci.map((voce) => (
-              <li>
+              <li class="border-b border-[var(--color-border)] last:border-b-0">
                 <a
                   href={voce.href}
                   aria-current={isActive(voce.href) ? "page" : undefined}
-                  class="block rounded-[var(--radius-sm)] px-3 py-2 text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] aria-[current=page]:font-semibold aria-[current=page]:text-[var(--color-primary)]"
+                  class="block py-4 font-[family-name:var(--font-heading)] text-xl text-[var(--color-text)] aria-[current=page]:text-[var(--color-primary)] aria-[current=page]:italic"
                 >
                   {voce.label}
                 </a>
@@ -61,14 +62,14 @@ const isActive = (href: string) => !href.includes("#") && path.startsWith(href);
       </details>
 
       <!-- Desktop -->
-      <ul class="hidden items-center gap-1 md:flex">
+      <ul class="hidden items-center gap-7 md:flex">
         {
           voci.map((voce) => (
             <li>
               <a
                 href={voce.href}
                 aria-current={isActive(voce.href) ? "page" : undefined}
-                class="rounded-[var(--radius-sm)] px-3 py-2 text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] aria-[current=page]:font-semibold aria-[current=page]:text-[var(--color-primary)]"
+                class="py-2 text-xs font-semibold tracking-[0.14em] text-[var(--color-text)] uppercase decoration-[var(--color-primary)] decoration-1 underline-offset-[6px] hover:underline aria-[current=page]:text-[var(--color-primary)] aria-[current=page]:underline"
               >
                 {voce.label}
               </a>

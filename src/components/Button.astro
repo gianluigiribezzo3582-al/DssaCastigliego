@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 
 const base =
-  "inline-flex min-h-[var(--touch-target-min)] items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 py-3 text-base font-semibold transition-colors duration-[var(--motion-duration)]";
+  "inline-flex min-h-[var(--touch-target-min)] items-center justify-center gap-3 rounded-[var(--radius-sm)] px-6 py-3 text-sm font-semibold tracking-[0.08em] uppercase transition-colors duration-[var(--motion-duration)]";
 
 const varianti = {
   primary:
@@ -30,4 +30,5 @@ const Tag = href ? "a" : "button";
 
 <Tag href={href} type={href ? undefined : type} class={classi} {...rest}>
   <slot />
+  <span class="freccia" aria-hidden="true">→</span>
 </Tag>

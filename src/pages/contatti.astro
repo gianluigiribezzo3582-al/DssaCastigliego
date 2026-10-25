@@ -19,10 +19,10 @@ const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
   description="Scrivi tramite il modulo di contatto o via email. Studio a San Lazzaro di Savena (Bologna), colloqui in presenza."
 >
   <section
-    class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 sm:px-6 sm:py-20"
   >
     <h1
-      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
+      class="font-[family-name:var(--font-heading)] text-4xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-5xl"
     >
       Contatti
     </h1>
@@ -69,9 +69,7 @@ const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
 
       <aside class="space-y-6">
         <div>
-          <h2 class="text-sm font-semibold text-[var(--color-text)]">
-            Contatti diretti
-          </h2>
+          <h2 class="etichetta">Contatti diretti</h2>
           <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
             <li>
               <a
@@ -126,9 +124,7 @@ const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
         </div>
 
         <div>
-          <h2
-            class="flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text)]"
-          >
+          <h2 class="etichetta flex items-center gap-1.5">
             <MapPin aria-hidden="true" size={15} />
             Studio
           </h2>

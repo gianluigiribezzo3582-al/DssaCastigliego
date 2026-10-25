@@ -31,7 +31,9 @@ const sezioni = await Promise.all(
   title={homeEntry!.data.seoTitle}
   description={homeEntry!.data.seoDescription}
 >
-  <section class="relative overflow-hidden bg-[var(--color-bg-alt)]">
+  <section
+    class="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-alt)]"
+  >
     <Image
       src={tegoleTerracotta}
       alt=""
@@ -39,73 +41,112 @@ const sezioni = await Promise.all(
       height={675}
       quality={35}
       loading="eager"
-      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07]"
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.06]"
     />
     <div
-      class="relative mx-auto max-w-[var(--content-max-width)] px-4 py-14 text-center sm:px-6 sm:py-20"
+      class="relative mx-auto grid max-w-[var(--content-max-width)] gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-12 md:items-end md:gap-12 md:py-28"
     >
-      <h1
-        class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-5xl"
-      >
-        {homeEntry!.data.titolo}
-      </h1>
-      <p class="mt-3 text-lg text-[var(--color-text-muted)]">
-        {homeEntry!.data.sottotitolo}
-      </p>
-      <div class="mt-8 flex justify-center">
-        <Button href={percorso("/contatti")}>Contattami</Button>
+      <div class="md:col-span-7">
+        <p class="etichetta">{homeEntry!.data.sottotitolo}</p>
+        <h1
+          class="mt-4 font-[family-name:var(--font-heading)] text-[2.5rem] leading-[1.05] font-medium tracking-tight text-[var(--color-text)] sm:text-6xl md:text-7xl"
+        >
+          {homeEntry!.data.titolo}
+        </h1>
+        <div class="mt-8 sm:mt-10">
+          <Button href={percorso("/contatti")}>Contattami</Button>
+        </div>
       </div>
+
+      <nav aria-label="In questa pagina" class="md:col-span-4 md:col-start-9">
+        <p class="etichetta">In questa pagina</p>
+        <ol class="mt-3 border-t border-[var(--color-text)]">
+          {
+            sezioni.map((sezione, indice) => (
+              <li class="border-b border-[var(--color-border)]">
+                <a
+                  href={`#${sezione.id}`}
+                  class="group flex min-h-[var(--touch-target-min)] items-baseline gap-4 py-3 text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                >
+                  <span class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-primary)] italic">
+                    {String(indice + 1).padStart(2, "0")}
+                  </span>
+                  <span class="font-[family-name:var(--font-heading)] text-lg">
+                    {sezione.data.titolo}
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
     </div>
   </section>
 
   {
-    sezioni.map((sezione, indice) => (
-      <section
-        id={sezione.id}
-        aria-labelledby={`titolo-${sezione.id}`}
-        class={`scroll-mt-4 py-12 sm:py-20 ${indice % 2 === 1 ? "bg-[var(--color-bg-alt)]" : ""}`}
-      >
-        <div class="mx-auto grid max-w-[var(--content-max-width)] items-center gap-8 px-4 sm:px-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12">
-          <figure
-            class={`mx-auto w-full max-w-sm ${indice % 2 === 1 ? "md:order-2" : ""}`}
-          >
-            {sezione.foto ? (
-              <Image
-                src={sezione.foto}
-                alt={sezione.data.altFoto ?? ""}
-                widths={[384, 768]}
-                sizes="(max-width: 416px) calc(100vw - 2rem), 384px"
-                class={`aspect-[4/5] w-full rounded-[var(--radius-lg)] object-cover shadow-[var(--shadow-card)] ${posizioneFoto[sezione.data.allineamentoFoto]}`}
-              />
-            ) : (
-              <div class="flex aspect-[4/5] w-full items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)]">
-                Foto in arrivo
-              </div>
-            )}
-            {sezione.data.didascaliaFoto && (
-              <figcaption class="mt-2 text-center text-xs text-[var(--color-text-muted)] italic">
-                {sezione.data.didascaliaFoto}
-              </figcaption>
-            )}
-          </figure>
-          <div>
-            <h2
-              id={`titolo-${sezione.id}`}
-              class="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text)] sm:text-3xl"
+    sezioni.map((sezione, indice) => {
+      const alternata = indice % 2 === 1;
+      const ultima = indice === sezioni.length - 1;
+      return (
+        <section
+          id={sezione.id}
+          aria-labelledby={`titolo-${sezione.id}`}
+          class={`scroll-mt-6 py-14 sm:py-20 md:py-28 ${alternata ? "bg-[var(--color-bg-alt)]" : ""} ${ultima ? "" : "border-b border-[var(--color-border)]"}`}
+        >
+          <div class="mx-auto grid max-w-[var(--content-max-width)] gap-8 px-4 sm:px-6 md:grid-cols-12 md:gap-x-12 md:gap-y-6">
+            <header
+              class={`md:col-span-6 md:row-start-1 md:self-end ${alternata ? "md:col-start-1" : "md:col-start-7"}`}
             >
-              {sezione.data.titolo}
-            </h2>
-            <div class="prose-content mt-5">
+              <p class="numero-sezione">
+                {String(indice + 1).padStart(2, "0")}
+              </p>
+              <h2
+                id={`titolo-${sezione.id}`}
+                class="mt-3 font-[family-name:var(--font-heading)] text-3xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-4xl md:text-5xl"
+              >
+                {sezione.data.titolo}
+              </h2>
+            </header>
+
+            <figure
+              class={`w-full max-w-[22rem] pr-2.5 pb-2.5 md:sticky md:top-10 md:row-span-2 md:row-start-1 md:max-w-none md:self-start ${alternata ? "md:col-span-5 md:col-start-8" : "md:col-span-5 md:col-start-1"}`}
+            >
+              <div class="cornice">
+                {sezione.foto ? (
+                  <Image
+                    src={sezione.foto}
+                    alt={sezione.data.altFoto ?? ""}
+                    widths={[384, 768]}
+                    sizes="(min-width: 768px) 40vw, calc(100vw - 2rem)"
+                    class={`block aspect-[4/5] w-full object-cover ${posizioneFoto[sezione.data.allineamentoFoto]}`}
+                  />
+                ) : (
+                  <div class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)]">
+                    Foto in arrivo
+                  </div>
+                )}
+              </div>
+              {sezione.data.didascaliaFoto && (
+                <figcaption class="mt-5 border-l border-[var(--color-primary)] pl-3 text-xs leading-relaxed text-[var(--color-text-muted)] italic">
+                  {sezione.data.didascaliaFoto}
+                </figcaption>
+              )}
+            </figure>
+
+            <div
+              class={`testo-sezione md:col-span-6 md:row-start-2 ${alternata ? "md:col-start-1" : "md:col-start-7"}`}
+            >
               <sezione.Content />
             </div>
           </div>
-        </div>
-        {indice === sezioni.length - 1 && (
-          <div class="mt-8 flex justify-center px-4 sm:mt-10">
-            <Button href={percorso("/contatti")}>Scrivimi</Button>
-          </div>
-        )}
-      </section>
-    ))
+
+          {ultima && (
+            <div class="mx-auto mt-14 flex max-w-[var(--content-max-width)] flex-col items-center border-t border-[var(--color-border)] px-4 pt-12 text-center sm:px-6 md:mt-20">
+              <Button href={percorso("/contatti")}>Scrivimi</Button>
+            </div>
+          )}
+        </section>
+      );
+    })
   }
 </Layout>

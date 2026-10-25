@@ -8,44 +8,47 @@ import { site, whatsappHref } from "../config/site";
   description="Questo sito non installa cookie di profilazione, analytics o marketing. Nessun cookie tecnico non essenziale è presente."
 >
   <article
-    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 sm:px-6 sm:py-20"
   >
-    <h1
-      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
-    >
-      Cookie policy
-    </h1>
-    <p class="text-sm text-[var(--color-text-muted)]">
-      Versione informativa {site.informativaPrivacy.versione} — ultimo aggiornamento:
-      {site.informativaPrivacy.dataAggiornamento}.
-    </p>
+    <div class="prose-content">
+      <h1
+        class="font-[family-name:var(--font-heading)] text-4xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-5xl"
+      >
+        Cookie policy
+      </h1>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Versione informativa {site.informativaPrivacy.versione} — ultimo aggiornamento:
+        {site.informativaPrivacy.dataAggiornamento}.
+      </p>
 
-    <h2>Nessun cookie installato</h2>
-    <p>
-      Questo sito, per scelta di progetto, non installa cookie di profilazione,
-      statistica/analytics o marketing, né cookie tecnici non essenziali. Non è
-      presente alcun banner di consenso perché non ce n'è motivo: non viene
-      impostato alcun cookie durante la normale navigazione del sito.
-    </p>
+      <h2>Nessun cookie installato</h2>
+      <p>
+        Questo sito, per scelta di progetto, non installa cookie di
+        profilazione, statistica/analytics o marketing, né cookie tecnici non
+        essenziali. Non è presente alcun banner di consenso perché non ce n'è
+        motivo: non viene impostato alcun cookie durante la normale navigazione
+        del sito.
+      </p>
 
-    <h2>Strumenti riservati a chi gestisce il sito</h2>
-    <p>
-      Alcuni strumenti ad uso esclusivo di chi amministra il sito, non
-      accessibili né rilevanti per chi lo visita normalmente, possono utilizzare
-      la memoria locale del browser (<em>localStorage</em>) per funzionare. Non
-      si tratta di cookie: questi dati restano esclusivamente sul dispositivo di
-      chi vi accede, senza essere mai inviati a un server, e non riguardano in
-      alcun modo la navigazione di chi visita il sito.
-    </p>
+      <h2>Strumenti riservati a chi gestisce il sito</h2>
+      <p>
+        Alcuni strumenti ad uso esclusivo di chi amministra il sito, non
+        accessibili né rilevanti per chi lo visita normalmente, possono
+        utilizzare la memoria locale del browser (<em>localStorage</em>) per
+        funzionare. Non si tratta di cookie: questi dati restano esclusivamente
+        sul dispositivo di chi vi accede, senza essere mai inviati a un server,
+        e non riguardano in alcun modo la navigazione di chi visita il sito.
+      </p>
 
-    <h2>Servizi di terze parti</h2>
-    <p>
-      Il sito non incorpora font, script, iframe o altre risorse caricate in
-      tempo reale da domini di terze parti (niente Google Fonts via CDN, niente
-      Google Maps, niente widget di chat).{
-        whatsappHref &&
-          " L'unico collegamento verso terze parti è un link diretto a WhatsApp (wa.me), che si apre solo se l'utente clicca volontariamente il pulsante corrispondente."
-      }
-    </p>
+      <h2>Servizi di terze parti</h2>
+      <p>
+        Il sito non incorpora font, script, iframe o altre risorse caricate in
+        tempo reale da domini di terze parti (niente Google Fonts via CDN,
+        niente Google Maps, niente widget di chat).{
+          whatsappHref &&
+            " L'unico collegamento verso terze parti è un link diretto a WhatsApp (wa.me), che si apre solo se l'utente clicca volontariamente il pulsante corrispondente."
+        }
+      </p>
+    </div>
   </article>
 </Layout>

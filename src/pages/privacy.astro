@@ -13,176 +13,183 @@ const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
   description="Informativa sul trattamento dei dati personali di chi visita il sito e di chi contatta la dott.ssa Elisa Castigliego."
 >
   <article
-    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 sm:px-6 sm:py-20"
   >
-    <h1
-      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
-    >
-      Privacy Policy
-    </h1>
-    <p class="text-sm text-[var(--color-text-muted)]">
+    <div class="prose-content">
+      <h1
+        class="font-[family-name:var(--font-heading)] text-4xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-5xl"
+      >
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        {
+          `Versione ${site.informativaPrivacy.versione} — ultimo aggiornamento: ${site.informativaPrivacy.dataAggiornamento}.`
+        }
+      </p>
+
+      <p>
+        Questa informativa è resa ai sensi degli articoli 13 e 14 del
+        Regolamento (UE) 2016/679 ("GDPR") e descrive come vengono trattati i
+        dati personali di chi visita questo sito e di chi contatta la dott.ssa {
+          site.nome
+        }.
+      </p>
+
+      <h2>Titolare del trattamento</h2>
+      <ul>
+        <li>{`${site.nomeConTitolo}, ${site.titoloProfessionale}`}</li>
+        <li>{`Studio a ${site.localita}`}</li>
+        <li>
+          Email: <a href={`mailto:${site.contatti.email}`}
+            >{site.contatti.email}</a
+          >
+        </li>
+        <li>
+          PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
+        </li>
+      </ul>
+
+      <h2>Dati di navigazione</h2>
+      <p>
+        Il sito non usa cookie, strumenti di statistica (analytics), pixel di
+        tracciamento né contenuti di terze parti (font, mappe, video o widget
+        esterni). Come avviene per qualunque sito web, il servizio di hosting
+        registra automaticamente alcuni dati tecnici delle richieste (ad esempio
+        indirizzo IP, data e ora, pagina richiesta, tipo di browser), che
+        servono esclusivamente a fornire il sito e a garantirne la sicurezza.
+        Questi dati non vengono usati per identificare chi visita il sito né per
+        profilarlo.
+      </p>
+      <p>
+        Base giuridica: legittimo interesse del titolare a rendere disponibile
+        il sito in modo sicuro (art. 6, par. 1, lett. f GDPR).
+      </p>
+
+      <h2>Dati che mi invii quando mi contatti</h2>
+      <p>
+        {
+          moduloAttivo
+            ? "Se mi scrivi via email, via PEC o tramite il modulo di contatto, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
+            : "Se mi scrivi via email o via PEC, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
+        }
+        al solo scopo di rispondere alla tua richiesta ed eventualmente fissare un
+        primo colloquio.
+      </p>
+      <p>
+        Base giuridica: esecuzione di misure precontrattuali adottate su tua
+        richiesta (art. 6, par. 1, lett. b GDPR). Il conferimento dei dati è
+        facoltativo, ma senza un recapito non mi è possibile risponderti.
+      </p>
+      <p>
+        <strong
+          >Ti chiedo di non inviare informazioni sul tuo stato di salute nel
+          primo messaggio</strong
+        >: le approfondiremo insieme durante il colloquio. Se comunque le
+        comunichi, verranno trattate con la massima riservatezza, nel rispetto
+        del segreto professionale, al solo fine di rispondere alla tua
+        richiesta.
+      </p>
+      <p>
+        Se la richiesta riguarda una persona minorenne, il primo contatto deve
+        avvenire da parte di chi esercita la responsabilità genitoriale.
+      </p>
+
       {
-        `Versione ${site.informativaPrivacy.versione} — ultimo aggiornamento: ${site.informativaPrivacy.dataAggiornamento}.`
+        moduloAttivo && (
+          <>
+            <h2>Modulo di contatto</h2>
+            <p>
+              Il messaggio inviato con il modulo viene inoltrato automaticamente
+              alla mia casella email senza essere salvato in database o archivi
+              del sito. L'indirizzo IP di chi invia il modulo viene usato solo
+              per un controllo antispam, in forma non leggibile (hash) e per
+              pochi minuti, e non viene mai associato al contenuto del
+              messaggio. L'invio dell'email è affidato al servizio Brevo
+              (Sendinblue SAS, Francia).
+            </p>
+          </>
+        )
       }
-    </p>
 
-    <p>
-      Questa informativa è resa ai sensi degli articoli 13 e 14 del Regolamento
-      (UE) 2016/679 ("GDPR") e descrive come vengono trattati i dati personali
-      di chi visita questo sito e di chi contatta la dott.ssa {site.nome}.
-    </p>
+      {
+        whatsappHref && (
+          <>
+            <h2>WhatsApp</h2>
+            <p>
+              Il pulsante WhatsApp è un semplice collegamento: non carica alcuno
+              script di Meta e non trasmette dati finché non viene cliccato. Una
+              volta aperta la conversazione, il trattamento dei dati è regolato
+              anche dall'informativa privacy di WhatsApp. Questo canale è
+              pensato solo per appuntamenti e questioni pratiche.
+            </p>
+          </>
+        )
+      }
 
-    <h2>Titolare del trattamento</h2>
-    <ul>
-      <li>{`${site.nomeConTitolo}, ${site.titoloProfessionale}`}</li>
-      <li>{`Studio a ${site.localita}`}</li>
-      <li>
-        Email: <a href={`mailto:${site.contatti.email}`}
+      <h2>A chi vengono comunicati i dati</h2>
+      <p>
+        I dati non vengono diffusi né ceduti a terzi. Possono trattarli, solo
+        per conto del titolare e per fornire i servizi tecnici necessari, i
+        fornitori di:
+      </p>
+      <ul>
+        <li>
+          hosting del sito: Netlify, Inc. (Stati Uniti), che tratta i dati di
+          navigazione descritti sopra;
+        </li>
+        <li>
+          posta elettronica e PEC, attraverso cui ricevo e conservo i messaggi.
+        </li>
+      </ul>
+      <p>
+        Quando un fornitore ha sede fuori dall'Unione europea, il trasferimento
+        dei dati avviene sulla base delle garanzie previste dagli articoli 44 e
+        seguenti del GDPR (decisione di adeguatezza UE-USA "Data Privacy
+        Framework" e/o clausole contrattuali standard approvate dalla
+        Commissione europea).
+      </p>
+
+      <h2>Per quanto tempo vengono conservati</h2>
+      <ul>
+        <li>
+          Dati di navigazione: per il tempo stabilito dal fornitore di hosting
+          per finalità di sicurezza, di norma pochi giorni o settimane.
+        </li>
+        <li>
+          Messaggi ricevuti: per il tempo necessario a gestire la richiesta. Se
+          non segue un rapporto professionale vengono cancellati; se invece
+          inizia un percorso, i dati vengono trattati secondo le regole
+          deontologiche e di legge previste per l'attività professionale, con
+          un'informativa specifica.
+        </li>
+      </ul>
+
+      <h2>I tuoi diritti</h2>
+      <p>
+        In qualsiasi momento puoi chiedere l'accesso ai tuoi dati, la loro
+        rettifica o cancellazione, la limitazione del trattamento, la
+        portabilità dei dati od opporti al trattamento (articoli 15-22 GDPR),
+        scrivendo a <a href={`mailto:${site.contatti.email}`}
           >{site.contatti.email}</a
-        >
-      </li>
-      <li>
-        PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
-      </li>
-    </ul>
+        > o via PEC a <a href={`mailto:${site.contatti.pec}`}
+          >{site.contatti.pec}</a
+        >.
+      </p>
+      <p>
+        Hai inoltre il diritto di proporre reclamo al Garante per la protezione
+        dei dati personali (<a
+          href="https://www.garanteprivacy.it"
+          rel="noopener"
+          target="_blank">www.garanteprivacy.it</a
+        >).
+      </p>
 
-    <h2>Dati di navigazione</h2>
-    <p>
-      Il sito non usa cookie, strumenti di statistica (analytics), pixel di
-      tracciamento né contenuti di terze parti (font, mappe, video o widget
-      esterni). Come avviene per qualunque sito web, il servizio di hosting
-      registra automaticamente alcuni dati tecnici delle richieste (ad esempio
-      indirizzo IP, data e ora, pagina richiesta, tipo di browser), che servono
-      esclusivamente a fornire il sito e a garantirne la sicurezza. Questi dati
-      non vengono usati per identificare chi visita il sito né per profilarlo.
-    </p>
-    <p>
-      Base giuridica: legittimo interesse del titolare a rendere disponibile il
-      sito in modo sicuro (art. 6, par. 1, lett. f GDPR).
-    </p>
-
-    <h2>Dati che mi invii quando mi contatti</h2>
-    <p>
-      {
-        moduloAttivo
-          ? "Se mi scrivi via email, via PEC o tramite il modulo di contatto, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
-          : "Se mi scrivi via email o via PEC, tratto i dati che scegli di comunicarmi (nome, recapiti e contenuto del messaggio)"
-      }
-      al solo scopo di rispondere alla tua richiesta ed eventualmente fissare un primo
-      colloquio.
-    </p>
-    <p>
-      Base giuridica: esecuzione di misure precontrattuali adottate su tua
-      richiesta (art. 6, par. 1, lett. b GDPR). Il conferimento dei dati è
-      facoltativo, ma senza un recapito non mi è possibile risponderti.
-    </p>
-    <p>
-      <strong
-        >Ti chiedo di non inviare informazioni sul tuo stato di salute nel primo
-        messaggio</strong
-      >: le approfondiremo insieme durante il colloquio. Se comunque le
-      comunichi, verranno trattate con la massima riservatezza, nel rispetto del
-      segreto professionale, al solo fine di rispondere alla tua richiesta.
-    </p>
-    <p>
-      Se la richiesta riguarda una persona minorenne, il primo contatto deve
-      avvenire da parte di chi esercita la responsabilità genitoriale.
-    </p>
-
-    {
-      moduloAttivo && (
-        <>
-          <h2>Modulo di contatto</h2>
-          <p>
-            Il messaggio inviato con il modulo viene inoltrato automaticamente
-            alla mia casella email senza essere salvato in database o archivi
-            del sito. L'indirizzo IP di chi invia il modulo viene usato solo per
-            un controllo antispam, in forma non leggibile (hash) e per pochi
-            minuti, e non viene mai associato al contenuto del messaggio.
-            L'invio dell'email è affidato al servizio Brevo (Sendinblue SAS,
-            Francia).
-          </p>
-        </>
-      )
-    }
-
-    {
-      whatsappHref && (
-        <>
-          <h2>WhatsApp</h2>
-          <p>
-            Il pulsante WhatsApp è un semplice collegamento: non carica alcuno
-            script di Meta e non trasmette dati finché non viene cliccato. Una
-            volta aperta la conversazione, il trattamento dei dati è regolato
-            anche dall'informativa privacy di WhatsApp. Questo canale è pensato
-            solo per appuntamenti e questioni pratiche.
-          </p>
-        </>
-      )
-    }
-
-    <h2>A chi vengono comunicati i dati</h2>
-    <p>
-      I dati non vengono diffusi né ceduti a terzi. Possono trattarli, solo per
-      conto del titolare e per fornire i servizi tecnici necessari, i fornitori
-      di:
-    </p>
-    <ul>
-      <li>
-        hosting del sito: Netlify, Inc. (Stati Uniti), che tratta i dati di
-        navigazione descritti sopra;
-      </li>
-      <li>
-        posta elettronica e PEC, attraverso cui ricevo e conservo i messaggi.
-      </li>
-    </ul>
-    <p>
-      Quando un fornitore ha sede fuori dall'Unione europea, il trasferimento
-      dei dati avviene sulla base delle garanzie previste dagli articoli 44 e
-      seguenti del GDPR (decisione di adeguatezza UE-USA "Data Privacy
-      Framework" e/o clausole contrattuali standard approvate dalla Commissione
-      europea).
-    </p>
-
-    <h2>Per quanto tempo vengono conservati</h2>
-    <ul>
-      <li>
-        Dati di navigazione: per il tempo stabilito dal fornitore di hosting per
-        finalità di sicurezza, di norma pochi giorni o settimane.
-      </li>
-      <li>
-        Messaggi ricevuti: per il tempo necessario a gestire la richiesta. Se
-        non segue un rapporto professionale vengono cancellati; se invece inizia
-        un percorso, i dati vengono trattati secondo le regole deontologiche e
-        di legge previste per l'attività professionale, con un'informativa
-        specifica.
-      </li>
-    </ul>
-
-    <h2>I tuoi diritti</h2>
-    <p>
-      In qualsiasi momento puoi chiedere l'accesso ai tuoi dati, la loro
-      rettifica o cancellazione, la limitazione del trattamento, la portabilità
-      dei dati od opporti al trattamento (articoli 15-22 GDPR), scrivendo a <a
-        href={`mailto:${site.contatti.email}`}>{site.contatti.email}</a
-      > o via PEC a <a href={`mailto:${site.contatti.pec}`}
-        >{site.contatti.pec}</a
-      >.
-    </p>
-    <p>
-      Hai inoltre il diritto di proporre reclamo al Garante per la protezione
-      dei dati personali (<a
-        href="https://www.garanteprivacy.it"
-        rel="noopener"
-        target="_blank">www.garanteprivacy.it</a
-      >).
-    </p>
-
-    <h2>Cookie</h2>
-    <p>
-      Il sito non installa alcun cookie. Dettagli nella <a
-        href={percorso("/cookie-policy")}>cookie policy</a
-      >.
-    </p>
+      <h2>Cookie</h2>
+      <p>
+        Il sito non installa alcun cookie. Dettagli nella <a
+          href={percorso("/cookie-policy")}>cookie policy</a
+        >.
+      </p>
+    </div>
   </article>
 </Layout>
