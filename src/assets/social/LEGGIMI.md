@@ -1,5 +1,7 @@
 # Immagine di anteprima per la condivisione
 
+Oggi contiene il logo (monogramma "EC" con girasole) su sfondo crema.
+
 Metti qui il file **`anteprima.png`** (vanno bene anche `.jpg`, `.jpeg`, `.webp`):
 è l'immagine che compare quando il link del sito viene condiviso su WhatsApp, social
 o messaggi. Formato consigliato: **1200 × 630 pixel**, con il logo al centro e un

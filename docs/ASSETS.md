@@ -5,11 +5,15 @@ Questo file elenca ogni immagine/illustrazione che manca ancora, con percorso
 previsto, dimensioni, formato e testo alternativo suggerito, così chi realizza gli
 asset (fotografo, illustratore) sa esattamente cosa produrre.
 
-## Anteprima di condivisione (logo)
+## Logo e anteprima di condivisione
 
-`src/assets/social/anteprima.png` (o `.jpg`/`.webp`), 1200 × 630 px: se presente
-diventa l'immagine Open Graph/Twitter (WhatsApp, social). Oggi non c'è, di proposito,
-in attesa del logo. Dettagli in `src/assets/social/LEGGIMI.md`.
+- `src/assets/logo/logo.png`: il logo (monogramma "EC" con girasole) ritagliato
+  lungo il cerchio, con sfondo trasparente, 1420 × 1420 px. Ricavato dal file
+  fornito, che aveva gli angoli neri al posto della trasparenza.
+- `src/assets/social/anteprima.png`: il logo centrato sullo sfondo crema del sito,
+  1200 × 630 px, usato come immagine Open Graph/Twitter (WhatsApp, social). In
+  build viene convertito in JPEG leggero (circa 33 KB). Per cambiarlo basta
+  sostituire il file. Dettagli in `src/assets/social/LEGGIMI.md`.
 
 ## Foto delle tre sezioni della home
 

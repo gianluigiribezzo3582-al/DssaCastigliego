@@ -18,9 +18,6 @@ minuti a qualche ora, raramente fino a 24-48 ore).
       un'immagine utilizzabile (foto vostra, opera di pubblico dominio o con licenza
       libera, illustrazione commissionata), caricala come
       `src/assets/foto/la-mia-formazione.jpg`.
-- [ ] **Anteprima di condivisione (WhatsApp/social)**: quando c'è il logo, caricalo
-      come `src/assets/social/anteprima.png` (1200 × 630 px). Vedi
-      `src/assets/social/LEGGIMI.md`.
 - [ ] **Numeri in `/emergenze`**: verifica che Telefono Azzurro (19696) e Telefono
       Amico Italia (02 2327 2327) siano corretti e attivi.
 - [ ] **Privacy e note legali**: falle rileggere a chi se ne occupa. Valutate insieme
