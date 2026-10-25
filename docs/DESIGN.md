@@ -15,6 +15,29 @@ metafore visive da stock photography.
 Tono generale richiesto e perseguito in tutte e tre le direzioni: caldo, accogliente,
 professionale — mai clinico-freddo, mai patinato.
 
+## Stile attuale: "Quaderno di osservazione" (evoluzione della Direzione A)
+
+Stessa palette terracotta e stessi font della Direzione A, con un'impaginazione
+editoriale ispirata al mondo di Elisa (Infant Observation, tradizione Tavistock,
+i "cento linguaggi" di Malaguzzi): un quaderno di appunti più che un sito "da studio".
+
+- **Angoli quasi vivi** (`--radius-*` a 2-3 px), niente pulsanti a pillola, niente
+  ombre morbide (`--shadow-card: none`): la profondità viene da filetti sottili.
+- **Sezioni numerate** `01 / 02 / 03` in Fraunces corsivo seguite da un filetto
+  (`.numero-sezione`), titoli grandi in Fraunces con peso medio.
+- **Etichette** in maiuscoletto spaziato color ocra (`.etichetta`) sopra i titoli,
+  nel menu e nel footer.
+- **Foto con cornice sfalsata** terracotta (`.cornice`), come un passe-partout; su
+  desktop la foto resta ferma (sticky) mentre scorre il testo lungo accanto.
+- **Hero** allineato a sinistra con nome grande e un piccolo indice "In questa
+  pagina" che porta alle tre sezioni.
+- **Pulsanti** rettangolari, testo maiuscolo spaziato con freccia che si sposta al
+  passaggio del mouse (ferma con `prefers-reduced-motion`).
+- **Mobile**: ogni sezione si legge titolo → immagine → testo; menu a pannello a
+  tutta larghezza; tutto allineato a sinistra sullo stesso margine.
+
+Le classi sono in `src/styles/global.css`, i token in `src/styles/tokens.css`.
+
 ---
 
 ## Direzione A — "Terracotta calda" (implementata)

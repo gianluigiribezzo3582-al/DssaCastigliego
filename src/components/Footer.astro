@@ -11,7 +11,7 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
 ---
 
 <footer
-  class="relative mt-[var(--space-12)] overflow-hidden border-t border-[var(--color-border)] bg-[var(--color-bg-alt)]"
+  class="relative overflow-hidden border-t border-[var(--color-text)] bg-[var(--color-bg-alt)]"
 >
   <Image
     src={linoTexture}
@@ -22,51 +22,48 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
     class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.1]"
   />
   <div
-    class="relative mx-auto max-w-[var(--content-max-width)] px-4 pt-10 pb-24 sm:px-6 sm:pb-10"
+    class="relative mx-auto max-w-[var(--content-max-width)] px-4 pt-12 pb-24 sm:px-6 md:pt-16 md:pb-10"
   >
-    <div class="grid gap-8 text-center sm:grid-cols-3">
-      <div>
+    <div class="grid gap-10 md:grid-cols-12 md:gap-12">
+      <div class="md:col-span-5">
         <p
-          class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]"
+          class="font-[family-name:var(--font-heading)] text-2xl leading-tight font-medium text-[var(--color-text)]"
         >
           {site.nomeConTitolo}
         </p>
-        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-          {site.titoloProfessionale}
-        </p>
-        <p class="mt-3 text-sm text-[var(--color-text-muted)]">
+        <p class="etichetta mt-2">{site.titoloProfessionale}</p>
+        <p class="mt-5 text-sm leading-relaxed text-[var(--color-text-muted)]">
           {iscrizioneOrdine}
-        </p>
-        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+          <br />
           {`P. IVA ${site.partitaIva}`}
         </p>
       </div>
 
-      <div>
-        <h2 class="text-sm font-semibold text-[var(--color-text)]">Contatti</h2>
-        <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
+      <div class="md:col-span-4">
+        <h2 class="etichetta">Contatti</h2>
+        <ul class="mt-4 space-y-3 text-sm text-[var(--color-text)]">
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={`mailto:${site.contatti.email}`}
             >
               <Mail
                 aria-hidden="true"
                 size={15}
-                class="mr-1.5 inline-block align-[-0.15em]"
+                class="mr-2 inline-block align-[-0.15em] text-[var(--color-primary)]"
               />
               {site.contatti.email}
             </a>
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={`mailto:${site.contatti.pec}`}
             >
               <ShieldCheck
                 aria-hidden="true"
                 size={15}
-                class="mr-1.5 inline-block align-[-0.15em]"
+                class="mr-2 inline-block align-[-0.15em] text-[var(--color-primary)]"
               />
               {`PEC: ${site.contatti.pec}`}
             </a>
@@ -75,13 +72,13 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
             site.contatti.telefono && (
               <li>
                 <a
-                  class="underline hover:text-[var(--color-primary)]"
+                  class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
                   href={`tel:${site.contatti.telefono}`}
                 >
                   <Phone
                     aria-hidden="true"
                     size={15}
-                    class="mr-1.5 inline-block align-[-0.15em]"
+                    class="mr-2 inline-block align-[-0.15em] text-[var(--color-primary)]"
                   />
                   {site.contatti.telefono}
                 </a>
@@ -92,57 +89,55 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
             whatsappHref && (
               <li>
                 <a
-                  class="underline hover:text-[var(--color-primary)]"
+                  class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
                   href={whatsappHref}
                   rel="noopener"
                 >
                   <MessageCircle
                     aria-hidden="true"
                     size={15}
-                    class="mr-1.5 inline-block align-[-0.15em]"
+                    class="mr-2 inline-block align-[-0.15em] text-[var(--color-primary)]"
                   />
                   WhatsApp (solo appuntamenti e questioni pratiche)
                 </a>
               </li>
             )
           }
-          <li>
+          <li class="text-[var(--color-text-muted)]">
             <MapPin
               aria-hidden="true"
               size={15}
-              class="mr-1.5 inline-block align-[-0.15em]"
+              class="mr-2 inline-block align-[-0.15em] text-[var(--color-primary)]"
             />
             {`Studio a ${site.localita}`}
           </li>
         </ul>
       </div>
 
-      <div>
-        <h2 class="text-sm font-semibold text-[var(--color-text)]">
-          Informazioni
-        </h2>
-        <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
+      <div class="md:col-span-3">
+        <h2 class="etichetta">Informazioni</h2>
+        <ul class="mt-4 space-y-3 text-sm text-[var(--color-text)]">
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={percorso("/emergenze")}>In caso di emergenza</a
             >
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={percorso("/privacy")}>Privacy policy</a
             >
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={percorso("/cookie-policy")}>Cookie policy</a
             >
           </li>
           <li>
             <a
-              class="underline hover:text-[var(--color-primary)]"
+              class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href={percorso("/note-legali")}>Note legali</a
             >
           </li>
@@ -150,23 +145,26 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
       </div>
     </div>
 
-    <p
-      class="mt-8 border-t border-[var(--color-border)] pt-6 text-center text-xs text-[var(--color-text-muted)]"
+    <div
+      class="mt-12 flex flex-col gap-3 border-t border-[var(--color-border)] pt-6 text-xs leading-relaxed text-[var(--color-text-muted)] md:flex-row md:items-start md:justify-between md:gap-10"
     >
-      Questo sito non gestisce emergenze o urgenze psicologiche. In caso di
-      pericolo immediato chiamare il 112. Vedi la pagina <a
-        class="underline"
-        href={percorso("/emergenze")}>emergenze</a
-      >.
-    </p>
-
-    <p class="mt-4 text-center text-xs text-[var(--color-text-muted)]">
-      {`© ${new Date().getFullYear()} ${site.nomeConTitolo} - Sviluppato da `}<a
-        class="hover:text-[var(--color-primary)] hover:underline"
-        href="https://gianluigiribezzo.dev"
-        target="_blank"
-        rel="noopener">Gianluigi Ribezzo</a
-      >
-    </p>
+      <p class="md:max-w-xl">
+        Questo sito non gestisce emergenze o urgenze psicologiche. In caso di
+        pericolo immediato chiamare il 112. Vedi la pagina <a
+          class="underline underline-offset-2"
+          href={percorso("/emergenze")}>emergenze</a
+        >.
+      </p>
+      <p class="md:text-right">
+        {
+          `© ${new Date().getFullYear()} ${site.nomeConTitolo} · Sviluppato da `
+        }<a
+          class="underline-offset-2 hover:text-[var(--color-primary)] hover:underline"
+          href="https://gianluigiribezzo.dev"
+          target="_blank"
+          rel="noopener">Gianluigi Ribezzo</a
+        >
+      </p>
+    </div>
   </div>
 </footer>

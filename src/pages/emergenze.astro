@@ -10,55 +10,57 @@ const telHref = (numero: string) => `tel:${numero.replace(/\s/g, "")}`;
   description="Questo sito e lo studio non gestiscono emergenze o urgenze psicologiche. In caso di pericolo immediato chiama il 112."
 >
   <article
-    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 sm:px-6 sm:py-20"
   >
-    <h1
-      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
-    >
-      In caso di emergenza
-    </h1>
+    <div class="prose-content">
+      <h1
+        class="font-[family-name:var(--font-heading)] text-4xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-5xl"
+      >
+        In caso di emergenza
+      </h1>
 
-    <div
-      class="mt-6 rounded-[var(--radius-lg)] border-2 border-[var(--color-error-text)] bg-[var(--color-error-bg)] p-5"
-    >
-      <p class="font-semibold text-[var(--color-error-text)]">
-        Questo sito e lo studio della dott.ssa {site.nome} non gestiscono emergenze
-        né urgenze. Se sei in pericolo immediato, o se stai vivendo un'emergenza per
-        te o per un'altra persona, chiama subito il{" "}
-        <a
-          class="underline"
-          href={telHref(site.emergenze.numeroUnicoEmergenze)}
-        >
-          {site.emergenze.numeroUnicoEmergenze}
-        </a>, il Numero Unico di Emergenza.
+      <div
+        class="mt-6 rounded-[var(--radius-lg)] border-2 border-[var(--color-error-text)] bg-[var(--color-error-bg)] p-5"
+      >
+        <p class="font-semibold text-[var(--color-error-text)]">
+          Questo sito e lo studio della dott.ssa {site.nome} non gestiscono emergenze
+          né urgenze. Se sei in pericolo immediato, o se stai vivendo un'emergenza
+          per te o per un'altra persona, chiama subito il{" "}
+          <a
+            class="underline"
+            href={telHref(site.emergenze.numeroUnicoEmergenze)}
+          >
+            {site.emergenze.numeroUnicoEmergenze}
+          </a>, il Numero Unico di Emergenza.
+        </p>
+      </div>
+
+      {
+        site.emergenze.numeriSupporto.length > 0 && (
+          <>
+            <h2>Numeri di ascolto e supporto</h2>
+            <p>
+              Se hai bisogno di parlare con qualcuno subito, questi servizi
+              nazionali offrono ascolto telefonico:
+            </p>
+            <ul>
+              {site.emergenze.numeriSupporto.map((servizio) => (
+                <li>
+                  {`${servizio.nome}: `}
+                  <a href={telHref(servizio.numero)}>{servizio.numero}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <h2>Tempi di risposta</h2>
+      <p>
+        Rispondo ai messaggi ricevuti il prima possibile. L'email non è però un
+        canale adatto alle situazioni urgenti: in quei casi rivolgiti ai numeri
+        indicati sopra.
       </p>
     </div>
-
-    {
-      site.emergenze.numeriSupporto.length > 0 && (
-        <>
-          <h2>Numeri di ascolto e supporto</h2>
-          <p>
-            Se hai bisogno di parlare con qualcuno subito, questi servizi
-            nazionali offrono ascolto telefonico:
-          </p>
-          <ul>
-            {site.emergenze.numeriSupporto.map((servizio) => (
-              <li>
-                {`${servizio.nome}: `}
-                <a href={telHref(servizio.numero)}>{servizio.numero}</a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )
-    }
-
-    <h2>Tempi di risposta</h2>
-    <p>
-      Rispondo ai messaggi ricevuti il prima possibile. L'email non è però un
-      canale adatto alle situazioni urgenti: in quei casi rivolgiti ai numeri
-      indicati sopra.
-    </p>
   </article>
 </Layout>

@@ -9,63 +9,67 @@ import { iscrizioneOrdine, site } from "../config/site";
   description="Dati identificativi della professionista, titolarità del sito e note legali."
 >
   <article
-    class="prose-content mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 sm:px-6 sm:py-20"
   >
-    <h1
-      class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
-    >
-      Note legali
-    </h1>
+    <div class="prose-content">
+      <h1
+        class="font-[family-name:var(--font-heading)] text-4xl leading-tight font-medium tracking-tight text-[var(--color-text)] sm:text-5xl"
+      >
+        Note legali
+      </h1>
 
-    <h2>Titolare del sito</h2>
-    <ul>
-      <li>{site.nomeConTitolo}</li>
-      <li>{`${site.titoloProfessionale} — ${iscrizioneOrdine}`}</li>
-      <li>{`P. IVA ${site.partitaIva}`}</li>
-      <li>{`Studio a ${site.localita}`}</li>
-      <li>
-        Email: <a href={`mailto:${site.contatti.email}`}
-          >{site.contatti.email}</a
-        >
-      </li>
-      <li>
-        PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
-      </li>
-      {site.contatti.telefono && <li>Telefono: {site.contatti.telefono}</li>}
-    </ul>
+      <h2>Titolare del sito</h2>
+      <ul>
+        <li>{site.nomeConTitolo}</li>
+        <li>{`${site.titoloProfessionale} — ${iscrizioneOrdine}`}</li>
+        <li>{`P. IVA ${site.partitaIva}`}</li>
+        <li>{`Studio a ${site.localita}`}</li>
+        <li>
+          Email: <a href={`mailto:${site.contatti.email}`}
+            >{site.contatti.email}</a
+          >
+        </li>
+        <li>
+          PEC: <a href={`mailto:${site.contatti.pec}`}>{site.contatti.pec}</a>
+        </li>
+        {site.contatti.telefono && <li>Telefono: {site.contatti.telefono}</li>}
+      </ul>
 
-    <h2>Natura del sito</h2>
-    <p>
-      Il sito ha finalità esclusivamente informativa e di presentazione
-      dell'attività professionale. Non costituisce una prestazione sanitaria né
-      un consulto psicologico a distanza: i colloqui si svolgono in presenza,
-      nell'ambito del rapporto professionale diretto tra la dott.ssa {site.nome}
-      e la persona che si rivolge a lei.
-    </p>
+      <h2>Natura del sito</h2>
+      <p>
+        Il sito ha finalità esclusivamente informativa e di presentazione
+        dell'attività professionale. Non costituisce una prestazione sanitaria
+        né un consulto psicologico a distanza: i colloqui si svolgono in
+        presenza, nell'ambito del rapporto professionale diretto tra la dott.ssa {
+          site.nome
+        }
+        e la persona che si rivolge a lei.
+      </p>
 
-    <h2>Comunicazione sanitaria</h2>
-    <p>
-      I contenuti del sito sono redatti nel rispetto del Codice Deontologico
-      degli Psicologi Italiani e dei principi di correttezza, trasparenza e
-      prudenza previsti per la comunicazione in ambito sanitario: non contengono
-      promesse di risultato, confronti con altri professionisti né testimonianze
-      di pazienti.
-    </p>
+      <h2>Comunicazione sanitaria</h2>
+      <p>
+        I contenuti del sito sono redatti nel rispetto del Codice Deontologico
+        degli Psicologi Italiani e dei principi di correttezza, trasparenza e
+        prudenza previsti per la comunicazione in ambito sanitario: non
+        contengono promesse di risultato, confronti con altri professionisti né
+        testimonianze di pazienti.
+      </p>
 
-    <h2>Proprietà dei contenuti</h2>
-    <p>
-      Testi e fotografie della dott.ssa {site.nome} presenti sul sito sono di sua
-      proprietà. Il dipinto "Viandante sul mare di nebbia" di Caspar David Friedrich
-      è un'opera di pubblico dominio; le immagini decorative di sfondo sono utilizzate
-      secondo la licenza Unsplash. Le illustrazioni di altri autori appartengono ai
-      rispettivi titolari dei diritti. Non è consentito riprodurre i contenuti, in
-      tutto o in parte, senza autorizzazione.
-    </p>
+      <h2>Proprietà dei contenuti</h2>
+      <p>
+        Testi e fotografie della dott.ssa {site.nome} presenti sul sito sono di sua
+        proprietà. Il dipinto "Viandante sul mare di nebbia" di Caspar David Friedrich
+        è un'opera di pubblico dominio; le immagini decorative di sfondo sono utilizzate
+        secondo la licenza Unsplash. Le illustrazioni di altri autori appartengono
+        ai rispettivi titolari dei diritti. Non è consentito riprodurre i contenuti,
+        in tutto o in parte, senza autorizzazione.
+      </p>
 
-    <h2>Hosting</h2>
-    <p>
-      Il sito è ospitato da Netlify, Inc. Per il trattamento dei dati personali
-      vedi la <a href={percorso("/privacy")}>Privacy Policy</a>.
-    </p>
+      <h2>Hosting</h2>
+      <p>
+        Il sito è ospitato da Netlify, Inc. Per il trattamento dei dati
+        personali vedi la <a href={percorso("/privacy")}>Privacy Policy</a>.
+      </p>
+    </div>
   </article>
 </Layout>

@@ -400,4 +400,19 @@ variabili la build è identica a prima (base `/`, modulo attivo).
 
 ---
 
+## 26. Stile "Quaderno di osservazione" e rifinitura degli spazi
+
+**Deciso (richiesta: meno bottoni arrotondati, stile unico, mobile curato):**
+evoluta la Direzione A in un'impaginazione editoriale (dettagli in
+`/docs/DESIGN.md`): angoli vivi, niente ombre, sezioni numerate, cornice sfalsata
+sulle foto, foto sticky su desktop, indice delle sezioni nell'hero, griglia a 12
+colonne con margine sinistro comune a tutte le pagine (anche quelle legali), ritmo
+verticale uniforme (`py-14 / sm:py-20 / md:py-28`). Nessun testo nuovo aggiunto
+oltre alle etichette di servizio ("In questa pagina").
+
+**Costo per cambiare idea:** basso per i colori/angoli (solo `tokens.css`), medio
+per la struttura della home (`src/pages/index.astro`).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._
