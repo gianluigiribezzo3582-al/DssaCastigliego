@@ -3,8 +3,7 @@
 // I dati che Elisa può modificare da sola (contatti, località, dati dell'Ordine/P.IVA,
 // numeri di emergenza) vivono in src/content/dati-sito.json e sono editabili dal CMS
 // su /admin ("Contatti e dati dello studio"). Qui restano i valori strutturali
-// (nome, titolo). Il dominio non è qui: arriva dall'ambiente di build, vedi
-// astro.config.mjs.
+// (nome, titolo). Il dominio è in astro.config.mjs.
 import datiSito from "../content/dati-sito.json";
 
 export const site = {
