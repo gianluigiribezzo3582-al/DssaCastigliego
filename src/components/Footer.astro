@@ -16,12 +16,13 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
   <Image
     src={linoTexture}
     alt=""
-    width={1600}
-    height={900}
+    width={1200}
+    height={675}
+    quality={35}
     class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.1]"
   />
   <div
-    class="relative mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6"
+    class="relative mx-auto max-w-[var(--content-max-width)] px-4 pt-10 pb-24 sm:px-6 sm:pb-10"
   >
     <div class="grid gap-8 text-center sm:grid-cols-3">
       <div>
@@ -46,19 +47,27 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
         <ul class="mt-2 space-y-2 text-sm text-[var(--color-text-muted)]">
           <li>
             <a
-              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+              class="underline hover:text-[var(--color-primary)]"
               href={`mailto:${site.contatti.email}`}
             >
-              <Mail aria-hidden="true" size={15} />
+              <Mail
+                aria-hidden="true"
+                size={15}
+                class="mr-1.5 inline-block align-[-0.15em]"
+              />
               {site.contatti.email}
             </a>
           </li>
           <li>
             <a
-              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+              class="underline hover:text-[var(--color-primary)]"
               href={`mailto:${site.contatti.pec}`}
             >
-              <ShieldCheck aria-hidden="true" size={15} />
+              <ShieldCheck
+                aria-hidden="true"
+                size={15}
+                class="mr-1.5 inline-block align-[-0.15em]"
+              />
               {`PEC: ${site.contatti.pec}`}
             </a>
           </li>
@@ -66,10 +75,14 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
             site.contatti.telefono && (
               <li>
                 <a
-                  class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+                  class="underline hover:text-[var(--color-primary)]"
                   href={`tel:${site.contatti.telefono}`}
                 >
-                  <Phone aria-hidden="true" size={15} />
+                  <Phone
+                    aria-hidden="true"
+                    size={15}
+                    class="mr-1.5 inline-block align-[-0.15em]"
+                  />
                   {site.contatti.telefono}
                 </a>
               </li>
@@ -79,18 +92,26 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
             whatsappHref && (
               <li>
                 <a
-                  class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+                  class="underline hover:text-[var(--color-primary)]"
                   href={whatsappHref}
                   rel="noopener"
                 >
-                  <MessageCircle aria-hidden="true" size={15} />
+                  <MessageCircle
+                    aria-hidden="true"
+                    size={15}
+                    class="mr-1.5 inline-block align-[-0.15em]"
+                  />
                   WhatsApp (solo appuntamenti e questioni pratiche)
                 </a>
               </li>
             )
           }
-          <li class="inline-flex items-center gap-1.5">
-            <MapPin aria-hidden="true" size={15} />
+          <li>
+            <MapPin
+              aria-hidden="true"
+              size={15}
+              class="mr-1.5 inline-block align-[-0.15em]"
+            />
             {`Studio a ${site.localita}`}
           </li>
         </ul>

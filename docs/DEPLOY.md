@@ -176,3 +176,32 @@ Differenze rispetto a Cloudflare Pages, da sapere:
   la GitHub App collegata il CMS consente solo il lavoro su una copia locale del
   repository, quindi online non permette modifiche, ma la pagina è raggiungibile.
 - Il file `_headers` (CSP e header di sicurezza) viene ignorato da GitHub Pages.
+
+## Netlify (hosting di produzione) con dominio Aruba
+
+La configurazione è in `netlify.toml` (build `npm run build`, cartella `dist`,
+Node 22). Passi da fare una volta:
+
+1. Netlify → **Add new site → Import an existing project → GitHub** → scegli
+   questo repository, branch `main`. Le impostazioni di build vengono lette da
+   `netlify.toml`.
+2. Netlify → **Domain management → Add a domain** → inserisci il dominio
+   registrato su Aruba (es. `www.dominio.it`) e impostalo come **primary domain**.
+3. Su Aruba (pannello DNS del dominio): crea i record indicati da Netlify, di
+   norma un `CNAME` per `www` verso `<nome-sito>.netlify.app` e un record `A` per
+   il dominio senza `www` verso il load balancer di Netlify (l'IP lo mostra
+   Netlify). In alternativa puoi delegare i DNS a Netlify cambiando i nameserver.
+4. Attendi la propagazione e l'emissione automatica del certificato HTTPS.
+5. Dopo che il dominio è attivo, rilancia un deploy (Deploys → Trigger deploy): il
+   dominio entra nel sito in build tramite la variabile `URL` di Netlify
+   (canonical, sitemap, robots.txt, Open Graph, JSON-LD). Non va scritto nel codice.
+6. Google Search Console: aggiungi il dominio e invia `https://<dominio>/sitemap-index.xml`.
+   Stesso per Bing Webmaster Tools (può importare da Search Console).
+
+Cosa funziona su Netlify: tutto il sito statico e il file `_headers` generato in
+build (CSP, header di sicurezza, cache di un anno per `/_astro/*`). Cosa no: il
+modulo di contatto e la protezione di `/admin`, che sono Cloudflare Pages
+Functions (`functions/`); la pagina Contatti mostra quindi il riquadro email
+(`PUBLIC_MODULO_CONTATTO=off` in `netlify.toml`). Le anteprime di branch e pull
+request sono marcate `noindex`. La copia su GitHub Pages resta come anteprima,
+anch'essa `noindex`: puoi disattivarla da Settings → Pages quando Netlify è online.

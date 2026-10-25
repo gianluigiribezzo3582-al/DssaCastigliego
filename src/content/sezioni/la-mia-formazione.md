@@ -1,7 +1,8 @@
 ---
 titolo: La mia formazione
 ordine: 3
-altFoto: ""
+altFoto: Illustrazione di un bambino con il viso appoggiato alle mani e una grande chioma fatta di macchie di colore
+allineamentoFoto: basso
 ---
 
 Il mio percorso ha preso avvio a Reggio Emilia, dove mi sono laureata in Scienze e Tecniche Psicologiche presso l’Università di Modena e Reggio Emilia, al Centro Internazionale Loris Malaguzzi. Questo luogo porta il nome del pedagogista che ha ispirato l’esperienza educativa reggiana, fondata su uno sguardo che riconosce nel bambino la ricchezza di “cento linguaggi” e che fa dell’ascolto e dell’osservazione una forma di cura. È uno sguardo che sento ancora vicino al mio modo di lavorare, e che ha accompagnato i passi successivi: la laurea magistrale in Psicologia Clinica della Salute e Neuropsicologia all’Università degli Studi di Firenze e, oggi, la formazione al Centro Studi Martha Harris, associato alla Tavistock Clinic di Londra, centro di eccellenza internazionale per la psicoterapia psicoanalitica.

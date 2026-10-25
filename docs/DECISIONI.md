@@ -376,4 +376,28 @@ variabili la build è identica a prima (base `/`, modulo attivo).
 
 ---
 
+## 25. Messa online su Netlify: SEO, metadati, pagine legali definitive
+
+**Deciso:** hosting di produzione su Netlify con dominio registrato su Aruba.
+
+- Il dominio arriva in build dalla variabile `URL` di Netlify (`astro.config.mjs`),
+  quindi non è scritto nel codice; `robots.txt` è generato in build
+  (`src/pages/robots.txt.ts`) e punta sempre alla sitemap giusta.
+- Bot: tutti ammessi, compresi quelli dei servizi di IA (scelta esplicita); esclusi
+  solo `/admin/` e la pagina di ringraziamento. Copie di anteprima (GitHub Pages,
+  deploy preview di Netlify) marcate `noindex` con `PUBLIC_NOINDEX=on`, per non
+  creare contenuti duplicati.
+- Metadati: robots con `max-image-preview:large`, Open Graph/Twitter con la foto di
+  "Mi presento" ritagliata 1200×630, `theme-color`, `author`; rimosso
+  `generator`. JSON-LD `Psychologist` (con località, area servita, foto) e `WebSite`.
+- Prestazioni: sfondi decorativi ricompressi (sono al 7-10% di opacità), foto
+  delle sezioni responsive (384/768 px), cache di un anno per `/_astro/*`, HSTS.
+- Pagine legali riscritte come testi definitivi (rimosse tutte le note di bozza):
+  privacy con hosting Netlify, contatti via email/PEC, minori, diritti; numeri di
+  supporto scelti con l'utente (Telefono Azzurro 19696, Telefono Amico Italia
+  02 2327 2327, oltre al 112), da verificare prima della pubblicazione.
+- Foto: ritaglio 4:5 con allineamento scelto per foto (`allineamentoFoto`, anche dal CMS).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

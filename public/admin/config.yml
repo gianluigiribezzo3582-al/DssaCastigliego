@@ -41,7 +41,6 @@ collections:
           - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
           - { label: "Titolo grande in home", name: "titolo", widget: "string" }
           - { label: "Sottotitolo in home", name: "sottotitolo", widget: "string" }
-          - { label: "Nota di bozza (solo per uso interno, non è mai visibile online)", name: "draftNote", widget: "string", required: false }
 
   - name: "sezioni"
     label: "Sezioni della home"
@@ -55,6 +54,7 @@ collections:
           - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
           - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
           - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Parte della foto da mostrare quando viene ritagliata", name: "allineamentoFoto", widget: "select", options: [{ label: "In alto (es. un ritratto)", value: "alto" }, { label: "Al centro", value: "centro" }, { label: "In basso", value: "basso" }], default: "alto", required: false }
           - { label: "Testo della sezione", name: "body", widget: "markdown" }
       - name: "di-cosa-mi-occupo"
         label: "Di cosa mi occupo"
@@ -64,6 +64,7 @@ collections:
           - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
           - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
           - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Parte della foto da mostrare quando viene ritagliata", name: "allineamentoFoto", widget: "select", options: [{ label: "In alto (es. un ritratto)", value: "alto" }, { label: "Al centro", value: "centro" }, { label: "In basso", value: "basso" }], default: "alto", required: false }
           - { label: "Testo della sezione", name: "body", widget: "markdown" }
       - name: "la-mia-formazione"
         label: "La mia formazione"
@@ -73,6 +74,7 @@ collections:
           - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
           - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
           - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Parte della foto da mostrare quando viene ritagliata", name: "allineamentoFoto", widget: "select", options: [{ label: "In alto (es. un ritratto)", value: "alto" }, { label: "Al centro", value: "centro" }, { label: "In basso", value: "basso" }], default: "alto", required: false }
           - { label: "Testo della sezione", name: "body", widget: "markdown" }
 
   - name: "dati_sito"

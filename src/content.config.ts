@@ -1,9 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-// Nota per chi lavora dal CMS: i campi "draftNote" servono solo in fase di bozza,
-// non vengono mai mostrati in pagina — sono un promemoria interno.
-
 // Le tre sezioni della home (Mi presento, Di cosa mi occupo, La mia formazione).
 // Il nome del file (es. "mi-presento") è anche l'ancora della sezione (#mi-presento)
 // e il nome della foto da mettere in src/assets/foto/ — vedi src/pages/index.astro.
@@ -16,6 +13,8 @@ const sezioni = defineCollection({
     altFoto: z.string().optional(),
     /** Didascalia facoltativa mostrata sotto la foto (es. titolo e autore di un'opera). */
     didascaliaFoto: z.string().optional(),
+    /** Quale parte della foto tenere quando viene ritagliata in verticale 4:5. */
+    allineamentoFoto: z.enum(["alto", "centro", "basso"]).default("alto"),
   }),
 });
 
@@ -26,7 +25,6 @@ const pagine = defineCollection({
     seoDescription: z.string().max(160),
     titolo: z.string().optional(),
     sottotitolo: z.string().optional(),
-    draftNote: z.string().optional(),
   }),
 });
 

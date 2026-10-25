@@ -1,0 +1,27 @@
+# Configurazione di Netlify (hosting di produzione). Vedi /docs/DEPLOY.md.
+#
+# Il dominio del sito arriva in build dalla variabile URL che Netlify imposta da
+# sola (il dominio principale, cioè quello Aruba una volta collegato): non va
+# scritto da nessuna parte nel codice. Vedi astro.config.mjs.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Il modulo di contatto usa una Cloudflare Pages Function (cartella functions/)
+  # che su Netlify non gira: la pagina Contatti mostra il riquadro email.
+  PUBLIC_MODULO_CONTATTO = "off"
+
+# La cartella functions/ contiene Cloudflare Pages Functions, non funzioni
+# Netlify: punta Netlify a una cartella diversa (inesistente) per non usarle.
+[functions]
+  directory = "netlify/functions"
+
+# Anteprime delle pull request e dei branch: mai indicizzate dai motori di ricerca.
+[context.deploy-preview.environment]
+  PUBLIC_NOINDEX = "on"
+
+[context.branch-deploy.environment]
+  PUBLIC_NOINDEX = "on"

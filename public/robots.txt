@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin
-Disallow: /demo-prenotazione
-
-Sitemap: https://www.esempio-elisa-castigliego.it/sitemap-index.xml

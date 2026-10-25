@@ -1,7 +1,9 @@
 ---
 titolo: Di cosa mi occupo
 ordine: 2
-altFoto: ""
+altFoto: Dipinto di un viandante visto di spalle, in piedi su una roccia, che guarda un paesaggio di montagne avvolto da un mare di nebbia
+allineamentoFoto: centro
+didascaliaFoto: Caspar David Friedrich, Viandante sul mare di nebbia, 1818 circa
 ---
 
 Accolgo bambini, adolescenti, genitori, famiglie e giovani adulti che si trovano davanti a un paesaggio ancora avvolto nella nebbia: sofferenze emotive, affettive e relazionali, disturbi del neurosviluppo, fragilità che possono segnare la crescita, dall’infanzia all’adolescenza, fino all’età adulta.
