@@ -6,7 +6,7 @@ export interface DatiContatto {
   nome: string;
   email: string;
   telefono: string;
-  preferenzaContatto: "email" | "telefono" | "whatsapp";
+  preferenzaContatto: "email" | "telefono";
   disponibilita: string;
   messaggio: string;
   consensoPrivacy: boolean;
@@ -55,7 +55,7 @@ export function valida(formData: FormData): EsitoValidazione {
     errori.recapito = "Inserisci almeno un recapito: email o telefono.";
   }
 
-  const preferenzeValide = ["email", "telefono", "whatsapp"] as const;
+  const preferenzeValide = ["email", "telefono"] as const;
   if (
     !preferenzeValide.includes(
       preferenzaContattoRaw as (typeof preferenzeValide)[number],

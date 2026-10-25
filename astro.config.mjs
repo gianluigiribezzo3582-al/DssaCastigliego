@@ -15,8 +15,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) =>
-        !page.includes("/admin") && !page.includes("/demo-prenotazione"),
+      filter: (page) => !page.includes("/admin"),
     }),
   ],
   vite: {

@@ -9,41 +9,31 @@ apposta per non rischiare di pubblicare per errore un dato reale sbagliato.
 Vai su `/admin` → **"Contatti e dati dello studio"** (un solo modulo aggiorna tutto
 il sito). File sorgente: `src/content/dati-sito.json`.
 
-- [ ] Email di contatto (`{{EMAIL_CONTATTO}}`)
-- [ ] Telefono di contatto (`{{TELEFONO_CONTATTO}}`)
-- [ ] Numero WhatsApp, solo cifre in formato internazionale (`{{WHATSAPP_NUMERO}}`) —
-      **testare il pulsante WhatsApp dopo la compilazione**
-- [ ] Link LinkedIn (`{{URL_LINKEDIN}}`)
-- [ ] Link Instagram (`{{URL_INSTAGRAM}}`)
-- [ ] Via e numero civico dello studio (`{{INDIRIZZO_STUDIO_VIA}}`)
-- [ ] CAP dello studio (`{{INDIRIZZO_STUDIO_CAP}}`)
-- [ ] Orario di apertura/chiusura (`{{ORARIO_APERTURA}}`, `{{ORARIO_CHIUSURA}}`)
-- [ ] Regione e numero di iscrizione all'Albo (`{{ALBO_REGIONE}}`, `{{ALBO_NUMERO}}`)
-- [ ] Partita IVA (`{{PARTITA_IVA}}`)
-- [ ] Codice fiscale (`{{CODICE_FISCALE}}`)
+Già compilati con i dati reali: email, PEC, località ("San Lazzaro di Savena –
+Bologna", l'indirizzo dello studio di proposito non compare), iscrizione all'Ordine
+degli Psicologi dell'Emilia-Romagna n. 11846, P. IVA.
+
+- [ ] Telefono e WhatsApp dello studio — **oggi vuoti di proposito** (in attesa di un
+      numero dedicato allo studio): finché sono vuoti non compaiono da nessuna parte.
+      Dopo averli compilati, **testare il pulsante WhatsApp**.
+- [ ] Link LinkedIn / Instagram (facoltativi, oggi vuoti; usati solo nel JSON-LD)
 - [ ] Data di aggiornamento dell'informativa privacy (`{{DATA_AGGIORNAMENTO_PRIVACY}}`)
 - [ ] Numeri di supporto per la pagina emergenze — **da verificare con attenzione,
-      non sono mai stati cercati né inventati in questa sessione** (vedi sezione 4)
+      non sono mai stati cercati né inventati** (vedi sezione 4)
 
-## 2. Testi biografici e professionali (pagina "Chi sono")
+## 2. Foto delle tre sezioni della home
 
-`/admin` → **Pagine del sito → Chi sono**, oppure `src/content/pagine/chi-sono.md`.
+- [ ] `src/assets/foto/mi-presento.jpg`
+- [ ] `src/assets/foto/di-cosa-mi-occupo.jpg`
+- [ ] `src/assets/foto/la-mia-formazione.jpg`
+- [ ] Testo alternativo (e, se serve, didascalia) di ciascuna foto dal CMS
 
-- [ ] Corso di laurea (`{{CORSO_DI_LAUREA}}`) e Ateneo (`{{ATENEO}}`)
-- [ ] Formazione post-laurea (`{{FORMAZIONE_POST_LAUREA}}`)
-- [ ] Titoli di studio elencati (`{{TITOLO_DI_STUDIO_1}}`, `{{TITOLO_DI_STUDIO_2}}`)
-- [ ] Formazione continua (`{{FORMAZIONE_CONTINUA}}`)
-- [ ] L'intero testo della biografia e dell'approccio, oggi generico e di bozza
+Dettagli in `/docs/ASSETS.md`.
 
-## 3. Durata, frequenza e tempi di risposta
+## 3. Tempi di risposta
 
-- [ ] Durata di una seduta in minuti (`{{DURATA_SEDUTA_MINUTI}}`) — compare in
-      `src/content/pagine/come-lavoro.md` e `src/content/faq/durata-frequenza.md`
 - [ ] Tempi di risposta indicativi alle richieste (`{{TEMPI_RISPOSTA_GIORNI}}` in
       `src/pages/emergenze.astro`)
-- [ ] Informazioni sui costi (oggi la pagina FAQ dice esplicitamente che il costo
-      viene comunicato al primo contatto: decidere se mantenere questa scelta o
-      pubblicare una tariffa, vedi `src/content/faq/costi.md`)
 
 ## 4. Numeri di emergenza (delicato — verificare con cura)
 
@@ -66,8 +56,8 @@ acquistato, aggiornarlo in:
 
 ## 6. Fotografia e altri asset visivi
 
-Vedi la checklist completa in `/docs/ASSETS.md` (fotografia definitiva di Elisa,
-eventuale immagine Open Graph, illustrazioni).
+Vedi la checklist completa in `/docs/ASSETS.md` (eventuale immagine Open Graph,
+favicon definitiva).
 
 ## 7. Pagine legali
 

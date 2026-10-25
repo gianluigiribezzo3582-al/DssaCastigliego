@@ -4,24 +4,18 @@ import { glob } from "astro/loaders";
 // Nota per chi lavora dal CMS: i campi "draftNote" servono solo in fase di bozza,
 // non vengono mai mostrati in pagina — sono un promemoria interno.
 
-const aree = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/aree" }),
+// Le tre sezioni della home (Mi presento, Di cosa mi occupo, La mia formazione).
+// Il nome del file (es. "mi-presento") è anche l'ancora della sezione (#mi-presento)
+// e il nome della foto da mettere in src/assets/foto/ — vedi src/pages/index.astro.
+const sezioni = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/sezioni" }),
   schema: z.object({
     titolo: z.string(),
-    riassunto: z.string().max(220),
     ordine: z.number().int().default(0),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().max(160).optional(),
-    draftNote: z.string().optional(),
-  }),
-});
-
-const faq = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/faq" }),
-  schema: z.object({
-    domanda: z.string(),
-    ordine: z.number().int().default(0),
-    draftNote: z.string().optional(),
+    /** Testo alternativo della foto; vuoto = foto puramente decorativa. */
+    altFoto: z.string().optional(),
+    /** Didascalia facoltativa mostrata sotto la foto (es. titolo e autore di un'opera). */
+    didascaliaFoto: z.string().optional(),
   }),
 });
 
@@ -36,4 +30,4 @@ const pagine = defineCollection({
   }),
 });
 
-export const collections = { aree, faq, pagine };
+export const collections = { sezioni, pagine };

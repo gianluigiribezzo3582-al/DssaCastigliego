@@ -11,11 +11,6 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 const ROTTE = [
   "/",
-  "/chi-sono",
-  "/aree-di-intervento",
-  "/aree-di-intervento/ansia",
-  "/come-lavoro",
-  "/faq",
   "/contatti",
   "/emergenze",
   "/privacy",

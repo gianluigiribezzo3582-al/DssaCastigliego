@@ -323,4 +323,42 @@ sviluppo, non contenuto per il pubblico), su richiesta esplicita.
 
 ---
 
+## 23. Sito ridotto all'osso: una home con tre sezioni, contatti e pagine legali
+
+**Deciso (su richiesta esplicita):** rimosse le pagine Chi sono, Aree di intervento
+(le schede con etichette diagnostiche), Come lavoro, FAQ (incluse tariffe e
+"come funziona il primo colloquio") e la demo di prenotazione, con le relative
+collezioni del CMS. La home ora contiene tre sezioni — Mi presento, Di cosa mi
+occupo, La mia formazione — con i testi forniti dalla dott.ssa, riportati alla
+lettera, ognuna con una foto. Restano: Contatti (con il modulo), Emergenze, Privacy,
+Cookie policy, Note legali, 404.
+
+Altre modifiche richieste nello stesso passaggio:
+
+- **Niente telefono né WhatsApp** finché non c'è un numero dedicato allo studio. I
+  campi restano nel CMS (vuoti) e vengono mostrati solo se compilati, così riattivarli
+  non richiede modifiche al codice. Tolta dal modulo di contatto l'opzione "ricontattami
+  su WhatsApp" (il numero di telefono di chi scrive resta come recapito facoltativo).
+- **Nessun indirizzo dello studio**: ovunque compare solo "San Lazzaro di Savena –
+  Bologna" (anche nel JSON-LD, senza via e CAP). Rimossi orari e mappa.
+- **Solo in presenza**: eliminati tutti i riferimenti ai colloqui online.
+- **Dati reali** inseriti: Ordine degli Psicologi dell'Emilia-Romagna n. 11846,
+  P. IVA, email, PEC. Rimosso il codice fiscale (non fornito; la P. IVA basta).
+
+**Default scelti senza conferma esplicita (facili da invertire):** rimossa la demo
+di prenotazione (coerente con "ridurre all'osso"), mantenuti il modulo di contatto e
+la pagina Emergenze. Nessun testo descrittivo aggiunto in home oltre a nome,
+qualifica, località e la frase "Ricevo solo in presenza".
+
+**Foto**: abbinate per nome file (`src/assets/foto/<id-sezione>.<ext>`) tramite
+`import.meta.glob`, così passano dall'ottimizzazione di Astro e una foto mancante
+non rompe la build (compare un riquadro "Foto in arrivo"). Le foto non sono
+caricabili dal CMS: scelta voluta per mantenerle ottimizzate (vedi decisione 15 per
+il compromesso opposto, ora non più necessario).
+
+**Costo per cambiare idea:** basso — le pagine rimosse sono recuperabili dalla
+storia git (commit precedente a questo).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

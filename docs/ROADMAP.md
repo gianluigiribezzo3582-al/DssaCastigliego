@@ -1,7 +1,9 @@
 # Roadmap — dalla demo di prenotazione a un sistema reale
 
-`/demo-prenotazione` è un prototipo puramente front-end (vedi `/docs/REPORT.md` per
-cosa fa oggi). Questo documento elenca cosa servirebbe per trasformarlo in una
+> Nota: la demo `/demo-prenotazione` è stata rimossa quando il sito è stato
+> semplificato (vedi `/docs/DECISIONI.md` §23); resta recuperabile dalla storia git.
+
+`/demo-prenotazione` era un prototipo puramente front-end. Questo documento elenca cosa servirebbe per trasformarlo in una
 prenotazione realmente funzionante, e cosa comporterebbe una futura area riservata.
 Le stime sono grossolane, pensate per una discussione con Elisa su priorità e costi,
 non per un preventivo vincolante.

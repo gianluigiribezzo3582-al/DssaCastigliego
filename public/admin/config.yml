@@ -31,7 +31,7 @@ i18n:
 collections:
   - name: "pagine"
     label: "Pagine del sito"
-    description: "I testi delle pagine principali: Home, Chi sono, Come lavoro."
+    description: "Titolo e sottotitolo in cima alla home, e i testi per Google."
     files:
       - name: "home"
         label: "Home"
@@ -42,109 +42,77 @@ collections:
           - { label: "Titolo grande in home", name: "titolo", widget: "string" }
           - { label: "Sottotitolo in home", name: "sottotitolo", widget: "string" }
           - { label: "Nota di bozza (solo per uso interno, non è mai visibile online)", name: "draftNote", widget: "string", required: false }
-          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
 
-      - name: "chi-sono"
-        label: "Chi sono"
-        file: "src/content/pagine/chi-sono.md"
+  - name: "sezioni"
+    label: "Sezioni della home"
+    description: "I testi delle tre sezioni: Mi presento, Di cosa mi occupo, La mia formazione. Le foto non si cambiano da qui: vedi la guida."
+    files:
+      - name: "mi-presento"
+        label: "Mi presento"
+        file: "src/content/sezioni/mi-presento.md"
         fields:
-          - { label: "Titolo per la scheda del browser e per Google", name: "seoTitle", widget: "string" }
-          - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
-          - { label: "Titolo della pagina", name: "titolo", widget: "string" }
-          - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
-          - { label: "Testo della pagina", name: "body", widget: "markdown" }
-
-      - name: "come-lavoro"
-        label: "Come lavoro"
-        file: "src/content/pagine/come-lavoro.md"
+          - { label: "Titolo della sezione", name: "titolo", widget: "string" }
+          - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
+          - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
+          - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Testo della sezione", name: "body", widget: "markdown" }
+      - name: "di-cosa-mi-occupo"
+        label: "Di cosa mi occupo"
+        file: "src/content/sezioni/di-cosa-mi-occupo.md"
         fields:
-          - { label: "Titolo per la scheda del browser e per Google", name: "seoTitle", widget: "string" }
-          - { label: "Descrizione per Google (massimo 160 caratteri)", name: "seoDescription", widget: "text" }
-          - { label: "Titolo della pagina", name: "titolo", widget: "string" }
-          - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
-          - { label: "Testo della pagina", name: "body", widget: "markdown" }
-
-  - name: "aree"
-    label: "Aree di intervento"
-    description: "Una scheda per ogni area di cui ti occupi (ansia, relazioni, ecc.)."
-    folder: "src/content/aree"
-    create: true
-    slug: "{{fields.titolo}}"
-    fields:
-      - { label: "Titolo dell'area", name: "titolo", widget: "string" }
-      - { label: "Riassunto breve (mostrato nelle anteprime, massimo 220 caratteri)", name: "riassunto", widget: "text" }
-      - { label: "Ordine di visualizzazione (numero: più basso = più in alto nella lista)", name: "ordine", widget: "number", value_type: "int" }
-      - { label: "Titolo per Google (facoltativo)", name: "seoTitle", widget: "string", required: false }
-      - { label: "Descrizione per Google (facoltativo, massimo 160 caratteri)", name: "seoDescription", widget: "text", required: false }
-      - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
-      - { label: "Testo della scheda", name: "body", widget: "markdown" }
-
-  - name: "faq"
-    label: "Domande frequenti"
-    description: "Una scheda per ogni domanda della pagina FAQ."
-    folder: "src/content/faq"
-    create: true
-    slug: "{{fields.domanda}}"
-    fields:
-      - { label: "Domanda", name: "domanda", widget: "string" }
-      - { label: "Ordine di visualizzazione (numero: più basso = più in alto)", name: "ordine", widget: "number", value_type: "int" }
-      - { label: "Nota di bozza (solo per uso interno)", name: "draftNote", widget: "string", required: false }
-      - { label: "Risposta", name: "body", widget: "markdown" }
+          - { label: "Titolo della sezione", name: "titolo", widget: "string" }
+          - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
+          - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
+          - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Testo della sezione", name: "body", widget: "markdown" }
+      - name: "la-mia-formazione"
+        label: "La mia formazione"
+        file: "src/content/sezioni/la-mia-formazione.md"
+        fields:
+          - { label: "Titolo della sezione", name: "titolo", widget: "string" }
+          - { label: "Ordine (1 = la prima in alto)", name: "ordine", widget: "number", value_type: "int" }
+          - { label: "Descrizione della foto per chi non vede (facoltativa)", name: "altFoto", widget: "string", required: false, hint: "Una frase che descrive la foto, letta da chi usa un lettore di schermo. Lasciala vuota se la foto è solo decorativa." }
+          - { label: "Didascalia sotto la foto (facoltativa)", name: "didascaliaFoto", widget: "string", required: false, hint: "Es. titolo e autore di un'opera d'arte. Se vuota, non compare nulla." }
+          - { label: "Testo della sezione", name: "body", widget: "markdown" }
 
   - name: "dati_sito"
     label: "Contatti e dati dello studio"
-    description: "Email, telefono, WhatsApp, indirizzo, orari, Albo e numeri utili — usati in tutto il sito."
+    description: "Email, PEC, località dello studio, iscrizione all'Ordine e numeri utili — usati in tutto il sito."
     files:
       - name: "dati-sito"
         label: "Contatti e dati dello studio"
         file: "src/content/dati-sito.json"
         fields:
-          - label: "Foto del ritratto"
-            name: "fotoRitratto"
-            widget: "image"
-            required: false
-            hint: "Sostituisce ovunque la foto segnaposto attuale (home, Chi sono, Contatti). Se lasci questo campo vuoto resta la foto segnaposto. Funziona meglio con una foto abbastanza quadrata/verticale, senza soggetti troppo vicini ai bordi: viene ritagliata automaticamente in modo diverso nelle varie pagine."
           - label: "Contatti"
             name: "contatti"
             widget: "object"
             fields:
               - { label: "Email", name: "email", widget: "string" }
-              - { label: "Telefono", name: "telefono", widget: "string" }
-              - label: "Numero WhatsApp (solo cifre, formato internazionale, es. 393331234567)"
+              - { label: "PEC", name: "pec", widget: "string" }
+              - { label: "Telefono dello studio (lascia vuoto per non mostrarlo)", name: "telefono", widget: "string", required: false }
+              - label: "Numero WhatsApp dello studio (lascia vuoto per non mostrarlo; solo cifre, formato internazionale, es. 393331234567)"
                 name: "whatsappNumero"
                 widget: "string"
-                pattern: ["^[0-9]{8,15}$", "Solo cifre, senza + e senza spazi"]
+                required: false
+                pattern: ["^([0-9]{8,15})?$", "Solo cifre, senza + e senza spazi"]
 
           - label: "Social"
             name: "social"
             widget: "object"
             fields:
-              - { label: "Link LinkedIn", name: "linkedin", widget: "string" }
-              - { label: "Link Instagram", name: "instagram", widget: "string" }
+              - { label: "Link LinkedIn (facoltativo)", name: "linkedin", widget: "string", required: false }
+              - { label: "Link Instagram (facoltativo)", name: "instagram", widget: "string", required: false }
 
-          - label: "Indirizzo dello studio"
-            name: "indirizzoStudio"
-            widget: "object"
-            fields:
-              - { label: "Via e numero civico", name: "via", widget: "string" }
-              - { label: "CAP", name: "cap", widget: "string" }
+          - { label: "Località dello studio (mostrata al posto dell'indirizzo)", name: "localita", widget: "string" }
 
-          - label: "Orari"
-            name: "orari"
-            widget: "object"
-            fields:
-              - { label: "Giorni di apertura (es. Lunedì – Venerdì)", name: "giorni", widget: "string" }
-              - { label: "Fascia oraria (es. 9:00 - 18:00)", name: "orario", widget: "string" }
-
-          - label: "Iscrizione all'Albo"
+          - label: "Iscrizione all'Ordine degli Psicologi"
             name: "albo"
             widget: "object"
             fields:
-              - { label: "Regione dell'Albo", name: "regione", widget: "string" }
+              - { label: "Regione dell'Ordine", name: "regione", widget: "string" }
               - { label: "Numero di iscrizione", name: "numero", widget: "string" }
 
           - { label: "Partita IVA", name: "partitaIva", widget: "string" }
-          - { label: "Codice fiscale", name: "codiceFiscale", widget: "string" }
 
           - label: "Informativa privacy"
             name: "informativaPrivacy"

@@ -1,15 +1,12 @@
 ---
 import Mail from "@lucide/astro/icons/mail";
+import MapPin from "@lucide/astro/icons/map-pin";
 import MessageCircle from "@lucide/astro/icons/message-circle";
 import Phone from "@lucide/astro/icons/phone";
+import ShieldCheck from "@lucide/astro/icons/shield-check";
 import { Image } from "astro:assets";
 import linoTexture from "../assets/sfondi/lino-texture.jpg";
-import { site } from "../config/site";
-
-const waTesto = encodeURIComponent(
-  "Ciao, ho visto il sito e vorrei informazioni su un appuntamento.",
-);
-const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
+import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
 ---
 
 <footer
@@ -30,15 +27,16 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
         <p
           class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]"
         >
-          {site.nome}
+          {site.nomeConTitolo}
         </p>
         <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-          {site.titoloProfessionale} · {site.citta}
+          {site.titoloProfessionale}
         </p>
         <p class="mt-3 text-sm text-[var(--color-text-muted)]">
-          Albo {site.albo.regione} n. {site.albo.numero} · P.IVA {
-            site.partitaIva
-          }
+          {iscrizioneOrdine}
+        </p>
+        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+          {`P. IVA ${site.partitaIva}`}
         </p>
       </div>
 
@@ -57,21 +55,42 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
           <li>
             <a
               class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
-              href={`tel:${site.contatti.telefono}`}
+              href={`mailto:${site.contatti.pec}`}
             >
-              <Phone aria-hidden="true" size={15} />
-              {site.contatti.telefono}
+              <ShieldCheck aria-hidden="true" size={15} />
+              {`PEC: ${site.contatti.pec}`}
             </a>
           </li>
-          <li>
-            <a
-              class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
-              href={waHref}
-              rel="noopener"
-            >
-              <MessageCircle aria-hidden="true" size={15} />
-              WhatsApp (solo appuntamenti e questioni pratiche)
-            </a>
+          {
+            site.contatti.telefono && (
+              <li>
+                <a
+                  class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+                  href={`tel:${site.contatti.telefono}`}
+                >
+                  <Phone aria-hidden="true" size={15} />
+                  {site.contatti.telefono}
+                </a>
+              </li>
+            )
+          }
+          {
+            whatsappHref && (
+              <li>
+                <a
+                  class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
+                  href={whatsappHref}
+                  rel="noopener"
+                >
+                  <MessageCircle aria-hidden="true" size={15} />
+                  WhatsApp (solo appuntamenti e questioni pratiche)
+                </a>
+              </li>
+            )
+          }
+          <li class="inline-flex items-center gap-1.5">
+            <MapPin aria-hidden="true" size={15} />
+            {`Studio a ${site.localita}`}
           </li>
         </ul>
       </div>
@@ -120,7 +139,7 @@ const waHref = `https://wa.me/${site.contatti.whatsappNumero}?text=${waTesto}`;
     </p>
 
     <p class="mt-4 text-center text-xs text-[var(--color-text-muted)]">
-      {`© ${new Date().getFullYear()} ${site.nome} - Sviluppato da `}<a
+      {`© ${new Date().getFullYear()} ${site.nomeConTitolo} - Sviluppato da `}<a
         class="hover:text-[var(--color-primary)] hover:underline"
         href="https://gianluigiribezzo.dev"
         target="_blank"

@@ -1,28 +1,20 @@
 {
-  "fotoRitratto": "",
   "contatti": {
-    "email": "{{EMAIL_CONTATTO}}",
-    "telefono": "{{TELEFONO_CONTATTO}}",
-    "whatsappNumero": "{{WHATSAPP_NUMERO}}"
+    "email": "castigliego.elisa@yahoo.com",
+    "pec": "elisa.castigliego@psypec.it",
+    "telefono": "",
+    "whatsappNumero": ""
   },
   "social": {
-    "linkedin": "{{URL_LINKEDIN}}",
-    "instagram": "{{URL_INSTAGRAM}}"
+    "linkedin": "",
+    "instagram": ""
   },
-  "indirizzoStudio": {
-    "via": "{{INDIRIZZO_STUDIO_VIA}}",
-    "cap": "{{INDIRIZZO_STUDIO_CAP}}"
-  },
-  "orari": {
-    "giorni": "Lunedì – Venerdì",
-    "orario": "{{ORARIO_APERTURA}} - {{ORARIO_CHIUSURA}}"
-  },
+  "localita": "San Lazzaro di Savena – Bologna",
   "albo": {
-    "regione": "{{ALBO_REGIONE}}",
-    "numero": "{{ALBO_NUMERO}}"
+    "regione": "Emilia-Romagna",
+    "numero": "11846"
   },
-  "partitaIva": "{{PARTITA_IVA}}",
-  "codiceFiscale": "{{CODICE_FISCALE}}",
+  "partitaIva": "04365851205",
   "informativaPrivacy": {
     "versione": "0.1-bozza",
     "dataAggiornamento": "{{DATA_AGGIORNAMENTO_PRIVACY}}"

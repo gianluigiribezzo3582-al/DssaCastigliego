@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { site } from "../config/site";
+import { site, whatsappHref } from "../config/site";
 ---
 
 <Layout
@@ -25,10 +25,9 @@ import { site } from "../config/site";
     <h2>Titolare del trattamento</h2>
     <ul>
       <li>{site.titolareTrattamento}, {site.titoloProfessionale}</li>
-      <li>
-        Indirizzo: {site.indirizzoStudio.via}, {site.indirizzoStudio.citta}
-      </li>
+      <li>{`Studio a ${site.localita}`}</li>
       <li>Email: {site.contatti.email}</li>
+      <li>PEC: {site.contatti.pec}</li>
       <li>
         [SEGNAPOSTO] Eventuale responsabile della protezione dei dati (se
         nominato): {"{{DPO_NOME}}"}
@@ -86,15 +85,22 @@ import { site } from "../config/site";
       <code> /docs/PRIVACY.md</code>.
     </p>
 
-    <h2>WhatsApp</h2>
-    <p>
-      Il pulsante WhatsApp presente nel sito è un semplice collegamento (wa.me):
-      non carica alcuno script di Meta e non trasmette dati finché non viene
-      cliccato volontariamente. Una volta aperta la conversazione su WhatsApp,
-      il trattamento dei dati è regolato dall'informativa privacy di WhatsApp
-      stessa. Questo canale è pensato solo per appuntamenti e questioni
-      pratiche, non per contenuti clinici.
-    </p>
+    {
+      whatsappHref && (
+        <>
+          <h2>WhatsApp</h2>
+          <p>
+            Il pulsante WhatsApp presente nel sito è un semplice collegamento
+            (wa.me): non carica alcuno script di Meta e non trasmette dati
+            finché non viene cliccato volontariamente. Una volta aperta la
+            conversazione su WhatsApp, il trattamento dei dati è regolato
+            dall'informativa privacy di WhatsApp stessa. Questo canale è pensato
+            solo per appuntamenti e questioni pratiche, non per contenuti
+            clinici.
+          </p>
+        </>
+      )
+    }
 
     <h2>Per quanto tempo vengono conservati i dati</h2>
     <p>

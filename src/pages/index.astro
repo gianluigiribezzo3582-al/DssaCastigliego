@@ -1,20 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import RitrattoElisa from "../components/RitrattoElisa.astro";
 import Button from "../components/Button.astro";
-import Card from "../components/Card.astro";
-import Compass from "@lucide/astro/icons/compass";
-import MessageSquare from "@lucide/astro/icons/message-square";
-import Users from "@lucide/astro/icons/users";
 import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import tegoleTerracotta from "../assets/sfondi/tegole-terracotta.jpg";
 
 const homeEntry = await getEntry("pagine", "home");
-const { Content } = await render(homeEntry!);
 
-const aree = (await getCollection("aree")).sort(
-  (a, b) => a.data.ordine - b.data.ordine,
+// Foto delle sezioni: src/assets/foto/<id-sezione>.<estensione>, es.
+// src/assets/foto/mi-presento.jpg. Se il file manca la build non si rompe:
+// al suo posto compare un riquadro neutro "Foto in arrivo".
+const fotoDisponibili = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/foto/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP}",
+  { eager: true },
+);
+function fotoPer(id: string): ImageMetadata | undefined {
+  const percorso = Object.keys(fotoDisponibili).find(
+    (p) =>
+      p
+        .split("/")
+        .pop()!
+        .replace(/\.[^.]+$/, "") === id,
+  );
+  return percorso ? fotoDisponibili[percorso].default : undefined;
+}
+
+const sezioni = await Promise.all(
+  (await getCollection("sezioni"))
+    .sort((a, b) => a.data.ordine - b.data.ordine)
+    .map(async (sezione) => ({
+      id: sezione.id,
+      data: sezione.data,
+      foto: fotoPer(sezione.id),
+      Content: (await render(sezione)).Content,
+    })),
 );
 ---
 
@@ -22,135 +42,85 @@ const aree = (await getCollection("aree")).sort(
   title={homeEntry!.data.seoTitle}
   description={homeEntry!.data.seoDescription}
 >
-  <section
-    class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
-  >
-    <div class="grid items-center gap-8 sm:grid-cols-2 sm:gap-12">
-      <div>
-        <h1
-          class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl"
-        >
-          {homeEntry!.data.titolo}
-        </h1>
-        <p class="mt-3 text-lg text-[var(--color-text-muted)]">
-          {homeEntry!.data.sottotitolo}
-        </p>
-        <div class="prose-content mt-6">
-          <Content />
-        </div>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <Button href="/contatti">Scrivi per un primo contatto</Button>
-          <Button href="/come-lavoro" variant="secondary">Come lavoro</Button>
-        </div>
-      </div>
-      <div class="mx-auto w-full max-w-xs sm:max-w-sm">
-        <RitrattoElisa
-          variant="verticale"
-          class="w-full rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]"
-        />
-      </div>
-    </div>
-  </section>
-
-  <section
-    class="relative overflow-hidden bg-[var(--color-bg-alt)] py-10 sm:py-16"
-  >
+  <section class="relative overflow-hidden bg-[var(--color-bg-alt)]">
     <Image
       src={tegoleTerracotta}
       alt=""
       width={1600}
       height={900}
+      loading="eager"
       class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07]"
     />
-    <div class="relative mx-auto max-w-[var(--content-max-width)] px-4 sm:px-6">
-      <h2
-        class="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text)]"
+    <div
+      class="relative mx-auto max-w-[var(--content-max-width)] px-4 py-14 text-center sm:px-6 sm:py-20"
+    >
+      <h1
+        class="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[var(--color-text)] sm:text-5xl"
       >
-        Per chi lavoro
-      </h2>
-      <p
-        class="mt-2 max-w-[var(--prose-max-width)] text-[var(--color-text-muted)]"
-      >
-        Alcune delle aree su cui si concentra più spesso il lavoro con gli
-        adulti che arrivano in studio. L'elenco è indicativo: ogni percorso
-        parte dalla richiesta specifica della persona.
+        {homeEntry!.data.titolo}
+      </h1>
+      <p class="mt-3 text-lg text-[var(--color-text-muted)]">
+        {homeEntry!.data.sottotitolo}
       </p>
-      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          aree.map((area) => (
-            <li>
-              <Card href={`/aree-di-intervento/${area.id}`}>
-                <h3 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-[var(--color-text)]">
-                  {area.data.titolo}
-                </h3>
-                <p class="mt-2 text-sm text-[var(--color-text-muted)]">
-                  {area.data.riassunto}
-                </p>
-              </Card>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="mt-8 flex justify-center">
+        <Button href="/contatti">Contattami</Button>
+      </div>
     </div>
   </section>
 
+  {
+    sezioni.map((sezione, indice) => (
+      <section
+        id={sezione.id}
+        aria-labelledby={`titolo-${sezione.id}`}
+        class={`scroll-mt-4 py-12 sm:py-20 ${indice % 2 === 1 ? "bg-[var(--color-bg-alt)]" : ""}`}
+      >
+        <div class="mx-auto grid max-w-[var(--content-max-width)] items-center gap-8 px-4 sm:px-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12">
+          <figure
+            class={`mx-auto w-full max-w-sm ${indice % 2 === 1 ? "md:order-2" : ""}`}
+          >
+            {sezione.foto ? (
+              <Image
+                src={sezione.foto}
+                alt={sezione.data.altFoto ?? ""}
+                width={800}
+                class="aspect-[4/5] w-full rounded-[var(--radius-lg)] object-cover shadow-[var(--shadow-card)]"
+              />
+            ) : (
+              <div class="flex aspect-[4/5] w-full items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)]">
+                Foto in arrivo
+              </div>
+            )}
+            {sezione.data.didascaliaFoto && (
+              <figcaption class="mt-2 text-center text-xs text-[var(--color-text-muted)] italic">
+                {sezione.data.didascaliaFoto}
+              </figcaption>
+            )}
+          </figure>
+          <div>
+            <h2
+              id={`titolo-${sezione.id}`}
+              class="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text)] sm:text-3xl"
+            >
+              {sezione.data.titolo}
+            </h2>
+            <div class="prose-content mt-5">
+              <sezione.Content />
+            </div>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
   <section
-    class="mx-auto max-w-[var(--content-max-width)] px-4 py-10 sm:px-6 sm:py-16"
+    class="mx-auto max-w-[var(--content-max-width)] px-4 py-12 text-center sm:px-6 sm:py-16"
   >
-    <h2
-      class="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text)]"
-    >
-      Come si inizia
-    </h2>
-    <ol class="mt-6 grid gap-6 sm:grid-cols-3">
-      <li
-        class="rounded-[var(--radius-lg)] border border-[var(--color-border)] p-5"
-      >
-        <span
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-bg-alt)] text-[var(--color-primary)]"
-        >
-          <MessageSquare aria-hidden="true" size={20} />
-        </span>
-        <p class="mt-3 font-semibold text-[var(--color-text)]">
-          Un primo contatto
-        </p>
-        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-          Tramite il modulo di contatto, email o WhatsApp.
-        </p>
-      </li>
-      <li
-        class="rounded-[var(--radius-lg)] border border-[var(--color-border)] p-5"
-      >
-        <span
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-bg-alt)] text-[var(--color-primary)]"
-        >
-          <Users aria-hidden="true" size={20} />
-        </span>
-        <p class="mt-3 font-semibold text-[var(--color-text)]">
-          Un primo colloquio
-        </p>
-        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-          Per conoscersi e capire insieme la richiesta.
-        </p>
-      </li>
-      <li
-        class="rounded-[var(--radius-lg)] border border-[var(--color-border)] p-5"
-      >
-        <span
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-bg-alt)] text-[var(--color-primary)]"
-        >
-          <Compass aria-hidden="true" size={20} />
-        </span>
-        <p class="mt-3 font-semibold text-[var(--color-text)]">
-          Si decide insieme come proseguire
-        </p>
-        <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-          Nessun percorso standardizzato: si valuta insieme, senza obblighi.
-        </p>
-      </li>
-    </ol>
-    <div class="mt-8">
-      <Button href="/contatti">Vai ai contatti</Button>
+    <p class="text-lg text-[var(--color-text)]">
+      Ricevo solo in presenza, nello studio di San Lazzaro di Savena (BO).
+    </p>
+    <div class="mt-6 flex justify-center">
+      <Button href="/contatti">Scrivimi</Button>
     </div>
   </section>
 </Layout>
