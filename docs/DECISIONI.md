@@ -348,7 +348,7 @@ Altre modifiche richieste nello stesso passaggio:
 **Default scelti senza conferma esplicita (facili da invertire):** rimossa la demo
 di prenotazione (coerente con "ridurre all'osso"), mantenuti il modulo di contatto e
 la pagina Emergenze. Nessun testo descrittivo aggiunto in home oltre a nome,
-qualifica, località e la frase "Ricevo solo in presenza".
+qualifica e località. (Aggiornamento su richiesta di Elisa: "Mi presento" inizia con "Sono la Dott.ssa…" ed è seguito da "Ricevo in presenza a San Lazzaro di Savena."; tolto ovunque "solo" da "solo in presenza".)
 
 **Foto**: abbinate per nome file (`src/assets/foto/<id-sezione>.<ext>`) tramite
 `import.meta.glob`, così passano dall'ottimizzazione di Astro e una foto mancante
