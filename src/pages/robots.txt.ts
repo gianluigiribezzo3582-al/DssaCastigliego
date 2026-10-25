@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { percorso } from "../lib/percorsi";
 
 // robots.txt generato in build, così l'indirizzo della sitemap segue sempre il
-// dominio reale (su Netlify viene dalla variabile URL, vedi astro.config.mjs).
+// dominio del sito (vedi astro.config.mjs).
 // Tutti i bot sono ammessi, inclusi quelli dei servizi di IA (scelta esplicita).
 // Con PUBLIC_NOINDEX=on (build di anteprima) blocca tutto.
 export const GET: APIRoute = ({ site }) => {

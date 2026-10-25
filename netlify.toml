@@ -1,8 +1,7 @@
 # Configurazione di Netlify (hosting di produzione). Vedi /docs/DEPLOY.md.
 #
-# Il dominio del sito arriva in build dalla variabile URL che Netlify imposta da
-# sola (il dominio principale, cioè quello Aruba una volta collegato): non va
-# scritto da nessuna parte nel codice. Vedi astro.config.mjs.
+# Il dominio ufficiale (www.elisacastigliegopsicologa.it) è in astro.config.mjs.
+# Guida completa alla messa online: /docs/MESSA-ONLINE.md.
 
 [build]
   command = "npm run build"

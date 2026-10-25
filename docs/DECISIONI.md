@@ -380,7 +380,7 @@ variabili la build è identica a prima (base `/`, modulo attivo).
 
 **Deciso:** hosting di produzione su Netlify con dominio registrato su Aruba.
 
-- Il dominio arriva in build dalla variabile `URL` di Netlify (`astro.config.mjs`),
+- (Superato dal §28: ora il dominio è fisso in `astro.config.mjs`.) Il dominio arrivava in build dalla variabile `URL` di Netlify,
   quindi non è scritto nel codice; `robots.txt` è generato in build
   (`src/pages/robots.txt.ts`) e punta sempre alla sitemap giusta.
 - Bot: tutti ammessi, compresi quelli dei servizi di IA (scelta esplicita); esclusi
@@ -431,6 +431,17 @@ messaggio che non arriva.
 
 **Limite noto (invariato):** il rate limit resta in memoria della singola istanza
 della function, come su Cloudflare (vedi `BLOCCHI.md` voce 5).
+
+---
+
+## 28. Dominio ufficiale fisso: www.elisacastigliegopsicologa.it
+
+**Deciso:** il dominio è scritto in `astro.config.mjs` invece di arrivare dalla
+variabile `URL` di Netlify. Prima che il dominio sia collegato, `URL` varrebbe
+l'indirizzo provvisorio `*.netlify.app`, e canonical, sitemap e Open Graph lo
+seguirebbero fino al deploy successivo. Con il dominio fisso puntano sempre a quello
+ufficiale. Versione principale con `www`, come consiglia Netlify; il dominio senza
+`www` reindirizza. Guida operativa: `/docs/MESSA-ONLINE.md`.
 
 ---
 

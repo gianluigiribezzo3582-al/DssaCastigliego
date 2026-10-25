@@ -7,7 +7,8 @@ apposta per non rischiare di pubblicare per errore un dato reale sbagliato.
 ## Stato attuale
 
 Tutti i segnaposto del sito sono stati compilati e le note di bozza rimosse.
-Restano solo queste verifiche e azioni prima/dopo la messa online:
+Restano solo queste verifiche e azioni prima/dopo la messa online (guida completa
+passo per passo: `/docs/MESSA-ONLINE.md`):
 
 - [ ] Verificare che i numeri di supporto in `/emergenze` siano corretti e attivi
       (Telefono Azzurro 19696, Telefono Amico Italia 02 2327 2327).

@@ -179,24 +179,10 @@ Differenze rispetto a Cloudflare Pages, da sapere:
 
 ## Netlify (hosting di produzione) con dominio Aruba
 
-La configurazione è in `netlify.toml` (build `npm run build`, cartella `dist`,
-Node 22). Passi da fare una volta:
-
-1. Netlify → **Add new site → Import an existing project → GitHub** → scegli
-   questo repository, branch `main`. Le impostazioni di build vengono lette da
-   `netlify.toml`.
-2. Netlify → **Domain management → Add a domain** → inserisci il dominio
-   registrato su Aruba (es. `www.dominio.it`) e impostalo come **primary domain**.
-3. Su Aruba (pannello DNS del dominio): crea i record indicati da Netlify, di
-   norma un `CNAME` per `www` verso `<nome-sito>.netlify.app` e un record `A` per
-   il dominio senza `www` verso il load balancer di Netlify (l'IP lo mostra
-   Netlify). In alternativa puoi delegare i DNS a Netlify cambiando i nameserver.
-4. Attendi la propagazione e l'emissione automatica del certificato HTTPS.
-5. Dopo che il dominio è attivo, rilancia un deploy (Deploys → Trigger deploy): il
-   dominio entra nel sito in build tramite la variabile `URL` di Netlify
-   (canonical, sitemap, robots.txt, Open Graph, JSON-LD). Non va scritto nel codice.
-6. Google Search Console: aggiungi il dominio e invia `https://<dominio>/sitemap-index.xml`.
-   Stesso per Bing Webmaster Tools (può importare da Search Console).
+Dominio: **www.elisacastigliegopsicologa.it** (scritto in `astro.config.mjs`).
+La configurazione di build è in `netlify.toml` (`npm run build`, cartella `dist`,
+Node 22). **La procedura passo per passo, con i record DNS da inserire su Aruba,
+è in `/docs/MESSA-ONLINE.md`.**
 
 ### Modulo di contatto e protezione di `/admin` su Netlify
 
