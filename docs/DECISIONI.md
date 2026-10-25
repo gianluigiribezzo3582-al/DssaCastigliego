@@ -500,4 +500,16 @@ resta intero anche quando un'app ritaglia l'anteprima a quadrato.
 
 ---
 
+## 32. Keep-alive settimanale della chiave API di Brevo
+
+**Deciso:** la chiave API di Brevo (accesso limitato a "Email transazionali") scade
+dopo 90 giorni di inutilizzo; con poche richieste dal modulo potrebbe succedere,
+e il modulo smetterebbe di inviare. `netlify/functions/brevo-keepalive.ts` è una
+Netlify Scheduled Function (`@weekly`) che fa una GET di sola lettura alle
+statistiche delle email transazionali: nessun invio, nessuna modifica, nessun
+costo. Se Brevo risponde con un errore (chiave scaduta o revocata), lo segnala nei
+log della function.
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

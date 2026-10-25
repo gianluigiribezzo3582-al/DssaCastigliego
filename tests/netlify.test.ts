@@ -130,3 +130,53 @@ describe("moduloContattoAttivo", () => {
     expect(moduloContattoAttivo()).toBe(true);
   });
 });
+
+describe("Netlify Scheduled Function brevo-keepalive", () => {
+  afterEach(() => {
+    delete process.env.MAIL_DRIVER;
+    delete process.env.BREVO_API_KEY;
+    vi.restoreAllMocks();
+  });
+
+  it("senza Brevo configurato non fa richieste", async () => {
+    const { default: keepalive } =
+      await import("../netlify/functions/brevo-keepalive");
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchSpia = vi.spyOn(globalThis, "fetch");
+    expect((await keepalive()).status).toBe(200);
+    expect(fetchSpia).not.toHaveBeenCalled();
+  });
+
+  it("con Brevo fa una sola richiesta GET di lettura, con la chiave", async () => {
+    const { default: keepalive, config } =
+      await import("../netlify/functions/brevo-keepalive");
+    process.env.MAIL_DRIVER = "brevo";
+    process.env.BREVO_API_KEY = "chiave-finta";
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchSpia = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(new Response("{}", { status: 200 }));
+    expect((await keepalive()).status).toBe(200);
+    expect(fetchSpia).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchSpia.mock.calls[0];
+    expect(String(url)).toContain("/v3/smtp/statistics/");
+    expect(init?.method ?? "GET").toBe("GET");
+    expect((init?.headers as Record<string, string>)["api-key"]).toBe(
+      "chiave-finta",
+    );
+    expect(config.schedule).toBe("@weekly");
+  });
+
+  it("segnala nei log una chiave non valida", async () => {
+    const { default: keepalive } =
+      await import("../netlify/functions/brevo-keepalive");
+    process.env.MAIL_DRIVER = "brevo";
+    process.env.BREVO_API_KEY = "chiave-scaduta";
+    const erroreSpia = vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response("{}", { status: 401 }),
+    );
+    expect((await keepalive()).status).toBe(502);
+    expect(erroreSpia).toHaveBeenCalled();
+  });
+});
