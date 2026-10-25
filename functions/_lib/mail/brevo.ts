@@ -40,7 +40,7 @@ export function creaDriverBrevo(config: ConfigurazioneBrevo): DriverMail {
         if (!risposta.ok) {
           return {
             ok: false,
-            errore: `Brevo ha risposto con stato ${risposta.status}`,
+            errore: `Brevo ha risposto con stato ${risposta.status}${await dettaglioErrore(risposta)}`,
           };
         }
 
@@ -53,4 +53,27 @@ export function creaDriverBrevo(config: ConfigurazioneBrevo): DriverMail {
       }
     },
   };
+}
+
+/**
+ * Estrae codice e messaggio dall'errore di Brevo (es. "unauthorized: Key not
+ * found", "invalid_parameter: sender is not valid") per i log della function.
+ * Il corpo della risposta di errore di Brevo non contiene i dati del modulo.
+ */
+async function dettaglioErrore(risposta: Response): Promise<string> {
+  try {
+    const testo = (await risposta.text()).slice(0, 300);
+    try {
+      const { code, message } = JSON.parse(testo) as {
+        code?: string;
+        message?: string;
+      };
+      if (code || message) return ` (${code ?? "?"}: ${message ?? ""})`;
+    } catch {
+      // risposta non JSON: si usa il testo così com'è
+    }
+    return testo ? ` (${testo})` : "";
+  } catch {
+    return "";
+  }
 }
