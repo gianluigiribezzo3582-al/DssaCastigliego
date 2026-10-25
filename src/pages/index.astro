@@ -87,6 +87,15 @@ const sezioni = await Promise.all(
     sezioni.map((sezione, indice) => {
       const alternata = indice % 2 === 1;
       const ultima = indice === sezioni.length - 1;
+      // Senza foto la sezione passa a due colonne di testo: titolo a sinistra
+      // (fermo su desktop), testo a destra. Nessun riquadro vuoto sul sito.
+      const conFoto = Boolean(sezione.foto);
+      const classiTitolo = conFoto
+        ? `md:col-span-6 md:row-start-1 md:self-end ${alternata ? "md:col-start-1" : "md:col-start-7"}`
+        : "md:sticky md:top-10 md:col-span-4 md:col-start-1 md:row-start-1 md:self-start";
+      const classiTesto = conFoto
+        ? `md:col-span-6 md:row-start-2 ${alternata ? "md:col-start-1" : "md:col-start-7"}`
+        : "md:col-span-7 md:col-start-6 md:row-start-1";
       return (
         <section
           id={sezione.id}
@@ -94,9 +103,7 @@ const sezioni = await Promise.all(
           class={`scroll-mt-6 py-14 sm:py-20 md:py-28 ${alternata ? "bg-[var(--color-bg-alt)]" : ""} ${ultima ? "" : "border-b border-[var(--color-border)]"}`}
         >
           <div class="mx-auto grid max-w-[var(--content-max-width)] gap-8 px-4 sm:px-6 md:grid-cols-12 md:gap-x-12 md:gap-y-6">
-            <header
-              class={`md:col-span-6 md:row-start-1 md:self-end ${alternata ? "md:col-start-1" : "md:col-start-7"}`}
-            >
+            <header class={classiTitolo}>
               <p class="numero-sezione">
                 {String(indice + 1).padStart(2, "0")}
               </p>
@@ -108,34 +115,30 @@ const sezioni = await Promise.all(
               </h2>
             </header>
 
-            <figure
-              class={`w-full max-w-[22rem] pr-2.5 pb-2.5 md:sticky md:top-10 md:row-span-2 md:row-start-1 md:max-w-none md:self-start ${alternata ? "md:col-span-5 md:col-start-8" : "md:col-span-5 md:col-start-1"}`}
-            >
-              <div class="cornice">
-                {sezione.foto ? (
-                  <Image
-                    src={sezione.foto}
-                    alt={sezione.data.altFoto ?? ""}
-                    widths={[384, 768]}
-                    sizes="(min-width: 768px) 40vw, calc(100vw - 2rem)"
-                    class={`block aspect-[4/5] w-full object-cover ${posizioneFoto[sezione.data.allineamentoFoto]}`}
-                  />
-                ) : (
-                  <div class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)]">
-                    Foto in arrivo
-                  </div>
+            {conFoto && (
+              <figure
+                class={`w-full max-w-[22rem] pr-2.5 pb-2.5 md:sticky md:top-10 md:row-span-2 md:row-start-1 md:max-w-none md:self-start ${alternata ? "md:col-span-5 md:col-start-8" : "md:col-span-5 md:col-start-1"}`}
+              >
+                <div class="cornice">
+                  {sezione.foto && (
+                    <Image
+                      src={sezione.foto}
+                      alt={sezione.data.altFoto ?? ""}
+                      widths={[384, 768]}
+                      sizes="(min-width: 768px) 40vw, calc(100vw - 2rem)"
+                      class={`block aspect-[4/5] w-full object-cover ${posizioneFoto[sezione.data.allineamentoFoto]}`}
+                    />
+                  )}
+                </div>
+                {sezione.data.didascaliaFoto && (
+                  <figcaption class="mt-5 border-l border-[var(--color-primary)] pl-3 text-xs leading-relaxed text-[var(--color-text-muted)] italic">
+                    {sezione.data.didascaliaFoto}
+                  </figcaption>
                 )}
-              </div>
-              {sezione.data.didascaliaFoto && (
-                <figcaption class="mt-5 border-l border-[var(--color-primary)] pl-3 text-xs leading-relaxed text-[var(--color-text-muted)] italic">
-                  {sezione.data.didascaliaFoto}
-                </figcaption>
-              )}
-            </figure>
+              </figure>
+            )}
 
-            <div
-              class={`testo-sezione md:col-span-6 md:row-start-2 ${alternata ? "md:col-start-1" : "md:col-start-7"}`}
-            >
+            <div class={`testo-sezione ${classiTesto}`}>
               <sezione.Content />
             </div>
           </div>

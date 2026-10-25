@@ -13,11 +13,14 @@ minuti a qualche ora, raramente fino a 24-48 ore).
 
 ## 0. Prima di tutto: contenuti (con Elisa)
 
-- [ ] **Illustrazione di "La mia formazione"**: è un'opera firmata (sembra
-      "B. Alemagna"). Serve il permesso dell'autrice o dell'editore per pubblicarla.
-      Se c'è, aggiungi il credito nella didascalia (`/admin` o
-      `src/content/sezioni/la-mia-formazione.md`, campo `didascaliaFoto`). Se non c'è,
-      sostituisci il file `src/assets/foto/la-mia-formazione.jpg`.
+- [ ] **Immagine di "La mia formazione"**: l'illustrazione firmata è stata tolta
+      (manca il permesso dell'autrice). Oggi la sezione è solo testo. Se trovate
+      un'immagine utilizzabile (foto vostra, opera di pubblico dominio o con licenza
+      libera, illustrazione commissionata), caricala come
+      `src/assets/foto/la-mia-formazione.jpg`.
+- [ ] **Anteprima di condivisione (WhatsApp/social)**: quando c'è il logo, caricalo
+      come `src/assets/social/anteprima.png` (1200 × 630 px). Vedi
+      `src/assets/social/LEGGIMI.md`.
 - [ ] **Numeri in `/emergenze`**: verifica che Telefono Azzurro (19696) e Telefono
       Amico Italia (02 2327 2327) siano corretti e attivi.
 - [ ] **Privacy e note legali**: falle rileggere a chi se ne occupa. Valutate insieme

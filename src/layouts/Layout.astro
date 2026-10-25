@@ -8,6 +8,7 @@ import TornaSu from "../components/TornaSu.astro";
 import { schemaPsychologist, schemaWebSite } from "../lib/jsonld";
 import { fotoPer } from "../lib/foto";
 import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { site } from "../config/site";
 
 interface Props {
@@ -41,24 +42,39 @@ const urlHome = new URL(percorso("/"), Astro.site).href;
 // contenuti duplicati nei motori di ricerca.
 const nascondiAiMotori = noindex || import.meta.env.PUBLIC_NOINDEX === "on";
 
-// Immagine per l'anteprima nei social/messaggistica (og:image): la foto di
-// "Mi presento" ritagliata 1200×630, se presente. Senza foto il tag è omesso.
-const fotoRitratto = fotoPer("mi-presento");
-const immagineSocial = fotoRitratto
+// Immagine dell'anteprima quando il link viene condiviso (WhatsApp, social):
+// src/assets/social/anteprima.<estensione>, idealmente 1200×630 (es. il logo).
+// Finché il file non c'è, l'anteprima mostra solo titolo e descrizione.
+const fileAnteprima = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>(
+    "../assets/social/anteprima.{png,jpg,jpeg,webp}",
+    { eager: true },
+  ),
+)[0]?.default;
+const immagineSocial = fileAnteprima
   ? new URL(
       (
         await getImage({
-          src: fotoRitratto,
+          src: fileAnteprima,
           width: 1200,
           height: 630,
           fit: "cover",
-          position: "top",
-          format: "jpeg",
+          format: "png",
         })
       ).src,
       Astro.site,
     ).href
   : undefined;
+
+// Immagine nei dati strutturati per Google (non compare nelle anteprime di
+// condivisione): il ritratto di "Mi presento", se presente.
+const fotoRitratto = fotoPer("mi-presento");
+const immagineSchema = fotoRitratto
+  ? new URL(
+      (await getImage({ src: fotoRitratto, width: 800, format: "jpeg" })).src,
+      Astro.site,
+    ).href
+  : new URL(percorso("/favicon.svg"), Astro.site).href;
 
 const jsonLdCompleto = senzaSchemaOrganizzazione
   ? jsonLd
@@ -66,8 +82,7 @@ const jsonLdCompleto = senzaSchemaOrganizzazione
       schemaPsychologist({
         urlHome,
         descrizione: description,
-        immagine:
-          immagineSocial ?? new URL(percorso("/favicon.svg"), Astro.site).href,
+        immagine: immagineSchema,
       }),
       schemaWebSite(urlHome),
       ...jsonLd,
