@@ -9,8 +9,13 @@ import sitemap from "@astrojs/sitemap";
 const DOMINIO_SEGNAPOSTO = "https://www.esempio-elisa-castigliego.it";
 
 // https://astro.build/config
+// SITE_URL e BASE_PATH vengono impostati dal workflow di GitHub Pages
+// (.github/workflows/deploy-pages.yml): lì il sito vive in una sottocartella
+// (es. /DssaCastigliego/). Altrove (sviluppo, Cloudflare Pages, dominio proprio)
+// restano vuoti e il sito sta alla radice.
 export default defineConfig({
-  site: DOMINIO_SEGNAPOSTO,
+  site: process.env.SITE_URL || DOMINIO_SEGNAPOSTO,
+  base: process.env.BASE_PATH || "/",
   output: "static",
   integrations: [
     mdx(),

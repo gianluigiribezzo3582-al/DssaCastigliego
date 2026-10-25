@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../lib/percorsi";
 import Layout from "../layouts/Layout.astro";
 import { site, whatsappHref } from "../config/site";
 ---
@@ -38,7 +39,7 @@ import { site, whatsappHref } from "../config/site";
     <p>
       Il sito non raccoglie dati di navigazione tramite cookie o strumenti di
       analytics. Gli unici dati personali trattati sono quelli che l'utente
-      sceglie volontariamente di inserire nel <a href="/contatti"
+      sceglie volontariamente di inserire nel <a href={percorso("/contatti")}
         >modulo di contatto</a
       >: nome o identificativo a scelta, un recapito (email o telefono), la
       preferenza di contatto, la disponibilità indicativa e un messaggio libero.

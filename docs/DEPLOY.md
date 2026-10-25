@@ -153,3 +153,26 @@ Vedi `/docs/CMS.md` per la procedura completa e separata.
       strumenti sviluppatore del browser, scheda Network)
 - [ ] `/demo-prenotazione` e `/admin` non compaiono nei risultati di ricerca dopo
       qualche settimana (verifica indicizzazione)
+
+## GitHub Pages (pubblicazione attuale, temporanea)
+
+Il sito si può pubblicare anche su GitHub Pages tramite il workflow
+`.github/workflows/deploy-pages.yml`, che parte a ogni push su `main`.
+
+**Una sola volta:** su GitHub → Settings → Pages → "Build and deployment" →
+**Source: GitHub Actions**. Con "Deploy from a branch" GitHub prova a costruire il
+sito con Jekyll e fallisce (è un progetto Astro).
+
+Differenze rispetto a Cloudflare Pages, da sapere:
+
+- Il sito vive in una sottocartella (`https://<utente>.github.io/DssaCastigliego/`):
+  il workflow passa ad Astro `SITE_URL` e `BASE_PATH`, e tutti i link interni usano
+  `percorso()` (`src/lib/percorsi.ts`). Con un dominio personalizzato la base torna
+  automaticamente `/`.
+- **Nessun codice lato server**: il modulo di contatto (`/api/contatto`) non può
+  funzionare. Il workflow imposta `PUBLIC_MODULO_CONTATTO=off` e la pagina Contatti
+  mostra solo l'invito a scrivere via email.
+- **`/admin` non è protetto** (il middleware Basic Auth è una Pages Function). Senza
+  la GitHub App collegata il CMS consente solo il lavoro su una copia locale del
+  repository, quindi online non permette modifiche, ma la pagina è raggiungibile.
+- Il file `_headers` (CSP e header di sicurezza) viene ignorato da GitHub Pages.

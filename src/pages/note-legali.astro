@@ -1,4 +1,5 @@
 ---
+import { percorso } from "../lib/percorsi";
 import Layout from "../layouts/Layout.astro";
 import { iscrizioneOrdine, site } from "../config/site";
 ---
@@ -46,7 +47,7 @@ import { iscrizioneOrdine, site } from "../config/site";
     <p>
       Il sito è ospitato su Cloudflare Pages. Il modulo di contatto utilizza,
       quando attivo, il servizio di invio email Brevo. Dettagli completi sul
-      trattamento dei dati in <a href="/privacy">Privacy Policy</a>.
+      trattamento dei dati in <a href={percorso("/privacy")}>Privacy Policy</a>.
     </p>
 
     <h2>Proprietà dei contenuti</h2>
