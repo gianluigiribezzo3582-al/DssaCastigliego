@@ -10,14 +10,16 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  # Il modulo di contatto usa una Cloudflare Pages Function (cartella functions/)
-  # che su Netlify non gira: la pagina Contatti mostra il riquadro email.
-  PUBLIC_MODULO_CONTATTO = "off"
 
-# La cartella functions/ contiene Cloudflare Pages Functions, non funzioni
-# Netlify: punta Netlify a una cartella diversa (inesistente) per non usarle.
+# Modulo di contatto: netlify/functions/contatto.ts (su /api/contatto).
+# Protezione di /admin: netlify/edge-functions/proteggi-admin.ts.
+# La cartella functions/ in radice contiene invece le Cloudflare Pages Functions:
+# qui si indica esplicitamente la cartella di Netlify.
+# Il modulo compare sul sito solo quando MAIL_DRIVER=brevo e BREVO_API_KEY sono
+# impostate tra le variabili d'ambiente di Netlify (vedi src/lib/modulo-contatto.ts).
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 # Anteprime delle pull request e dei branch: mai indicizzate dai motori di ricerca.
 [context.deploy-preview.environment]

@@ -415,4 +415,23 @@ per la struttura della home (`src/pages/index.astro`).
 
 ---
 
+## 27. Modulo di contatto e protezione di `/admin` portati su Netlify
+
+**Deciso:** la logica del modulo è stata estratta in
+`functions/_lib/gestore-contatto.ts`, usata sia dalla Cloudflare Pages Function sia
+dalla nuova Netlify Function (`netlify/functions/contatto.ts`, path `/api/contatto`).
+Il controllo Basic Auth è in `functions/_lib/accesso-admin.ts`, usato dal middleware
+Cloudflare e dalla Netlify Edge Function `netlify/edge-functions/proteggi-admin.ts`.
+Nessuna logica duplicata, stessi test.
+
+**Salvaguardie:** su Netlify il modulo compare solo se in build ci sono
+`MAIL_DRIVER=brevo` e `BREVO_API_KEY` (`src/lib/modulo-contatto.ts`); in produzione la
+function risponde 503 invece di usare il driver finto. Così nessuno può inviare un
+messaggio che non arriva.
+
+**Limite noto (invariato):** il rate limit resta in memoria della singola istanza
+della function, come su Cloudflare (vedi `BLOCCHI.md` voce 5).
+
+---
+
 _Le decisioni successive vengono aggiunte in fondo a questo file man mano che emergono._

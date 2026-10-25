@@ -1,4 +1,5 @@
 import type { PagesFunction } from "@cloudflare/workers-types";
+import { controllaAccessoAdmin } from "./_lib/accesso-admin";
 
 export interface Env {
   ADMIN_BASIC_AUTH_USER?: string;
@@ -26,31 +27,11 @@ export interface Env {
  */
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, next, env } = context;
-  const url = new URL(request.url);
-
-  if (!url.pathname.startsWith("/admin")) {
-    return next();
-  }
-
-  const utente = env.ADMIN_BASIC_AUTH_USER;
-  const password = env.ADMIN_BASIC_AUTH_PASS;
-
-  if (!utente || !password) {
-    return next();
-  }
-
-  const intestazione = request.headers.get("authorization") ?? "";
-  const atteso = `Basic ${btoa(`${utente}:${password}`)}`;
-
-  if (intestazione !== atteso) {
-    return new Response("Accesso riservato.", {
-      status: 401,
-      headers: {
-        "www-authenticate": 'Basic realm="Area riservata", charset="UTF-8"',
-        "content-type": "text/plain; charset=utf-8",
-      },
-    });
-  }
-
-  return next();
+  return (
+    controllaAccessoAdmin(
+      request,
+      env.ADMIN_BASIC_AUTH_USER,
+      env.ADMIN_BASIC_AUTH_PASS,
+    ) ?? next()
+  );
 };

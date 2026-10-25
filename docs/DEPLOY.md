@@ -198,10 +198,54 @@ Node 22). Passi da fare una volta:
 6. Google Search Console: aggiungi il dominio e invia `https://<dominio>/sitemap-index.xml`.
    Stesso per Bing Webmaster Tools (può importare da Search Console).
 
-Cosa funziona su Netlify: tutto il sito statico e il file `_headers` generato in
-build (CSP, header di sicurezza, cache di un anno per `/_astro/*`). Cosa no: il
-modulo di contatto e la protezione di `/admin`, che sono Cloudflare Pages
-Functions (`functions/`); la pagina Contatti mostra quindi il riquadro email
-(`PUBLIC_MODULO_CONTATTO=off` in `netlify.toml`). Le anteprime di branch e pull
-request sono marcate `noindex`. La copia su GitHub Pages resta come anteprima,
-anch'essa `noindex`: puoi disattivarla da Settings → Pages quando Netlify è online.
+### Modulo di contatto e protezione di `/admin` su Netlify
+
+Funzionano entrambi su Netlify:
+
+- **Modulo**: `netlify/functions/contatto.ts` risponde su `/api/contatto` con la
+  stessa logica della versione Cloudflare (`functions/_lib/gestore-contatto.ts`:
+  validazione, honeypot, time-trap, rate limit, invio con Brevo).
+- **`/admin`**: `netlify/edge-functions/proteggi-admin.ts` chiede nome utente e
+  password (Basic Auth).
+
+Il modulo **compare sul sito solo quando l'invio reale è configurato**
+(`MAIL_DRIVER=brevo` e `BREVO_API_KEY` presenti in build, vedi
+`src/lib/modulo-contatto.ts`); finché non lo è, la pagina Contatti mostra il
+riquadro "Scrivimi via email". In produzione la function rifiuta comunque di usare
+il driver finto (`mock`).
+
+**1. Brevo (invio delle email)**
+
+1. Crea un account gratuito su brevo.com.
+2. Brevo → Senders, Domains & Dedicated IPs → **Domains → Add a domain**: aggiungi
+   il dominio Aruba e crea su Aruba (pannello DNS) i record che Brevo indica (codice
+   Brevo, DKIM, eventualmente DMARC). Serve perché il mittente deve essere un
+   indirizzo del dominio del sito: Yahoo non permette di inviare a nome di
+   `@yahoo.com` da servizi esterni.
+3. Brevo → **Senders → Add a sender**: ad esempio `sito@<dominio>` (non serve che
+   la casella esista davvero, basta il dominio autenticato).
+4. Brevo → SMTP & API → **API Keys → Generate**: copia la chiave.
+
+**2. Variabili d'ambiente su Netlify** (Site configuration → Environment
+variables, ambito "Builds" e "Functions", contesto "Production")
+
+| Variabile               | Valore                                                          |
+| ----------------------- | --------------------------------------------------------------- |
+| `MAIL_DRIVER`           | `brevo`                                                         |
+| `BREVO_API_KEY`         | la chiave generata su Brevo (segnala come segreta)              |
+| `BREVO_MITTENTE_EMAIL`  | il mittente verificato, es. `sito@<dominio>`                    |
+| `BREVO_MITTENTE_NOME`   | `Sito Dott.ssa Elisa Castigliego`                               |
+| `DESTINATARIO_EMAIL`    | `castigliego.elisa@yahoo.com`                                   |
+| `RATE_LIMIT_SALT`       | una stringa casuale lunga (es. generata da un password manager) |
+| `ADMIN_BASIC_AUTH_USER` | nome utente per `/admin`                                        |
+| `ADMIN_BASIC_AUTH_PASS` | password robusta per `/admin` (segnala come segreta)            |
+
+**3. Rilancia un deploy** (Deploys → Trigger deploy → Clear cache and deploy):
+il modulo compare nella pagina Contatti.
+
+**4. Prova**: invia un messaggio dal sito e verifica che arrivi su Yahoo. Rispondendo
+all'email si risponde direttamente a chi ha scritto (campo "rispondi a").
+
+Le anteprime di branch e pull request sono marcate `noindex`. La copia su GitHub
+Pages resta come anteprima, anch'essa `noindex` e senza modulo: puoi disattivarla
+da Settings → Pages quando Netlify è online.

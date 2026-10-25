@@ -1,11 +1,12 @@
 ---
+import { moduloContattoAttivo } from "../lib/modulo-contatto";
 import { percorso } from "../lib/percorsi";
 import Layout from "../layouts/Layout.astro";
 import { site, whatsappHref } from "../config/site";
 
-// Le sezioni sul modulo di contatto compaiono solo dove il modulo è attivo
-// (vedi src/pages/contatti.astro e PUBLIC_MODULO_CONTATTO).
-const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
+// Modulo di contatto mostrato solo dove può davvero recapitare i messaggi:
+// vedi src/lib/modulo-contatto.ts.
+const moduloAttivo = moduloContattoAttivo();
 ---
 
 <Layout

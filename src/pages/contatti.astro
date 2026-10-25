@@ -1,4 +1,5 @@
 ---
+import { moduloContattoAttivo } from "../lib/modulo-contatto";
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Mail from "@lucide/astro/icons/mail";
@@ -8,10 +9,9 @@ import Phone from "@lucide/astro/icons/phone";
 import ShieldCheck from "@lucide/astro/icons/shield-check";
 import { site, whatsappHref } from "../config/site";
 
-// Su un hosting solo statico (GitHub Pages) la Function /api/contatto non esiste:
-// il workflow imposta PUBLIC_MODULO_CONTATTO=off e al posto del modulo compare
-// l'invito a scrivere via email, così nessun messaggio va perso.
-const moduloAttivo = import.meta.env.PUBLIC_MODULO_CONTATTO !== "off";
+// Modulo di contatto mostrato solo dove può davvero recapitare i messaggi:
+// vedi src/lib/modulo-contatto.ts.
+const moduloAttivo = moduloContattoAttivo();
 ---
 
 <Layout
