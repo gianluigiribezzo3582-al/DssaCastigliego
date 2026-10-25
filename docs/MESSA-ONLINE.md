@@ -114,8 +114,13 @@ email" al posto del modulo: il sito è comunque pubblicabile.
 5. **Senders → Add a sender**: nome `Sito Dott.ssa Elisa Castigliego`, email
    `sito@elisacastigliegopsicologa.it` (la casella non deve esistere davvero: basta
    il dominio autenticato).
-6. **SMTP & API → API Keys → Generate a new API key**: copia la chiave (si vede una
-   sola volta).
+6. **SMTP & API → API Keys → Generate a new API key**: accesso **Limitato**, con
+   **Email transazionali: Tutti** e tutto il resto su **Nessuna**. Copia la chiave
+   (inizia con `xkeysib-`, si vede una sola volta). Brevo fa scadere le chiavi
+   dopo 90 giorni di inutilizzo: per evitarlo il sito ha una funzione pianificata
+   (`netlify/functions/brevo-keepalive.ts`) che ogni settimana fa una richiesta di
+   sola lettura, senza inviare email. Esito in Netlify → Logs → Functions →
+   brevo-keepalive.
    **Importante:** in Brevo → menu del profilo → **Security → Authorised IPs**
    disattiva il blocco degli IP sconosciuti ("Deactivate blocking"). Le funzioni di
    Netlify inviano da indirizzi sempre diversi: con il blocco attivo Brevo rifiuta
