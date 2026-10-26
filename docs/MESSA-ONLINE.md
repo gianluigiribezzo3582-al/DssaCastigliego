@@ -180,8 +180,6 @@ email" al posto del modulo: il sito è comunque pubblicabile.
 
 ## Più avanti (facoltativo)
 
-- **Telefono/WhatsApp dello studio**: quando ci sarà il numero, compilalo da `/admin`
-  → "Contatti e dati dello studio" (oppure in `src/content/dati-sito.json`).
 - **Modifiche da `/admin` direttamente online**: dopo la password della pagina,
   Sveltia chiede "Accedi con GitHub". Per attivarlo: GitHub OAuth App + provider
   OAuth su Netlify, circa 10 minuti, procedura in `/docs/CMS.md` ("Login con

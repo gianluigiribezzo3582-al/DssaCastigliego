@@ -7,7 +7,7 @@ import MapPin from "@lucide/astro/icons/map-pin";
 import MessageCircle from "@lucide/astro/icons/message-circle";
 import Phone from "@lucide/astro/icons/phone";
 import ShieldCheck from "@lucide/astro/icons/shield-check";
-import { site, whatsappHref } from "../config/site";
+import { site, telefonoHref, whatsappHref } from "../config/site";
 
 // Modulo di contatto mostrato solo dove può davvero recapitare i messaggi:
 // vedi src/lib/modulo-contatto.ts.
@@ -94,7 +94,7 @@ const moduloAttivo = moduloContattoAttivo();
                 <li>
                   <a
                     class="inline-flex items-center gap-1.5 underline hover:text-[var(--color-primary)]"
-                    href={`tel:${site.contatti.telefono}`}
+                    href={telefonoHref!}
                   >
                     <Phone aria-hidden="true" size={15} />
                     {site.contatti.telefono}

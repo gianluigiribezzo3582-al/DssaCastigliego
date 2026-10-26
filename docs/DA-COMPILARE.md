@@ -19,5 +19,4 @@ passo per passo: `/docs/MESSA-ONLINE.md`):
 - [ ] Configurare Brevo (dominio autenticato su Aruba) e le variabili d'ambiente su
       Netlify, poi provare un invio dal modulo: `/docs/DEPLOY.md`.
 - [ ] Impostare `ADMIN_BASIC_AUTH_USER`/`ADMIN_BASIC_AUTH_PASS` su Netlify.
-- [ ] Telefono/WhatsApp dello studio: compilarli dal CMS quando ci saranno.
 - [ ] Facoltativo: link LinkedIn/Instagram dal CMS (finiscono nei dati strutturati).
