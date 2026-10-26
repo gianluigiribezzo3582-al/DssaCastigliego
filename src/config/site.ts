@@ -42,6 +42,11 @@ export const site = {
 /** Dicitura completa dell'iscrizione all'Ordine, usata in footer e note legali. */
 export const iscrizioneOrdine = `Iscrizione Ordine degli Psicologi dell'${site.albo.regione} n. ${site.albo.numero}`;
 
+/** Link "tel:" del telefono dello studio (solo cifre e +), oppure null se assente. */
+export const telefonoHref = site.contatti.telefono
+  ? `tel:${site.contatti.telefono.replace(/[^\d+]/g, "")}`
+  : null;
+
 /** Link wa.me precompilato, oppure null se il numero WhatsApp non è impostato. */
 export const whatsappHref = site.contatti.whatsappNumero
   ? `https://wa.me/${site.contatti.whatsappNumero}?text=${encodeURIComponent(

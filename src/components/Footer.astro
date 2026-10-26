@@ -7,7 +7,12 @@ import Phone from "@lucide/astro/icons/phone";
 import ShieldCheck from "@lucide/astro/icons/shield-check";
 import { Image } from "astro:assets";
 import linoTexture from "../assets/sfondi/lino-texture.jpg";
-import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
+import {
+  iscrizioneOrdine,
+  site,
+  telefonoHref,
+  whatsappHref,
+} from "../config/site";
 ---
 
 <footer
@@ -73,7 +78,7 @@ import { iscrizioneOrdine, site, whatsappHref } from "../config/site";
               <li>
                 <a
                   class="underline decoration-[var(--color-border)] decoration-1 underline-offset-4 hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
-                  href={`tel:${site.contatti.telefono}`}
+                  href={telefonoHref!}
                 >
                   <Phone
                     aria-hidden="true"
